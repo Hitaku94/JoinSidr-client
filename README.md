@@ -166,22 +166,20 @@ Project model
     - password
 - POST/auth/logout
     body: (empty)
-- GET/messages
-- GET/auth/profile
-- GET/auth/settings/:id
-- PUT/auth/settings/:id
-- DELETE/settings/:id
+- GET/allMesages
+- POST/messages/:id_User1/:id_User2
+- GET/messages/:id_message
+- GET/profile/:id (userinfo and his projects)
+- GET/settings
+- PUT/settings
+- DELETE/settings
 - POST/project-create
-- GET/auth/trends
-- GET/auth/project/:id
-- PUT/auth/project/:id
+- GET/trends
+- GET/project/:id
+- PUT/project/:id
 - DELETE/project/:id
-
-
-
-
-
-<br>
+/p
+<Tr>
 
 
 ## Links
