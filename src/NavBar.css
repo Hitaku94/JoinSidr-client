@@ -1,0 +1,11 @@
+.link {
+    text-decoration: none;
+    color: white;
+    text-align: center;
+}
+
+.navItem {
+    display: flex;
+    position: relative;
+    align-items: center;
+}
