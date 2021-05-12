@@ -176,7 +176,7 @@ export default function NavBar() {
             <MenuIcon />
           </IconButton>
           <Typography className={classes.title} variant="h6" noWrap>
-            JoinSidr
+          <Link to="/" className="link" color="inherit">JoinSidr</Link>
           </Typography>
           {/*<div className={classes.search}>
             <div className={classes.searchIcon}>
