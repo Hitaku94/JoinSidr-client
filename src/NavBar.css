@@ -4,6 +4,11 @@
     padding-left: 10px
 }
 
+.link-profile{
+    text-decoration: none;
+    color: black;
+}
+
 .navItem {
     display: flex;
     position: relative;
