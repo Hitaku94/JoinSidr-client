@@ -117,8 +117,8 @@ export default function NavBar() {
       open={isMenuOpen}
       onClose={handleMenuClose}
     >
-      <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
-      <MenuItem onClick={handleMenuClose}>My account</MenuItem>
+      <MenuItem onClick={handleMenuClose}><Link className="link-profile" to={"/profile"}>Profile</Link></MenuItem>
+      <MenuItem onClick={handleMenuClose}><Link className="link-profile" to={"/settings"}>Settings</Link></MenuItem>
     </Menu>
   );
 
