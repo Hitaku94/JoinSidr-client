@@ -1,9 +1,6 @@
 import React, {useEffect, useState} from "react";
 import { Switch, Route, withRouter } from "react-router-dom";
-import {Home, NavBar} from "./components"
-import Profile from "./components/Profile";
-import Signin from "./components/Signin";
-import Signup from "./components/Signup";
+import {Home, NavBar, Profile, Signin, Signup} from "./components"
 import axios from "axios";
 import config from "./config";
 
@@ -17,7 +14,7 @@ function App(props) {
 
   const handleSignup = (e)=>{
     e.preventDefault()
-    const {username, email, password} = e.target
+    let {username, email, password} = e.target
     let newUser = {
       username: username.value, 
       email: email.value, 
@@ -31,7 +28,6 @@ function App(props) {
       .catch(() => {
         console.log('SignUp failed')
       })
-    
   }
 
   const handleSignIn = async (e) => {
