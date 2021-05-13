@@ -39,16 +39,11 @@ function App() {
       <NavBar />
       <Switch>
         <Route exact path="/" component={Home} />
-<<<<<<< HEAD
         <Route  path="/signup"  render={(routeProps) => {
             return  <Signup onSubmit={handleSignup} {...routeProps}  />
           }}/>
-        <Route path="/signin" component={Signup} />
-=======
-        <Route path="/signup" component={Signup} />
         <Route path="/signin" component={Signin} />
         <Route path="/profile" component={Profile} />
->>>>>>> faae7ec8a87e5cbf5272ef68cb7138e1691e0ac9
       </Switch>
     </div>
   );
