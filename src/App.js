@@ -9,9 +9,9 @@ import config from "./config";
 
 
 
-function App() {
+function App(props) {
   const [user, updateUser] = useState(null)
-  
+  const [error, updateError] = useState(null) 
 
   
 
@@ -34,6 +34,24 @@ function App() {
     
   }
 
+  const handleSignIn = async (e) => {
+    e.preventDefault()
+    const { email , password} = e.target
+    let newUser = {
+      email: email.value, 
+      password: password.value
+    }
+
+    axios.post(`${config.API_URL}/api/signin`, newUser, {withCredentials: true})
+      .then((response) => {
+        updateUser(response.data)
+        updateError(null)
+      })
+      .catch((errorObj) => {
+        updateError(errorObj.response.data)
+      })
+  }
+
   return (
     <div className="App">
       <NavBar />
@@ -42,7 +60,9 @@ function App() {
         <Route  path="/signup"  render={(routeProps) => {
             return  <Signup onSubmit={handleSignup} {...routeProps}  />
           }}/>
-        <Route path="/signin" component={Signup} />
+        <Route  path="/signin"  render={(routeProps) => {
+            return  <Signin onSignIn={handleSignIn}  {...routeProps}  />
+          }}/>
         <Route path="/profile" component={Profile} />
       </Switch>
     </div>
