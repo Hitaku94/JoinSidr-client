@@ -3,6 +3,7 @@ import { fade, makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
+import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import InputBase from '@material-ui/core/InputBase';
 import Badge from '@material-ui/core/Badge';
@@ -81,14 +82,16 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function NavBar() {
+export default function NavBar(props) {
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
 
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
-
+  //PROPS VARIABLES
+  const { user, onLogout } = props
+  //---------------------------------
   const handleProfileMenuOpen = (event) => {
     setAnchorEl(event.currentTarget);
   };
@@ -193,14 +196,20 @@ export default function NavBar() {
             </div>*/}
           <div className={classes.grow} />
           <div className={classes.sectionDesktop}>
+          {
+            user ? (
+              <Button onClick={onLogout} variant="contained" color="secondary">Logout</Button>
+            ) : (
+              <>
           <Typography className={classes.title, "navItem"} variant="h6" noWrap color="inherit">
           <Link to="/signin" className="link" color="inherit">Sign in </Link>
           </Typography>
           <Typography className={classes.title, "navItem"} variant="h6" noWrap color="inherit">
           <Link to="/signup" className="link" color="inherit">Sign up </Link>
           </Typography>
-            
-            
+          </>
+            )
+          }
             <IconButton aria-label="show 4 new mails" color="inherit">
               <Badge badgeContent={4} color="secondary">
                 <MailIcon />

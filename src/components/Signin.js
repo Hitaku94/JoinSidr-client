@@ -97,6 +97,9 @@ function Signin(props) {
           >
             Sign In
           </Button>
+          {
+                error && (<p style={{color:'red'}}>{error}</p>)
+            }
           <Grid container>
             <Grid item xs>
               <Link href="#" variant="body2">

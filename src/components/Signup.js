@@ -49,7 +49,7 @@ const useStyles = makeStyles((theme) => ({
 
 function Signup(props) {
   const classes = useStyles();
-  const {onSubmit} = props
+  const {onSubmit, error} = props
 
   return (
     <Container component="main" maxWidth="xs">
@@ -108,6 +108,9 @@ function Signup(props) {
           >
             Sign Up
           </Button>
+          {
+                error && (<p style={{color:'red'}}>{error}</p>)
+            }
           <Grid container justify="flex-end">
             <Grid item>
               <Link className="link-profile" to="/signin" variant="body2">
