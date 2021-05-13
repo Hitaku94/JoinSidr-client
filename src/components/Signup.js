@@ -46,8 +46,9 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function SignUp() {
+function Signup(props) {
   const classes = useStyles();
+  const {onSubmit} = props
 
   return (
     <Container component="main" maxWidth="xs">
@@ -59,29 +60,18 @@ export default function SignUp() {
         <Typography component="h1" variant="h5">
           Sign up
         </Typography>
-        <form className={classes.form} noValidate>
+        <form onSubmit={onSubmit} className={classes.form} noValidate>
           <Grid container spacing={2}>
-            <Grid item xs={12} sm={6}>
+            <Grid item xs={12}>
               <TextField
-                autoComplete="fname"
-                name="firstName"
+                autoComplete="uname"
+                name="username"
                 variant="outlined"
                 required
                 fullWidth
-                id="firstName"
-                label="First Name"
+                id="username"
+                label="username"
                 autoFocus
-              />
-            </Grid>
-            <Grid item xs={12} sm={6}>
-              <TextField
-                variant="outlined"
-                required
-                fullWidth
-                id="lastName"
-                label="Last Name"
-                name="lastName"
-                autoComplete="lname"
               />
             </Grid>
             <Grid item xs={12}>
@@ -105,12 +95,6 @@ export default function SignUp() {
                 type="password"
                 id="password"
                 autoComplete="current-password"
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <FormControlLabel
-                control={<Checkbox value="allowExtraEmails" color="primary" />}
-                label="I want to receive inspiration, marketing promotions and updates via email."
               />
             </Grid>
           </Grid>
@@ -138,3 +122,5 @@ export default function SignUp() {
     </Container>
   );
 }
+
+export default Signup
