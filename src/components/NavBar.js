@@ -194,6 +194,9 @@ export default function NavBar() {
           <div className={classes.grow} />
           <div className={classes.sectionDesktop}>
           <Typography className={classes.title, "navItem"} variant="h6" noWrap color="inherit">
+          <Link to="/trends" className="link" color="inherit">Trending projects </Link>
+          </Typography>
+          <Typography className={classes.title, "navItem"} variant="h6" noWrap color="inherit">
           <Link to="/signin" className="link" color="inherit">Sign in </Link>
           </Typography>
           <Typography className={classes.title, "navItem"} variant="h6" noWrap color="inherit">

@@ -3,15 +3,25 @@ import { Switch, Route, withRouter } from "react-router-dom";
 import { Home, NavBar, Profile, Signin, Signup, AddProject } from "./components"
 import axios from "axios";
 import config from "./config";
+import Trends from "./components/Trends";
 
 
 
 
 function App(props) {
   const [user, updateUser] = useState(null)
-  const [project, updateProject] = useState([])
+  const [projects, updateProject] = useState([])
   const [error, updateError] = useState(null)
 
+  useEffect(() => {
+    axios.get(`${config.API_URL}/api/trends`, {withCredentials: true})
+      .then((response) => {
+        console.log(response.data)
+        updateProject(response.data)
+      }).catch(() => {
+        console.log('Fecthing failed')
+      });
+  }, [])
 
 
   const handleSignup = (e) => {
@@ -70,7 +80,7 @@ function App(props) {
         }, {withCredentials: true})
       })
       .then((response) => {
-        updateProject([response.data, ...project])
+        updateProject([response.data, ...projects])
       })
       .catch(() => {
         console.log('Image upload failed')
@@ -95,6 +105,9 @@ function App(props) {
         }} />
          <Route exact path="/project-create" render={(routeProps) => {
           return <AddProject onAdd={handleCreateProject} {...routeProps} />
+        }} />
+        <Route exact path="/trends" render={(routeProps) => {
+          return <Trends projects={projects} {...routeProps} />
         }} />
       </Switch>
     </div>
