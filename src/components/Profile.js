@@ -1,10 +1,11 @@
 import React from 'react'
+import ClippedDrawer from './DrawerLeft'
 
 function Profile() {
     return (
-        <div>
-            <h1>Profile page</h1>
-        </div>
+        <>
+            <ClippedDrawer />
+        </>
     )
 }
 
