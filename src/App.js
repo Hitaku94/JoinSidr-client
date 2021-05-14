@@ -104,10 +104,7 @@ function App(props) {
 
   const handleEditSettings = (event) => {
     event.preventDefault();
-    
 
-<<<<<<< HEAD
-    
     let username= event.target.username.value
     let description= event.target.description.value; 
      let country= event.target.country.value;
@@ -116,22 +113,10 @@ function App(props) {
       workLocation: event.target.worklocation.value, 
       skills: event.target.skills.value,
       ,*/
-    console.log(event.target)
+
     let profilePic = event.target.profilePic.files[0];
     let formData = new FormData();
     formData.append("imageUrl", profilePic)
-=======
-    let editedProfile = {
-      description: event.target.description.value, 
-      country: event.target.country.value,
-      /*experience: event.target.experience.value, 
-      available: event.target.available.value, 
-      workLocation: event.target.worklocation.value, 
-      skills: event.target.skills.value,
-      username: event.target.username.value,*/
-    };
-
->>>>>>> a795a28567ee10b5ee7570a918f058833b9e329b
     axios
       .post(`${config.API_URL}/api/upload`, formData)
       .then((response)=>{
