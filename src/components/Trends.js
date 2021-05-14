@@ -5,10 +5,11 @@ import GridListTile from '@material-ui/core/GridListTile';
 import GridListTileBar from '@material-ui/core/GridListTileBar';
 import IconButton from '@material-ui/core/IconButton';
 import InfoIcon from '@material-ui/icons/Info';
-import Paper from '@material-ui/core/Paper';
-import Grid from '@material-ui/core/Grid';
+import {Paper, Grid, Divider} from '@material-ui/core';
 import SearchIcon from '@material-ui/icons/Search';
 import InputBase from '@material-ui/core/InputBase';
+import SearchBar from './SearchBar'
+import {Link} from  'react-router-dom'
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -47,8 +48,14 @@ const useStyles = makeStyles((theme) => ({
 function Trends(props) {
     const classes = useStyles();
     const { projects } = props
+
+    if (!projects) {
+        return <p>Loading . . .</p>
+    }
+
     return (
-        
+        <div style={{marginTop: 50}}>
+        <SearchBar />
         <div className={classes.root}>
  
             <Grid container spacing={5}>
@@ -56,17 +63,20 @@ function Trends(props) {
 
                     projects.map((project) => {
                         return (
+                            
                             <Grid className={classes.grid} item xs={12} sm={6} md={4} lg={3}>
                                 <Paper className={classes.paper}>
-                                    
+                                <Link to={`/project/${project._id}`}>
                                     <img className={classes.image} src={project.image} alt={project.image} />
-                                    
+                                <Divider />
                                     <div>
                                         <h3 className={classes.h3}>{project.title}</h3>
-                                        <p className={classes.h3}>by: {project.title}</p>
+                                        <p className={classes.h3}>by: {project.user?.username}</p>
                                     </div>
+                                    </Link>
                                 </Paper>
                             </Grid>
+                            
                         )
                     }
 
@@ -74,7 +84,7 @@ function Trends(props) {
             </Grid>
         
         </div>
-    
+        </div>
     );
 }
 

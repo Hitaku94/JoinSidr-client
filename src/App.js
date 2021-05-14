@@ -12,6 +12,7 @@ import Settings from "./components/Settings";
 import axios from "axios";
 import config from "./config";
 import Trends from "./components/Trends";
+import ProjectDetails from "./components/ProjectDetails";
 
 function App(props) {
   const [user, updateUser] = useState(null);
@@ -89,13 +90,13 @@ function App(props) {
     let editedProfile = {
       email: event.target.email.value,
       password: event.target.password.value,
-      description: event.target.description.value, 
-      profilePic: event.target.profile.value, 
+      description: event.target.description.value,
+      profilePic: event.target.profile.value,
       country: event.target.country.value,
-      experience: event.target.experience.value, 
-      available: event.target.available.value, 
-      workLocation: event.target.worklocation.value, 
-      skills: event.target.skills.value 
+      experience: event.target.experience.value,
+      available: event.target.available.value,
+      workLocation: event.target.worklocation.value,
+      skills: event.target.skills.value
     };
 
     axios
@@ -194,6 +195,13 @@ function App(props) {
           path="/trends"
           render={(routeProps) => {
             return <Trends projects={projects} {...routeProps} />;
+          }}
+        />
+        <Route
+          exact
+          path="/project/:id"
+          render={(routeProps) => {
+            return <ProjectDetails projects={projects} {...routeProps} />;
           }}
         />
       </Switch>
