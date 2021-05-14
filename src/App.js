@@ -17,7 +17,7 @@ function App(props) {
   const [user, updateUser] = useState(null);
   const [projects, updateProject] = useState([]);
   const [error, updateError] = useState(null);
-  const [fetchingUser, updateFetchingUser] = useState(true);
+  
 
   useEffect(() => {
     axios
@@ -29,7 +29,21 @@ function App(props) {
       .catch(() => {
         console.log("Fecthing failed");
       });
-  }, []);
+    
+      fetchUser()
+
+  },[]);
+
+
+  const fetchUser = ()=>{
+    axios
+    .get(`${config.API_URL}/api/profile`, { withCredentials: true })
+    .then((response) => {
+      updateUser(response.data)
+    }).catch((err) => {
+      console.log("user not logged in")
+    });
+  }
 
   const handleSignup = (e) => {
     e.preventDefault();
@@ -62,6 +76,7 @@ function App(props) {
     axios
       .post(`${config.API_URL}/api/signin`, newUser, { withCredentials: true })
       .then((response) => {
+        console.log(response.data)
         updateUser(response.data);
         updateError(null);
         props.history.push("/profile");
@@ -87,19 +102,16 @@ function App(props) {
     event.preventDefault();
 
     let editedProfile = {
-      email: event.target.email.value,
-      password: event.target.password.value,
       description: event.target.description.value, 
-      profilePic: event.target.profile.value, 
       country: event.target.country.value,
-      experience: event.target.experience.value, 
-      available: event.target.available.value, 
-      workLocation: event.target.worklocation.value, 
-      skills: event.target.skills.value 
+      //experience: event.target.experience.value, 
+      //available: event.target.available.value, 
+      //workLocation: event.target.worklocation.value, 
+      //skills: event.target.skills.value 
     };
 
     axios
-      .patch(`${config.API_URL}/settings`, editedProfile, {
+      .patch(`${config.API_URL}/api/settings`, editedProfile, {
         withCredentials: true,
       })
       .then((response) => {
@@ -177,6 +189,7 @@ function App(props) {
               <Settings
                 onEdit={handleEditSettings}
                 loggedInUser={user}
+                fetchingUser={fetchUser}
                 {...routeProps}
               />
             );
