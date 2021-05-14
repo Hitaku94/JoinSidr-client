@@ -7,7 +7,7 @@ import {Grid, Container, Divider} from '@material-ui/core';
 
 function ProjectDetails(props) {
 
-    const [project, updateProject] = useState({})
+    const [project, updateProject] = useState(null)
 
     useEffect(() => {
         let projectId = props.match.params.id
@@ -22,14 +22,18 @@ function ProjectDetails(props) {
             })
     }, [])
 
+    if (!project) {
+        return <h1>Loading</h1>
+    }
+
     return (
         <Container className={"container"} style={{width: "50%"}} fixed >
             <Grid container spacing={8}>
                 <Grid className="item" item xs={12}>
-                        {/*<img src={project.user.profilePic} alt={project.user.username} />*/}
+                        <img src={project.user.profilePic} alt={project.user.username} />
                         <div className="info">
                             <h2>{project.title}</h2>
-                            {/*<span>{project.user.username}</span> <span>{project.date}</span> <span>{project.user.country}</span>*/}
+                            <span>{project.user.username}</span> <span>{project.date}</span> <span>{project.user.country}</span>
                         </div>   
                 </Grid>
                 <Grid  item xs={12}>
@@ -45,7 +49,7 @@ function ProjectDetails(props) {
                     <Divider />
                     <h3>More project by {project.title}</h3>
                 </Grid>
-                <Grid  item xs={6}>
+                <Grid item xs={6}>
                     
                 <img className="image" src={project.image} alt={project.title} />
                 </Grid>
