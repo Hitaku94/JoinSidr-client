@@ -17,6 +17,7 @@ function App(props) {
   const [user, updateUser] = useState(null);
   const [projects, updateProject] = useState([]);
   const [error, updateError] = useState(null);
+  const [fetchingUser, updateFetchingUser]= useState(true)
   
 
   useEffect(() => {
@@ -40,6 +41,7 @@ function App(props) {
     .get(`${config.API_URL}/api/profile`, { withCredentials: true })
     .then((response) => {
       updateUser(response.data)
+      updateFetchingUser(false)
     }).catch((err) => {
       console.log("user not logged in")
     });
@@ -100,20 +102,28 @@ function App(props) {
 
   const handleEditSettings = (event) => {
     event.preventDefault();
+    
 
-    let editedProfile = {
-      description: event.target.description.value, 
-      country: event.target.country.value,
-      experience: event.target.experience.value, 
-      available: event.target.available.value, 
+    
+    let username= event.target.username.value
+    let description= event.target.description.value; 
+     let country= event.target.country.value;
+     let experience= event.target.experience.value;
+      /*available: event.target.available.value, 
       workLocation: event.target.worklocation.value, 
       skills: event.target.skills.value,
-      username: event.target.skills.value,
-    };
-
+      ,*/
+    console.log(event.target)
+    let profilePic = event.target.profilePic.files[0];
+    let formData = new FormData();
+    formData.append("imageUrl", profilePic)
     axios
-      .patch(`${config.API_URL}/api/settings`, editedProfile, {
-        withCredentials: true,
+      .post(`${config.API_URL}/api/upload`, formData)
+      .then((response)=>{
+        return axios
+        .patch(`${config.API_URL}/api/settings`, {username, description, country, experience, profilePic: response.data.image}, {
+          withCredentials: true,
+        })
       })
       .then((response) => {
         updateUser(response.data);
@@ -153,6 +163,9 @@ function App(props) {
         console.log("Image upload failed");
       });
   };
+  if(fetchingUser){
+    return <p>Loading</p>
+  }
 
   return (
     <div className="App">
