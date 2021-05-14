@@ -106,10 +106,6 @@ function App(props) {
   const handleEditSettings = (event) => {
     event.preventDefault();
 
-<<<<<<< HEAD
-    
-=======
->>>>>>> a903fafa723ab08ccc774eff1a22c8d67874b790
     let username= event.target.username.value
     let description= event.target.description.value; 
      let country= event.target.country.value;
@@ -168,13 +164,9 @@ function App(props) {
         console.log("Image upload failed");
       });
   };
-<<<<<<< HEAD
-  
-=======
   if(fetchingUser){
     return <h1>Loading</h1>
   }
->>>>>>> a903fafa723ab08ccc774eff1a22c8d67874b790
 
   const handleEditProject = (e, projectId) => {
     e.preventDefault()
