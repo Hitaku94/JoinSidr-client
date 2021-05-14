@@ -60,7 +60,7 @@ function Trends(props) {
  
             <Grid container spacing={5}>
                 {
-
+                    
                     projects.map((project) => {
                         return (
                             

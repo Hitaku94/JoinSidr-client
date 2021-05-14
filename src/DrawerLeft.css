@@ -6,3 +6,11 @@
 
 }
 
+.link {
+    text-decoration: none;
+}
+
+.link-edit{
+    text-decoration: none;
+    color: black;
+}
