@@ -8,6 +8,7 @@ import MenuIcon from '@material-ui/icons/Menu';
 import InboxIcon from '@material-ui/icons/MoveToInbox';
 import MailIcon from '@material-ui/icons/Mail';
 import {Link} from  'react-router-dom'
+import {Paper, Grid} from '@material-ui/core';
 import '../DrawerLeft.css'
 
 const drawerWidth = 240;
@@ -43,13 +44,43 @@ const useStyles = makeStyles((theme) => ({
         flexGrow: 1,
         padding: theme.spacing(3),
     },
+    paper: {
+        padding: theme.spacing(0),
+        color: theme.palette.text.secondary,
+        width: "100%",
+      
+        
+    },
+    grid: {
+        display: "flex",
+        alignItems: 'center',
+        justifyContent: 'center',
+        overflow: 'hidden',
+        borderRadius: 10,
+        
+    },
+    image: {
+        width: "100%",
+        height: 300,
+        top: 0,
+        left: 0,
+    },
+
+    h3: {
+        margin: 5,
+        color: theme.palette.text.secondary,
+    },
 }));
 
 function ResponsiveDrawer(props) {
-    const { window } = props;
+    const { window, user, projects } = props;
     const classes = useStyles();
     const theme = useTheme();
     const [mobileOpen, setMobileOpen] = React.useState(false);
+
+    let filteredProject = projects.filter((e) => {
+        return e.user._id = user._id
+    })
 
     const handleDrawerToggle = () => {
         setMobileOpen(!mobileOpen);
@@ -91,7 +122,13 @@ function ResponsiveDrawer(props) {
         </div>
     );
 
+    
+
     const container = window !== undefined ? () => window().document.body : undefined;
+
+    if (!projects) {
+        return <p>Loading . . .</p>
+    }
 
     return (
         <div className={classes.root}>
@@ -145,29 +182,33 @@ function ResponsiveDrawer(props) {
             </nav>
             <main className={classes.content}>
                 <div className={classes.toolbar} />
-                <Typography paragraph>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
-                    ut labore et dolore magna aliqua. Rhoncus dolor purus non enim praesent elementum
-                    facilisis leo vel. Risus at ultrices mi tempus imperdiet. Semper risus in hendrerit
-                    gravida rutrum quisque non tellus. Convallis convallis tellus id interdum velit laoreet id
-                    donec ultrices. Odio morbi quis commodo odio aenean sed adipiscing. Amet nisl suscipit
-                    adipiscing bibendum est ultricies integer quis. Cursus euismod quis viverra nibh cras.
-                    Metus vulputate eu scelerisque felis imperdiet proin fermentum leo. Mauris commodo quis
-                    imperdiet massa tincidunt. Cras tincidunt lobortis feugiat vivamus at augue. At augue eget
-                    arcu dictum varius duis at consectetur lorem. Velit sed ullamcorper morbi tincidunt. Lorem
-                    donec massa sapien faucibus et molestie ac.
-        </Typography>
-                <Typography paragraph>
-                    Consequat mauris nunc congue nisi vitae suscipit. Fringilla est ullamcorper eget nulla
-                    facilisi etiam dignissim diam. Pulvinar elementum integer enim neque volutpat ac
-                    tincidunt. Ornare suspendisse sed nisi lacus sed viverra tellus. Purus sit amet volutpat
-                    consequat mauris. Elementum eu facilisis sed odio morbi. Euismod lacinia at quis risus sed
-                    vulputate odio. Morbi tincidunt ornare massa eget egestas purus viverra accumsan in. In
-                    hendrerit gravida rutrum quisque non tellus orci ac. Pellentesque nec nam aliquam sem et
-                    tortor. Habitant morbi tristique senectus et. Adipiscing elit duis tristique sollicitudin
-                    nibh sit. Ornare aenean euismod elementum nisi quis eleifend. Commodo viverra maecenas
-                    accumsan lacus vel facilisis. Nulla posuere sollicitudin aliquam ultrices sagittis orci a.
-        </Typography>
+                <Grid container spacing={5}>
+                {
+                    
+                    filteredProject.map((project) => {
+                        return (
+                            
+                            <Grid key={project._id} className={classes.grid} item xs={12} sm={12} md={6} lg={4}>
+                                
+                                <Paper className={classes.paper}>
+                                <Link className="link" to={`/project/${project._id}`}>
+                                    <img className={classes.image} src={project.image} alt={project.image} />
+                                <Divider />
+                                    <div>
+                                        <h3 className={classes.h3}>{project.title}</h3>
+                                        <p className={classes.h3}>{project.description}</p>
+                                    </div>
+                                    </Link>
+                                    <Link className="link-edit" to={`/project-edit/${project._id}`}>Edit</Link>
+                                </Paper>
+                                
+                            </Grid>
+                            
+                        )
+                    }
+
+                    )}
+            </Grid>
             </main>
         </div>
     );

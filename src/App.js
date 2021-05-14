@@ -12,6 +12,8 @@ import Settings from "./components/Settings";
 import axios from "axios";
 import config from "./config";
 import Trends from "./components/Trends";
+import ProjectDetails from "./components/ProjectDetails";
+import EditProject from "./components/EditProject";
 
 function App(props) {
   const [user, updateUser] = useState(null);
@@ -104,11 +106,11 @@ function App(props) {
     let editedProfile = {
       description: event.target.description.value, 
       country: event.target.country.value,
-      experience: event.target.experience.value, 
+      /*experience: event.target.experience.value, 
       available: event.target.available.value, 
       workLocation: event.target.worklocation.value, 
       skills: event.target.skills.value,
-      username: event.target.skills.value,
+      username: event.target.username.value,*/
     };
 
     axios
@@ -154,6 +156,40 @@ function App(props) {
       });
   };
 
+  const handleEditProject = (e, projectId) => {
+    e.preventDefault()
+
+    let title = e.target.title.value;
+    let type = e.target.type.value;
+    let description = e.target.description.value;
+    let image = e.target.image.files[0];
+    
+    let formData = new FormData();
+    formData.append("imageUrl", image);
+
+    axios
+      .post(`${config.API_URL}/api/upload`, formData)
+      .then((response) => {
+        return axios.patch(
+          `${config.API_URL}/api/project/${projectId}`, 
+          {
+            title: title,
+            type: type,
+            description: description,
+            image: response.data.image,
+          },
+           {withCredentials: true,}
+        );
+      })
+      .then((response) => {
+        console.log(image)
+        updateProject(response.data)
+      }) 
+      .catch(() => {
+        console.log("Edit project failed");
+      });
+  };
+
   return (
     <div className="App">
       <NavBar onLogout={handleLogout} user={user} />
@@ -179,7 +215,7 @@ function App(props) {
           exact
           path="/profile"
           render={(routeProps) => {
-            return <Profile {...routeProps} />;
+            return <Profile user={user} projects={projects} {...routeProps} />;
           }}
         />
         <Route
@@ -208,6 +244,20 @@ function App(props) {
           path="/trends"
           render={(routeProps) => {
             return <Trends projects={projects} {...routeProps} />;
+          }}
+        />
+         <Route
+          exact
+          path="/project/:id"
+          render={(routeProps) => {
+            return <ProjectDetails projects={projects} {...routeProps} />;
+          }}
+        />
+        <Route
+          exact
+          path="/project-edit/:id"
+          render={(routeProps) => {
+            return <EditProject onEdit={handleEditProject} {...routeProps} />;
           }}
         />
       </Switch>

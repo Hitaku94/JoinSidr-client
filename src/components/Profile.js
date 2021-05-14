@@ -1,10 +1,13 @@
 import React from 'react'
 import ClippedDrawer from './DrawerLeft'
 
-function Profile() {
+function Profile(props) {
+
+    const {user, projects} = props
+
     return (
         <>
-            <ClippedDrawer />
+            <ClippedDrawer user={user} projects={projects} />
         </>
     )
 }
