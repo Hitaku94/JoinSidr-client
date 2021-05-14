@@ -46,6 +46,7 @@ function App(props) {
       updateFetchingUser(false)
     }).catch((err) => {
       console.log("user not logged in")
+      updateFetchingUser(false)
     });
   }
 
@@ -164,7 +165,7 @@ function App(props) {
       });
   };
   if(fetchingUser){
-    return <p>Loading</p>
+    return <h1>Loading</h1>
   }
 
   const handleEditProject = (e, projectId) => {
