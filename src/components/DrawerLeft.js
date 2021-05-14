@@ -79,8 +79,10 @@ function ResponsiveDrawer(props) {
     const [mobileOpen, setMobileOpen] = React.useState(false);
 
     let filteredProject = projects.filter((e) => {
-        return e.user._id = user._id
+        return e.user._id == user._id
     })
+
+    console.log(filteredProject)
 
     const handleDrawerToggle = () => {
         setMobileOpen(!mobileOpen);
