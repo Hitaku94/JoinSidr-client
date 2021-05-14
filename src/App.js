@@ -38,7 +38,7 @@ function App(props) {
   },[]);
 
 
-  const fetchUser = ()=>{
+ const fetchUser = ()=>{
     axios
     .get(`${config.API_URL}/api/profile`, { withCredentials: true })
     .then((response) => {
@@ -106,7 +106,6 @@ function App(props) {
     event.preventDefault();
     
 
-<<<<<<< HEAD
     
     let username= event.target.username.value
     let description= event.target.description.value; 
@@ -120,18 +119,6 @@ function App(props) {
     let profilePic = event.target.profilePic.files[0];
     let formData = new FormData();
     formData.append("imageUrl", profilePic)
-=======
-    let editedProfile = {
-      description: event.target.description.value, 
-      country: event.target.country.value,
-      /*experience: event.target.experience.value, 
-      available: event.target.available.value, 
-      workLocation: event.target.worklocation.value, 
-      skills: event.target.skills.value,
-      username: event.target.username.value,*/
-    };
-
->>>>>>> a795a28567ee10b5ee7570a918f058833b9e329b
     axios
       .post(`${config.API_URL}/api/upload`, formData)
       .then((response)=>{
@@ -178,9 +165,7 @@ function App(props) {
         console.log("Image upload failed");
       });
   };
-  if(fetchingUser){
-    return <p>Loading</p>
-  }
+  
 
   const handleEditProject = (e, projectId) => {
     e.preventDefault()
@@ -215,7 +200,7 @@ function App(props) {
         console.log("Edit project failed");
       });
   };
-
+  
   return (
     <div className="App">
       <NavBar onLogout={handleLogout} user={user} />
