@@ -44,6 +44,7 @@ const useStyles = makeStyles((theme) => ({
   },
   submit: {
     margin: theme.spacing(3, 0, 2),
+
   },
 }));
 
@@ -106,7 +107,7 @@ function Signup(props) {
             color="primary"
             className={classes.submit}
           >
-            Sign Up
+            <span>Sign Up</span>
           </Button>
           {
                 error && (<p style={{color:'red'}}>{error}</p>)
