@@ -1,0 +1,28 @@
+.container {
+    width: 50%;
+    height: 100vh;
+    margin-top: 50px;
+}
+
+.item {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    width: 100%;
+}
+
+.info {
+    margin-left: 20px;
+
+}
+h2 {
+    margin: 0
+}
+
+.image{
+    width: 100%
+}
+
+h3 {
+    text-align: center
+}

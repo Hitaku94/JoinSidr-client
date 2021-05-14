@@ -104,10 +104,11 @@ function App(props) {
     let editedProfile = {
       description: event.target.description.value, 
       country: event.target.country.value,
-      //experience: event.target.experience.value, 
-      //available: event.target.available.value, 
-      //workLocation: event.target.worklocation.value, 
-      //skills: event.target.skills.value 
+      experience: event.target.experience.value, 
+      available: event.target.available.value, 
+      workLocation: event.target.worklocation.value, 
+      skills: event.target.skills.value,
+      username: event.target.skills.value,
     };
 
     axios

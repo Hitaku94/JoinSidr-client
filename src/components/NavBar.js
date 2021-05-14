@@ -205,6 +205,7 @@ export default function NavBar(props) {
               <Button onClick={onLogout} variant="contained" color="secondary">Logout</Button>
             ) : (
               <>
+          
           <Typography className={classes.title, "navItem"} variant="h6" noWrap color="inherit">
           <Link to="/signin" className="slide-bar" color="inherit">Sign in </Link>
           </Typography>
