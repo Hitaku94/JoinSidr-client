@@ -23,6 +23,9 @@ h2 {
     width: 100%
 }
 
-h3 {
-    text-align: center
+
+
+.moreProject {
+    text-align: center;
+    margin: 5px;
 }

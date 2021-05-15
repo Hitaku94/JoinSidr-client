@@ -43,11 +43,12 @@ function ProjectDetails(props) {
                 
                 <Grid  item xs={12}>
                     <Divider />
+                    <h3>Description</h3>
                     <p>{project.description}</p>
                 </Grid>
                 <Grid  item xs={12}>
                     <Divider />
-                    <h3>More project by {project.user.username}</h3>
+                    <h2 className="moreProject">More project by {project.user.username}</h2>
                 </Grid>
                 <Grid item xs={6}>
                     

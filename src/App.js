@@ -97,7 +97,7 @@ function App(props) {
       .then(() => {
         updateUser(null);
         props.history.push("/");
-        updateFetchingUser(false)
+        
       })
       .catch((errorObj) => {
         updateError(errorObj.response.data);
