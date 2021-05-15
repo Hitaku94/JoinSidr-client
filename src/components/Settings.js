@@ -4,14 +4,18 @@ import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
 
 const Settings = (props) => {
-  const { loggedInUser, onEdit } = props;
-  const [user, updateUser] = useState(loggedInUser);
-
+  const { loggedInUser, onEdit, onChange } = props;
+  
   const handleChangeUser = (event) =>
-    updateUser({
-      ...user,
-      [event.currentTarget.name]: event.currentTarget.value,
-    });
+  updateUser({
+    ...user,
+    [event.currentTarget.name]: event.currentTarget.value,
+  });
+
+  if (!loggedInUser){
+    return <h1>Loading</h1>
+}
+
   console.log(props);
   return (
     <div className="container">
@@ -32,7 +36,7 @@ const Settings = (props) => {
           variant="filled"
           label="username"
           onChange={handleChangeUser}
-          value={user.username}
+          value={loggedInUser.username}
         />
         <TextField
           name="description"
@@ -40,7 +44,7 @@ const Settings = (props) => {
           variant="filled"
           label="description"
           onChange={handleChangeUser}
-          value={user.description}
+          value={loggedInUser.description}
         />
         <TextField
           name="country"
@@ -48,7 +52,7 @@ const Settings = (props) => {
           variant="filled"
           label="Country"
           onChange={handleChangeUser}
-          value={user.country}
+          value={loggedInUser.country}
         />
         <div id="experience">
           <label for="experience" class="form-label" id="marginText">

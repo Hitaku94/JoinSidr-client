@@ -164,6 +164,9 @@ function App(props) {
         console.log("Image upload failed");
       });
   };
+
+
+
   if(fetchingUser){
     return <h1>Loading</h1>
   }
@@ -227,7 +230,7 @@ function App(props) {
           exact
           path="/profile"
           render={(routeProps) => {
-            return <Profile user={user} projects={projects} {...routeProps} />;
+            return <Profile user={user} projects={projects} onLogout={handleLogout} {...routeProps} />;
           }}
         />
         <Route

@@ -1,4 +1,4 @@
-.imageProfile {
+.infoProfile {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -10,7 +10,214 @@
     text-decoration: none;
 }
 
+.linkLogo {
+    text-decoration: none;
+    color: black;
+}
+
+.boxLogo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    align-content: center;
+}
+
 .link-edit{
     text-decoration: none;
     color: black;
+}
+
+.country {
+    font-style: italic;
+   
+}
+
+.countryBox {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 25px;
+}
+
+h5 {
+    margin: 2px;
+}
+
+.description {
+    margin-bottom: 25px;
+}
+
+.profilePic {
+    margin-top: 20px;
+    border-radius: 50%;
+    width: 75px;
+}
+
+.imgProject {
+    width: 100%;
+    height: 300px;
+    filter: blur(0px);
+    transition: filter 0.3s ease-in;
+    
+   
+   
+}
+
+.content {
+    position: absolute;
+    top: 60%;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    transform: translateY(-50%);
+    text-align: center;
+    color: #fff;
+}
+
+
+.box .details .content h2 {
+    margin-bottom: 75px;
+    
+    font-size: 30px;
+    color: white
+}
+
+.box .details .content h4 {
+    margin-bottom: 50px;
+    margin-top: 0;
+    padding: 0;
+    font-size: 15px;
+    color: white;
+}
+
+
+.box .details .content p {
+    margin: 10px 0 0;
+    padding: 0;
+    font-size: 20px;
+    color: white;
+}
+
+.box .details {
+    font-size: 1.5em;
+    font-weight: bold;
+    text-decoration: none;
+    z-index: 1;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    opacity: 0;
+    transition: opacity .5s;
+    background: rgba(90,0,10,0.4);
+    color: white;
+    
+    /* position the text in t’ middle*/
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.box:hover .details {
+    transform: scaleY(1);
+    opacity: 1;
+}
+
+.box .imgBox {
+    line-height: 0;
+    overflow: hidden;
+}
+
+.box {
+    position: relative;
+    display: "flex";
+    justify-content: 'center';
+    overflow: 'hidden';
+    border-radius: 10;
+    align-items: 'center';
+    margin: 20px;
+}
+
+.box:hover .imgBox img {
+    filter: blur(3px);
+  }
+  
+
+.followBtn {
+    padding: 7px 25px;
+    margin-right: 5px;
+    border-radius: 10px;
+    background-color: #3f51b5;
+    cursor: pointer;
+    border: 1px solid #3f51b5;
+    color: white;
+}
+
+.msgBtn {
+    padding: 7px 20px;
+    margin-left: 5px;
+    border-radius: 10px;
+    border: 1px solid white;
+    background-color:  #d3d8f8;
+    cursor: pointer;
+    color: #3f51b5;
+}
+
+.iconSpace {
+    margin-left: 20px;
+}
+
+.btnLogOut {
+    border: none;
+    width: 100%;
+    padding: 0;
+    background-color: white;
+    cursor: pointer;
+}
+
+.btnLogOut:hover {
+    color: grey
+}
+
+.logo {
+    text-align: center;
+    margin: 0;
+}
+
+.linkIcon {
+    text-decoration: none;
+    color: rgba(0, 0, 0, 0.87);
+}
+.linkIcon:hover {
+    color: grey;
+}
+/* upload box */
+
+.uploadBox {
+    border: 1px dotted grey;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    margin: 20px;
+}
+
+.upload {
+    font-size: 20px;
+}
+
+.uploadLink {
+    margin-top: 25px;
+    border: 1px solid;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 10px;
+    color: #3f51b5;
+}
+
+.uploadLink:hover {
+    color: #a6afe0;
 }
