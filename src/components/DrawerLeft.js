@@ -78,7 +78,6 @@ function ResponsiveDrawer(props) {
         return e.user._id == user._id
     })
 
-    console.log(filteredProject)
 
     const handleDrawerToggle = () => {
         setMobileOpen(!mobileOpen);

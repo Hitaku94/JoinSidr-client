@@ -50,6 +50,12 @@ function App(props) {
     });
   }
 
+  const handleChangeUser = (event) =>
+  updateUser({
+    ...user,
+    [event.currentTarget.name]: event.currentTarget.value,
+  });
+
   const handleSignup = (e) => {
     e.preventDefault();
     let { username, email, password } = e.target;
@@ -203,6 +209,19 @@ function App(props) {
       });
   };
   
+  const handleDeleteProject = (projectId) => {
+    axios.delete(`${config.API_URL}/api/project/${projectId}`, {withCredentials: true})
+      .then(() => {
+        let filteredProject = projects.filter((project) => {
+          return project._id !== projectId
+        })
+        updateProject(filteredProject)
+        props.history.push("/profile");
+      }).catch((err) => {
+        console.log('Delete failed', err)
+      });
+  }
+
   return (
     <div className="App">
       <NavBar onLogout={handleLogout} user={user} />
@@ -239,6 +258,7 @@ function App(props) {
               <Settings
                 onEdit={handleEditSettings}
                 loggedInUser={user}
+                onChange={handleChangeUser}
                 fetchingUser={fetchUser}
                 {...routeProps}
               />
@@ -263,7 +283,7 @@ function App(props) {
           exact
           path="/project/:id"
           render={(routeProps) => {
-            return <ProjectDetails projects={projects} {...routeProps} />;
+            return <ProjectDetails projects={projects} user={user} onDelete={handleDeleteProject} {...routeProps} />;
           }}
         />
         <Route

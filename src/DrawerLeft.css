@@ -47,7 +47,7 @@ h5 {
     margin-bottom: 25px;
 }
 
-.profilePic {
+.infoProfile .profilePic {
     margin-top: 20px;
     border-radius: 50%;
     width: 75px;
@@ -114,6 +114,7 @@ h5 {
     transition: opacity .5s;
     background: rgba(90,0,10,0.4);
     color: white;
+    border-radius: 10px;
     
     /* position the text in t’ middle*/
     display: flex;
