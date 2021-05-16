@@ -1,0 +1,136 @@
+.center {
+    width: 80%;
+    height: 50%;
+    margin-top: 50px;
+    margin-bottom: 75px;
+}
+
+.center .centerGrid {
+    display: flex;
+}
+
+.center .centerBlock {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.center .centerBlock .infoGrid {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    max-height: 380px;
+
+}
+
+.center .centerBlock .imgDisplay {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    width: 50%;
+    padding: 20px ;
+    background:lightblue;
+    border: 2px dashed #555;
+    height: 380px;
+}
+
+.center .centerBlock h1 {
+    text-align: center;
+    width: 100%
+}
+
+.center .centerBlock form {
+    width: 100%;
+    margin-top: 75px;
+}
+
+.center .centerBlock .infoGrid .labelLigne {
+    display:flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    height: 100%
+}
+
+.center .centerBlock .infoGrid button:enabled {
+    padding: 10px 15px;
+    border-radius: 10px;
+    border: 1px solid;
+    color: white;
+    cursor: pointer;
+    background: red;
+   
+}
+
+.center .centerBlock .infoGrid button:disabled {
+    padding: 10px 15px;
+    border-radius: 10px;
+    border: 1px solid;
+    color: rgb(241, 97, 97);
+}
+
+.center .centerBlock .infoGrid button:enabled:hover {
+    background :lightcoral;
+}
+
+.center .centerBlock .infoGrid .labelLigne input {
+    margin-top: 5px;
+    margin-bottom: 25px;
+    padding: 10px 15px;
+    border-radius: 5px;
+    border: 1px solid;
+}
+
+.center .centerBlock .infoGrid .labelLigne label {
+    font-size: 20px;
+    font-weight: 500;
+}
+
+.center .centerBlock .infoGrid .labelLigne textarea {
+    margin-bottom: 50px;
+    margin-top: 5px;
+    width: 400px;
+    height: 50px;
+    padding: 15px;
+    resize:none;
+}
+
+.center .centerBlock .imgDisplay .inputUpload {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.center .centerBlock .imgDisplay .inputUpload input {
+    display: none;
+}
+
+.center .centerBlock .imgDisplay .inputUpload label {
+    display: block;
+    width: 50%;
+    height: 50px;
+    line-height: 50px;
+    text-align: center;
+    font-size: 20px;
+    background: #333;
+    border-radius: 10px;
+    cursor: pointer;
+    margin-top: 20px;
+    color: white;
+}
+
+.center .centerBlock .imgDisplay img {
+    width: 100%;
+    display: none;
+    height: 300px;
+
+}
+
+.center .centerBlock .imgDisplay .centerImg {
+    display:flex;
+    align-items: center;
+    justify-content: center;
+}

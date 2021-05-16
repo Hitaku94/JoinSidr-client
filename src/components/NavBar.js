@@ -122,6 +122,7 @@ export default function NavBar(props) {
     >
       <MenuItem onClick={handleMenuClose}><Link className="link-profile" to={"/profile"}>Profile</Link></MenuItem>
       <MenuItem onClick={handleMenuClose}><Link className="link-profile" to={"/settings"}>Settings</Link></MenuItem>
+      <MenuItem onClick={handleMenuClose}><Button onClick={onLogout} variant="contained" color="secondary">Logout</Button></MenuItem>
     </Menu>
   );
 
@@ -199,28 +200,7 @@ export default function NavBar(props) {
               <Link to="/userslist" className="slide-bar" color="inherit">Users</Link>
               </Typography>
               
-              <Typography className={classes.title, "navItem"} variant="h6" noWrap color="inherit">
-              <Link to="/settings" className="slide-bar" color="inherit">Settings </Link>
-              </Typography>
-              
-              <Typography className={classes.title, "navItem"} variant="h6" noWrap color="inherit">
-              <Button onClick={onLogout} variant="contained" color="secondary">Logout</Button>
-              </Typography>
-              
-              </>
-            ) : (
-              <>
-          
-          <Typography className={classes.title, "navItem"} variant="h6" noWrap color="inherit">
-          <Link to="/signin" className="slide-bar" color="inherit">Sign in </Link>
-          </Typography>
-          <Typography className={classes.title, "navItem"} variant="h6" noWrap color="inherit">
-          <Link to="/signup" className="slide-bar" color="inherit">Sign up </Link>
-          </Typography>
-          </>
-            )
-          }
-            <IconButton aria-label="show 4 new mails" color="inherit">
+              <IconButton aria-label="show 4 new mails" color="inherit">
               <Badge badgeContent={4} color="secondary">
                 <MailIcon />
               </Badge>
@@ -240,6 +220,23 @@ export default function NavBar(props) {
             >
               <AccountCircle />
             </IconButton>
+              </>
+            ) 
+             : (
+              <>
+          
+          <Typography className={classes.title, "navItem"} variant="h6" noWrap color="inherit">
+          <Link to="/signin" className="slide-bar" color="inherit">Sign in </Link>
+          </Typography>
+          <Typography className={classes.title, "navItem"} variant="h6" noWrap color="inherit">
+          <Link to="/signup" className="slide-bar" color="inherit">Sign up </Link>
+          </Typography>
+          </>
+            )
+          }
+           
+            
+            
           </div>
           <div className={classes.sectionMobile}>
             <IconButton

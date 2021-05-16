@@ -16,10 +16,13 @@ import config from "./config";
 import Trends from "./components/Trends";
 import ProjectDetails from "./components/ProjectDetails";
 import EditProject from "./components/EditProject";
+import UserProfile from "./components/UserProfile";
+import ChoicePage from "./components/ChoicePage";
 
 function App(props) {
   const [user, updateUser] = useState(null);
   const [users, updateUsers]= useState([])
+  const [allUser, updateAllUser] = useState([]);
   const [projects, updateProject] = useState([]);
   const [error, updateError] = useState(null);
   const [fetchingUser, updateFetchingUser]= useState(true)
@@ -31,23 +34,40 @@ function App(props) {
       .then((response) => {
         console.log(response.data);
         updateProject(response.data);
+       
       })
-      .catch(() => {
+      .catch((err) => {
         console.log("Fecthing failed");
       });
     
       fetchUser();
       fetchUsers();
 
+      console.log(fetchUser())
+      users()
+      console.log(users())
+      
+
   },[]);
 
+  const users = () => {
+    axios.get(`${config.API_URL}/api/usersProfile`, { withCredentials: true })
+      .then((response) => {
+        updateAllUser(response.data)
+        console.log(response.data)
+      }).catch((err) => {
+        console.log("users doesn't work")
+      });
+  }
 
  const fetchUser = ()=>{
     axios
     .get(`${config.API_URL}/api/profile`, { withCredentials: true })
     .then((response) => {
       updateUser(response.data)
+      console.log(response.data)
       updateFetchingUser(false)
+      
     }).catch((err) => {
       console.log("user not logged in")
       updateFetchingUser(false)
@@ -64,6 +84,11 @@ function App(props) {
         console.log("user not logged in")
       });
   }
+  const handleChangeUser = (event) =>
+  updateUser({
+    ...user,
+    [event.currentTarget.name]: event.currentTarget.value,
+  });
 
   const handleSignup = (e) => {
     e.preventDefault();
@@ -78,7 +103,7 @@ function App(props) {
       .post(`${config.API_URL}/api/signup`, newUser, { withCredentials: true })
       .then(() => {
         //updateUser(response.data)
-        props.history.push("/signin");
+        props.history.push("/choice-page");
       })
       .catch((errorObj) => {
         updateError(errorObj.response.data.errorMessage);
@@ -180,9 +205,6 @@ function App(props) {
         console.log("Image upload failed");
       });
   };
-  if(fetchingUser){
-    return <h1>Loading</h1>
-  }
 
   const handleEditProject = (e, projectId) => {
     e.preventDefault()
@@ -218,6 +240,23 @@ function App(props) {
       });
   };
   
+  const handleDeleteProject = (projectId) => {
+    axios.delete(`${config.API_URL}/api/project/${projectId}`, {withCredentials: true})
+      .then(() => {
+        let filteredProject = projects.filter((project) => {
+          return project._id !== projectId
+        })
+        updateProject(filteredProject)
+        props.history.push("/profile");
+      }).catch((err) => {
+        console.log('Delete failed', err)
+      });
+  }
+
+  if(fetchingUser){
+    return <h1>Loading</h1>
+  }
+
   return (
     <div className="App">
       <NavBar onLogout={handleLogout} user={user} />
@@ -258,6 +297,8 @@ function App(props) {
                 onEdit={handleEditSettings}
                 loggedInUser={user}
                 //fetchingUser={fetchUser}
+                onChange={handleChangeUser}
+                fetchingUser={fetchUser}
                 {...routeProps}
               />
             );
@@ -281,7 +322,7 @@ function App(props) {
           exact
           path="/project/:id"
           render={(routeProps) => {
-            return <ProjectDetails projects={projects} {...routeProps} />;
+            return <ProjectDetails projects={projects} user={user} allUser={allUser} onDelete={handleDeleteProject} {...routeProps} />;
           }}
         />
         <Route
@@ -294,6 +335,20 @@ function App(props) {
         <Route  path="/chat/:chatId"  render={(routeProps) => {
               return  <ChatPage user={user} {...routeProps}  />
             }}/>
+        <Route
+          exact
+          path="/user/:id"
+          render={(routeProps) => {
+            return <UserProfile {...routeProps} />;
+          }}
+        />
+        <Route
+          exact
+          path="/choice-page"
+          render={(routeProps) => {
+            return <ChoicePage {...routeProps} />;
+          }}
+        />
       </Switch>
     </div>
   );
