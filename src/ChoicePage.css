@@ -1,0 +1,141 @@
+.body {
+    width: 100%;
+    height: 100vh;
+    display:flex;
+    overflow:hidden;
+    position: relative
+}
+
+.body .are-you {
+    display: inline-block;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 0%;
+    right: 45%;
+    height: 100vh;
+    text-align: center;
+    font-size: 50px;
+    word-spacing: 20px;
+}
+
+.body .boxLeft {
+    width: 50%;
+    height: 100vh;
+    background-color: #fbf9f3;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+   
+   
+}
+
+.body .boxLeft .miniBoxLeft {
+    position: relative;
+    display: block;
+    width: 100px;
+    height: 100px;
+    background-color: #ed9271;
+    border-radius: 50%;
+    transition: width 2s, height 2s, background-color 2s, border-radius, transform 2s;
+    
+}
+
+.body .boxLeft .miniBoxLeft .overlay {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 50vh;
+    color: #ed9271;
+    opacity: 0;
+    visibility: hidden;
+}
+
+.body .boxLeft .miniBoxLeft .overlay .overlay-link {
+    text-decoration: none;
+    color: #ed9271;
+    padding: 10px 20px;
+    border: 1px solid #ed9271;
+    border-radius: 10px;
+    font-size: 40px;
+}
+
+.body .boxLeft .miniBoxLeft:hover {
+    background-color: #fbf9f3;
+    width: 100%;
+    height: 50vh;
+    transform: rotate(360deg);
+    border-radius: 0;
+
+}
+
+.body .boxLeft .miniBoxLeft:hover .overlay {
+    opacity: 1;
+    visibility: visible;
+    transition: opacity 4s;
+}
+
+.body .boxRight {
+    width: 50%;
+    height: 100vh;
+    background-color: #ed9271;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.body .boxRight .miniBoxRight {
+    position: relative;
+    display: block;
+    width: 100px;
+    height: 100px;
+    background-color: #fbf9f3;
+    border-radius: 50%;
+    transition: width 1.7s, height 1.7s, background-color 1.7s, border-radius, transform 1.7s;
+    
+}
+
+.body .boxRight .miniBoxRight .overlay {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 50vh;
+    color: #fbf9f3;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.25s
+}
+
+.body .boxRight .miniBoxRight .overlay .overlay-link {
+    text-decoration: none;
+    color: #fbf9f3;
+    padding: 10px 20px;
+    border: 1px solid #fbf9f3;
+    border-radius: 10px;
+    font-size: 40px;
+}
+
+.body .boxRight .miniBoxRight:hover {
+    background-color: #ed9271;
+    width: 100%;
+    height: 50vh;
+    transform: rotate(360deg);
+    border-radius: 5px;
+
+}
+
+.body .boxRight .miniBoxRight:hover .overlay {
+    opacity: 1;
+    visibility: visible;
+    transition: opacity 4s;
+}

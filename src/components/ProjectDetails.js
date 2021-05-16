@@ -8,13 +8,12 @@ import { Link } from 'react-router-dom'
 
 function ProjectDetails(props) {
 
-    const { projects, user, onDelete } = props
+    const { projects, onDelete, allUser, user } = props
 
     const [project, updateProject] = useState(null)
 
     useEffect(() => {
         let projectId = props.match.params.id
-        console.log(props.match)
         axios.get(`${config.API_URL}/api/project/${projectId}`, { withCredentials: true })
             .then((response) => {
                 console.log(response.data)
@@ -23,11 +22,9 @@ function ProjectDetails(props) {
             .catch(() => {
                 console.log("Detail fetch failed")
             })
+
     }, [])
 
-    if (!project) {
-        return <h1>Loading</h1>
-    }
 
     let projectUsers = projects.filter((e) => {
         return e.user._id == user._id
@@ -36,10 +33,19 @@ function ProjectDetails(props) {
     let filteredProject = projectUsers.filter((e) => {
         return e._id != project._id
     })
-    console.log(projectUsers)
-    console.log(filteredProject)
 
+    let filteredUsers = allUser.filter((e) => {
+        return e._id == project.user._id
+    })
 
+    let singleUser = filteredUsers[0]
+
+    console.log(singleUser)
+
+    
+    if (!project) {
+        return <h1>Loading</h1>
+    }
 
     return (
         <>
@@ -49,7 +55,7 @@ function ProjectDetails(props) {
                         <img className="profilePic" src={project.user.profilePic} alt={project.user.username} />
                         <div className="info">
                             <h2>{project.title}</h2>
-                            <span><Link className="link" to="/profile">{project.user.username}</Link></span>, <span>{project.date}</span> <span>{project.user.country}</span>
+                            <span><Link className="link" to={`/userProfile/${project.user._id}`}>{project.user.username}</Link></span>, <span>{project.date}</span> <span>{project.user.country}</span>
                         </div>
                     </Grid>
                     <Grid item xs={12}>
