@@ -11,7 +11,7 @@ const Settings = (props) => {
     ...user,
     [event.currentTarget.name]: event.currentTarget.value,
   });
-  const { loggedInUser, onEdit, onChange} = props;
+  //const { loggedInUser, onEdit, onChange} = props;
 
   if (!loggedInUser){
     return <h1>Loading</h1>

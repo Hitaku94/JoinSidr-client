@@ -44,13 +44,13 @@ function App(props) {
       fetchUsers();
 
       console.log(fetchUser())
-      users()
-      console.log(users())
+      userstaka()
+      
       
 
   },[]);
 
-  const users = () => {
+  const userstaka = () => {
     axios.get(`${config.API_URL}/api/usersProfile`, { withCredentials: true })
       .then((response) => {
         updateAllUser(response.data)
