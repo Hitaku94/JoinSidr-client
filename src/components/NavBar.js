@@ -191,11 +191,23 @@ export default function NavBar(props) {
           <div className={classes.sectionDesktop}>
           <Typography className={classes.title, "navItem"} variant="h6" noWrap color="inherit">
           <Link to="/trends" className="slide-bar" color="inherit">Trending projects </Link>
-          <Link to="/settings" className="slide-bar" color="inherit">Settings </Link>
           </Typography>
           {
             user ? (
+              <>
+              <Typography className={classes.title, "navItem"} variant="h6" noWrap color="inherit">
+              <Link to="/userslist" className="slide-bar" color="inherit">Users</Link>
+              </Typography>
+              
+              <Typography className={classes.title, "navItem"} variant="h6" noWrap color="inherit">
+              <Link to="/settings" className="slide-bar" color="inherit">Settings </Link>
+              </Typography>
+              
+              <Typography className={classes.title, "navItem"} variant="h6" noWrap color="inherit">
               <Button onClick={onLogout} variant="contained" color="secondary">Logout</Button>
+              </Typography>
+              
+              </>
             ) : (
               <>
           

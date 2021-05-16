@@ -8,6 +8,8 @@ import {
   Signup,
   AddProject,
 } from "./components";
+import ChatPage from "./components/chatPages/ChatPage"
+import UserList from "./components/chatPages/UserList"
 import Settings from "./components/Settings";
 import axios from "axios";
 import config from "./config";
@@ -17,6 +19,7 @@ import EditProject from "./components/EditProject";
 
 function App(props) {
   const [user, updateUser] = useState(null);
+  const [users, updateUsers]= useState([])
   const [projects, updateProject] = useState([]);
   const [error, updateError] = useState(null);
   const [fetchingUser, updateFetchingUser]= useState(true)
@@ -33,7 +36,8 @@ function App(props) {
         console.log("Fecthing failed");
       });
     
-      fetchUser()
+      fetchUser();
+      fetchUsers();
 
   },[]);
 
@@ -48,6 +52,17 @@ function App(props) {
       console.log("user not logged in")
       updateFetchingUser(false)
     });
+  }
+
+  const fetchUsers = () =>{
+    axios.get(`${config.API_URL}/api/users`, {withCredentials: true})
+      .then((response) => {
+          console.log(response.data)
+          updateUsers(response.data)
+      })
+      .catch((err) => {
+        console.log("user not logged in")
+      });
   }
 
   const handleSignup = (e) => {
@@ -208,6 +223,9 @@ function App(props) {
       <NavBar onLogout={handleLogout} user={user} />
       <Switch>
         <Route exact path="/" component={Home} />
+        <Route exact path='/userslist' render={(routeProps) => {
+              return <UserList users={users} user={user}  {...routeProps}  />
+            }} />
         <Route
           path="/signup"
           render={(routeProps) => {
@@ -239,7 +257,7 @@ function App(props) {
               <Settings
                 onEdit={handleEditSettings}
                 loggedInUser={user}
-                fetchingUser={fetchUser}
+                //fetchingUser={fetchUser}
                 {...routeProps}
               />
             );
@@ -273,6 +291,9 @@ function App(props) {
             return <EditProject onEdit={handleEditProject} {...routeProps} />;
           }}
         />
+        <Route  path="/chat/:chatId"  render={(routeProps) => {
+              return  <ChatPage user={user} {...routeProps}  />
+            }}/>
       </Switch>
     </div>
   );
