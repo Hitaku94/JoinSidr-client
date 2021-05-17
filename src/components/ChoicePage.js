@@ -17,12 +17,12 @@ function ChoicePage() {
             <div className="boxRight">
                 <div className="miniBoxRight">
                     <div className="overlay">
-                    <Link className="overlay-link" to="/" >Recrutor</Link>
+                    <Link className="overlay-link" to="/" >Recruiter</Link>
                     </div>
                 </div>
             </div>
            
-                <span className="are-you">Are you</span>
+                <span className="are-you"><span className="are">Are</span><span className="you">You</span></span>
             
         </div>
     )

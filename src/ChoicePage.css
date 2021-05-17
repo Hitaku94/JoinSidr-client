@@ -7,16 +7,22 @@
 }
 
 .body .are-you {
-    display: inline-block;
-    justify-content: center;
-    align-items: center;
     position: absolute;
-    top: 0%;
-    right: 45%;
-    height: 100vh;
+    top: 10%;
+    left: 50%;
     text-align: center;
     font-size: 50px;
-    word-spacing: 20px;
+    transform: translate(-50%, -50%);
+}
+
+.body .are-you .are {
+    color: #ed9271;
+    margin-right: 15px;
+}
+
+.body .are-you .you {
+    color: #fbf9f3;
+    margin-left: 15px;
 }
 
 .body .boxLeft {
@@ -26,8 +32,6 @@
     display: flex;
     justify-content: center;
     align-items: center;
-   
-   
 }
 
 .body .boxLeft .miniBoxLeft {
@@ -37,8 +41,15 @@
     height: 100px;
     background-color: #ed9271;
     border-radius: 50%;
+    box-shadow: 0 0 0 0 #ed9271;
+    animation: pulse 1.3s infinite;
     transition: width 2s, height 2s, background-color 2s, border-radius, transform 2s;
-    
+}
+
+@keyframes pulse {
+    to {
+        box-shadow: 0 0 0 10px rgb(237, 146, 113, 0.01);
+    }
 }
 
 .body .boxLeft .miniBoxLeft .overlay {
@@ -57,12 +68,30 @@
 }
 
 .body .boxLeft .miniBoxLeft .overlay .overlay-link {
+    position: relative;
     text-decoration: none;
     color: #ed9271;
     padding: 10px 20px;
-    border: 1px solid #ed9271;
+    border: 2px solid #ed9271;
     border-radius: 10px;
     font-size: 40px;
+    overflow: hidden;
+    transition: 1s all ease;
+}
+
+.body .boxLeft .miniBoxLeft .overlay .overlay-link::before {
+    background: #ed9271;
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: -1;
+    transition: all 0.6s ease;
+    width: 120%;
+    height: 0%;
+    transform: translate(-50%, -50%) rotate(-20deg);
+    display:block
 }
 
 .body .boxLeft .miniBoxLeft:hover {
@@ -71,6 +100,7 @@
     height: 50vh;
     transform: rotate(360deg);
     border-radius: 0;
+    animation: none;
 
 }
 
@@ -78,6 +108,15 @@
     opacity: 1;
     visibility: visible;
     transition: opacity 4s;
+}
+
+.body .boxLeft .miniBoxLeft .overlay .overlay-link:hover {
+    color: #fbf9f3;
+    border: 2px solid #fbf9f3;
+}
+
+.body .boxLeft .miniBoxLeft .overlay .overlay-link:hover::before {
+    height: 200%
 }
 
 .body .boxRight {
@@ -96,8 +135,15 @@
     height: 100px;
     background-color: #fbf9f3;
     border-radius: 50%;
+    box-shadow: 0 0 0 0 #fbf9f3;
+    animation: pulse1 1.3s infinite;
     transition: width 1.7s, height 1.7s, background-color 1.7s, border-radius, transform 1.7s;
-    
+}
+
+@keyframes pulse1 {
+    to {
+        box-shadow: 0 0 0 10px rgb(251, 249, 243, 0.01);
+    }
 }
 
 .body .boxRight .miniBoxRight .overlay {
@@ -117,12 +163,30 @@
 }
 
 .body .boxRight .miniBoxRight .overlay .overlay-link {
+    position: relative;
     text-decoration: none;
     color: #fbf9f3;
     padding: 10px 20px;
-    border: 1px solid #fbf9f3;
+    border: 2px solid #fbf9f3;
     border-radius: 10px;
     font-size: 40px;
+    overflow: hidden;
+    transition: 1s all ease;
+    
+}
+
+.body .boxRight .miniBoxRight .overlay .overlay-link::before {
+    background: #fbf9f3;
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: -1;
+    transition: all 0.6s ease;
+    width: 120%;
+    height: 0%;
+    transform: translate(-50%, -50%) rotate(20deg);
 }
 
 .body .boxRight .miniBoxRight:hover {
@@ -131,6 +195,7 @@
     height: 50vh;
     transform: rotate(360deg);
     border-radius: 5px;
+    animation: none;
 
 }
 
@@ -138,4 +203,13 @@
     opacity: 1;
     visibility: visible;
     transition: opacity 4s;
+}
+
+.body .boxRight .miniBoxRight .overlay .overlay-link:hover {
+    color: #ed9271;
+    border: 2px solid #ed9271;
+}
+
+.body .boxRight .miniBoxRight .overlay .overlay-link:hover::before {
+    height: 200%
 }

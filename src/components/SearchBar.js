@@ -47,8 +47,10 @@ const useStyles = makeStyles((theme) => ({
     },
   }));
 
-function SearchBar() {
+function SearchBar(props) {
     const classes = useStyles();
+    const { onSearch } = props;
+
     return (
         <Grid className={"searchBox"} container spacing={3}>
         <Grid  item xs={10}>
@@ -57,6 +59,7 @@ function SearchBar() {
               <SearchIcon />
             </div>
             <InputBase
+              onChange={onSearch}
               placeholder="Search…"
               classes={{
                 root: classes.inputRoot,

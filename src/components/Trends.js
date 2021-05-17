@@ -47,7 +47,7 @@ const useStyles = makeStyles((theme) => ({
 
 function Trends(props) {
     const classes = useStyles();
-    const { projects } = props
+    const { projects, onSearch } = props
 
     if (!projects) {
         return <p>Loading . . .</p>
@@ -55,7 +55,7 @@ function Trends(props) {
 
     return (
         <div style={{marginTop: 50}}>
-        <SearchBar />
+        <SearchBar onSearch={onSearch} />
         <div className={classes.root}>
  
             <Grid container spacing={5}>

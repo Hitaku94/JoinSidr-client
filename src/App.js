@@ -21,6 +21,7 @@ function App(props) {
   const [user, updateUser] = useState(null);
   const [allUser, updateAllUser] = useState([]);
   const [projects, updateProject] = useState([]);
+  const [filteredProjects, updateFilteredProjects] = useState([])
   const [error, updateError] = useState(null);
   const [fetchingUser, updateFetchingUser]= useState(true)
   
@@ -29,9 +30,16 @@ function App(props) {
     axios
       .get(`${config.API_URL}/api/trends`, { withCredentials: true })
       .then((response) => {
-        console.log(response.data);
         updateProject(response.data);
-       
+      })
+      .catch((err) => {
+        console.log("Fecthing failed");
+      });
+
+      axios
+      .get(`${config.API_URL}/api/trends`, { withCredentials: true })
+      .then((response) => {
+        updateFilteredProjects(response.data);
       })
       .catch((err) => {
         console.log("Fecthing failed");
@@ -238,6 +246,20 @@ function App(props) {
       });
   }
 
+  const handleSearch = (e) => {
+    // since our onChange event listener is on the input
+    // e.target will give us  the input DOM
+    let input  = e.target.value 
+    console.log(input)
+    let filteredProjects = projects.filter((singleProject) => {
+      // converting to same case 
+      // checking if the input includes in the books title
+      return singleProject.title.toLowerCase().includes(input.toLowerCase())
+    })
+    updateFilteredProjects(filteredProjects)
+  }
+
+
   if(fetchingUser){
     return <h1>Loading</h1>
   }
@@ -296,7 +318,7 @@ function App(props) {
           exact
           path="/trends"
           render={(routeProps) => {
-            return <Trends projects={projects} {...routeProps} />;
+            return <Trends onSearch={handleSearch} projects={filteredProjects} {...routeProps} />;
           }}
         />
          <Route
