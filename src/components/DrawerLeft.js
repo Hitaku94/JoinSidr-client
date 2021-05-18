@@ -102,7 +102,7 @@ function ResponsiveDrawer(props) {
                 </div>
                 <div>
                     <button className="followBtn">Follow</button>
-                    <button className="msgBtn">Message</button>
+                    <button className="msgBtn"> <Link to="/userslist">Message</Link></button>
                 </div>
             </div>
             <List>
@@ -117,7 +117,7 @@ function ResponsiveDrawer(props) {
             </List>
             <Divider />
             <List>
-            <Link className="linkIcon" to="/messages">
+            <Link className="linkIcon" to="/userslist">
                 <ListItem>
                     <MessageIcon className="iconSpace"/>
                     <ListItemText className="iconSpace">Messages</ListItemText>

@@ -13,6 +13,8 @@ import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import {Link} from  'react-router-dom'
 import '../Signup.css'
+import GoogleButton from './externalComponents/GoogleButton'
+import LinkedInButton from './externalComponents/LinkedInButton'
 
 function Copyright() {
   return (
@@ -50,7 +52,7 @@ const useStyles = makeStyles((theme) => ({
 
 function Signup(props) {
   const classes = useStyles();
-  const {onSubmit, error} = props
+  const {onSubmit, error, onGoogleSuccess, onGoogleFailure, onLinkedInSuccess, onLinkedInFailure} = props
 
   return (
     <Container component="main" maxWidth="xs">
@@ -109,6 +111,9 @@ function Signup(props) {
           >
             <span>Sign Up</span>
           </Button>
+          <GoogleButton onSuccess={onGoogleSuccess} onFailure={onGoogleFailure}/>
+          <LinkedInButton onSuccess={onLinkedInSuccess} onFailure={onLinkedInFailure} />
+
           {
                 error && (<p style={{color:'red'}}>{error}</p>)
             }
