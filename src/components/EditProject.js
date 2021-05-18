@@ -6,6 +6,9 @@ import '../AddProject.css'
 function EditProject(props) {
 
     const { onEdit, projects }  = props
+    const [project, updateProject] = useState({})
+
+    let projectId = props.match.params.id
 
     const showPreview = (event) => {
         if(event.target.files.length > 0){
@@ -16,7 +19,33 @@ function EditProject(props) {
         }
     }
 
-    let projectId = props.match.params.id
+    /*const handleTitleChange = (event) => {
+        let text = event.target.value
+        let cloneProject = JSON.parse(JSON.stringify(project))
+        cloneProject.title = text
+    
+        updateProject(cloneProject)
+      }
+    
+      const handleDescChange = (event) => {
+        let text = event.target.value
+        let cloneProject = JSON.parse(JSON.stringify(project))
+        cloneProject.description = text
+    
+        updateProject(cloneProject)
+      }*/
+
+    if (!projects) {
+        <h1>Loading</h1>
+    }
+
+    let filteredProjects = projects.filter((e) => {
+        return projectId == e._id
+    })
+
+    let singleProject = filteredProjects[0]
+    console.log(filteredProjects)
+    
 
     return (
         <Container className={"center"} style={{ width: "80%" }} fixed >
@@ -37,11 +66,11 @@ function EditProject(props) {
                     <Grid className="infoGrid" item xs={6}>
                         <div className="labelLigne">
                         <label for="title">Title</label>
-                        <input name="title" id="title" type="text" placeholder="Project title" />
+                        <input  name="title" id="title" type="text" placeholder="Project title" defaultValue={singleProject.title} />
                         <label for="type">Type</label>
-                        <input name="type" id="type" type="text" placeholder="Enter type" />
+                        <input name="type" id="type" type="text" placeholder="Enter type" defaultValue={singleProject.type} />
                         <label for="description">Description</label>
-                        <textarea name="description" id="description" type="text" placeholder="Project description" />
+                        <textarea name="description" id="description" type="text" placeholder="Project description" defaultValue={singleProject.description} />
                         <div>
                         <button type="submit" >Save</button>
                         </div>

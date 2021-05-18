@@ -69,15 +69,25 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function ResponsiveDrawer(props) {
-    const { window, user, projects, onLogout } = props;
+    const { window, user, projects, onLogout, allUsers } = props;
     const classes = useStyles();
     const theme = useTheme();
     const [mobileOpen, setMobileOpen] = React.useState(false);
+
+    if (!projects || !user) {
+        return <p>Loading . . .</p>
+    }
 
     let filteredProject = projects.filter((e) => {
         return e.user._id == user._id
     })
 
+    let followers = 0;
+    allUsers.forEach((e) => {
+        if (e.follow.includes(user._id)) {
+            followers++
+        }
+    })
 
     const handleDrawerToggle = () => {
         setMobileOpen(!mobileOpen);
@@ -108,16 +118,16 @@ function ResponsiveDrawer(props) {
             <List>
                 <ListItem>
                     <ListItemText >Followers</ListItemText>
-                        0
+                        {followers}
                 </ListItem>
                 <ListItem>
                     <ListItemText>Following</ListItemText>
-                        0
+                    {user.follow.length}
                 </ListItem>
             </List>
             <Divider />
             <List>
-            <Link className="linkIcon" to="/messages">
+            <Link className="linkIcon" to="/userslist">
                 <ListItem>
                     <MessageIcon className="iconSpace"/>
                     <ListItemText className="iconSpace">Messages</ListItemText>
@@ -149,9 +159,6 @@ function ResponsiveDrawer(props) {
 
     const container = window !== undefined ? () => window().document.body : undefined;
 
-    if (!projects) {
-        return <p>Loading . . .</p>
-    }
 
     return (
         <div className={classes.root}>

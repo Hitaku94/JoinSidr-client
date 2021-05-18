@@ -12,19 +12,34 @@ function ProjectDetails(props) {
 
     const [project, updateProject] = useState(null)
 
-    useEffect(() => {
+    const fetchProject = () => {
         let projectId = props.match.params.id
         axios.get(`${config.API_URL}/api/project/${projectId}`, { withCredentials: true })
-            .then((response) => {
-                console.log(response.data)
-                updateProject(response.data)
-            })
-            .catch(() => {
-                console.log("Detail fetch failed")
-            })
+        .then((response) => {
+            console.log(response.data)
+            updateProject(response.data)
+        })
+        .catch(() => {
+            console.log("Detail fetch failed")
+        })
 
+    }
+
+    useEffect(() => {
+        fetchProject()
     }, [])
 
+    useEffect(() => {
+        console.log(project)
+        
+        if (!project || props.match.params.id != project._id) {
+           fetchProject()
+        } 
+    })
+
+    if (!project) {
+        return <h1>Loading</h1>
+    }
 
     let projectUsers = projects.filter((e) => {
         return e.user._id == user._id
@@ -42,10 +57,7 @@ function ProjectDetails(props) {
 
     console.log(singleUser)
 
-    
-    if (!project) {
-        return <h1>Loading</h1>
-    }
+    console.log(project.user.profilePic)
 
     return (
         <>
@@ -55,7 +67,7 @@ function ProjectDetails(props) {
                         <img className="profilePic" src={project.user.profilePic} alt={project.user.username} />
                         <div className="info">
                             <h2>{project.title}</h2>
-                            <span><Link className="link" to={`/userProfile/${project.user._id}`}>{project.user.username}</Link></span>, <span>{project.date}</span> <span>{project.user.country}</span>
+                            <span><Link className="link" to={`/user/${project.user._id}`}>{project.user.username}</Link></span>, <span>{project.date}</span> <span>{project.user.country}</span>
                         </div>
                     </Grid>
                     <Grid item xs={12}>
@@ -82,7 +94,7 @@ function ProjectDetails(props) {
                 <Grid item xs={12}>
                         <div className="lineBox">
                         <span className="spanLine"></span>
-                        <h2 className="moreProject">More project by <Link className="link" to="/profile"><span className="profileLink">{project.user.username}</span></Link></h2>
+                        <h2 className="moreProject">More project by <Link className="link" to={`/user/${project.user._id}`}><span className="profileLink">{project.user.username}</span></Link></h2>
                         <span className="spanLine"></span>
                         </div>
                     </Grid>
@@ -102,9 +114,7 @@ filteredProject.map((project) => {
                 </div>
                 <Link className="link" to={`/project/${project._id}`}>
                     <div className="details">
-
-                        <div className="content">
-                           
+                        <div className="content">          
                             <h2>{project.title}</h2>
 
                         </div>

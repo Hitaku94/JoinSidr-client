@@ -69,7 +69,8 @@
 
 .body .boxLeft .miniBoxLeft .overlay .overlay-link {
     position: relative;
-    text-decoration: none;
+    cursor: pointer;
+    background-color: #fbf9f3;
     color: #ed9271;
     padding: 10px 20px;
     border: 2px solid #ed9271;
@@ -85,7 +86,6 @@
     position: absolute;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%);
     z-index: -1;
     transition: all 0.6s ease;
     width: 120%;
@@ -113,6 +113,8 @@
 .body .boxLeft .miniBoxLeft .overlay .overlay-link:hover {
     color: #fbf9f3;
     border: 2px solid #fbf9f3;
+    background-color: #ed9271;
+    
 }
 
 .body .boxLeft .miniBoxLeft .overlay .overlay-link:hover::before {
@@ -164,6 +166,7 @@
 
 .body .boxRight .miniBoxRight .overlay .overlay-link {
     position: relative;
+    background-color: #ed9271;
     text-decoration: none;
     color: #fbf9f3;
     padding: 10px 20px;
@@ -172,11 +175,12 @@
     font-size: 40px;
     overflow: hidden;
     transition: 1s all ease;
+    cursor: pointer;
     
 }
 
 .body .boxRight .miniBoxRight .overlay .overlay-link::before {
-    background: #fbf9f3;
+    background-color: #fbf9f3;
     content: "";
     position: absolute;
     top: 50%;
@@ -208,6 +212,7 @@
 .body .boxRight .miniBoxRight .overlay .overlay-link:hover {
     color: #ed9271;
     border: 2px solid #ed9271;
+    background-color: #fbf9f3;
 }
 
 .body .boxRight .miniBoxRight .overlay .overlay-link:hover::before {
