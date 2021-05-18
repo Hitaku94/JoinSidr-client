@@ -123,7 +123,7 @@ function ResponsiveDrawer(props) {
                     <ListItemText className="iconSpace">Messages</ListItemText>
                 </ListItem>
                 </Link>
-                <Link className="linkIcon" to="/settings">
+                <Link className="linkIcon" to="/security">
                 <ListItem>
                     <AccountCircleIcon className="iconSpace"/>
                     <ListItemText className="iconSpace">Account</ListItemText>

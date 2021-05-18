@@ -159,7 +159,7 @@ function App(props) {
         updateUser(response.data.data);
         updateError(null);
         updateShowloading(false);
-        props.history.push("/signin");
+        props.history.push("/profile");
       });
   };
 

@@ -39,8 +39,8 @@ const AccountForm = (props) => {
                     value={user.username}
                   />
                   <TextField
-                    name="description"
-                    type="text"
+                    name="password"
+                    type="password"
                     onChange={handleChangeUser}
                     value={user.password}
                   />
