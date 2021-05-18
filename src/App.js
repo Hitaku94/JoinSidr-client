@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Switch, Route, withRouter } from "react-router-dom";
+import { Switch, Route, withRouter, Redirect } from "react-router-dom";
 import {
   Home,
   NavBar,
@@ -21,64 +21,75 @@ import ChoicePage from "./components/ChoicePage";
 import AccountForm from "./components/AccountForm"
 
 function App(props) {
+
   const [user, updateUser] = useState(null);
   const [users, updateUsers] = useState([]);
-  const [allUser, updateAllUser] = useState([]);
   const [projects, updateProject] = useState([]);
+  const [filteredProjects, updateFilteredProjects] = useState([])
   const [error, updateError] = useState(null);
   const [fetchingUser, updateFetchingUser] = useState(true);
   const [showLoading, updateShowloading] = useState(true);
+  const [redirect, updateRedirect] = useState(null)
+  const [profileRedirect, updateProfileRedirect] = useState(false)
+
+  
+
 
   useEffect(() => {
     axios
       .get(`${config.API_URL}/api/trends`, { withCredentials: true })
       .then((response) => {
-        console.log(response.data);
         updateProject(response.data);
+        updateFilteredProjects(response.data);
       })
       .catch((err) => {
         console.log("Fecthing failed");
       });
-
-    fetchUser();
-    fetchUsers();
-
-    userstaka();
-  }, []);
+    
+      fetchUser();
+      fetchUsers();
+      
+    
+  },[]);
 
   useEffect(() => {
-    if (user) {
-      props.history.push("/profile");
-    } else if (!user) {
-      props.history.push("/");
+    if(redirect === "signin") {
+      props.history.push("/signin")
+  } else if (redirect === "") {
+      props.history.push("/")
+  } else if (redirect === "afterSignIn") {
+    if(!user.userType) {
+      props.history.push("/choice-page")
+    } else {
+      props.history.push("/profile")
     }
-  }, [user]);
+  } else if (redirect === "profile") {
+    props.history.push("/profile")
+  }
+  }, [props.history, redirect])
 
-  const userstaka = () => {
-    axios
-      .get(`${config.API_URL}/api/usersProfile`, { withCredentials: true })
-      .then((response) => {
-        updateAllUser(response.data);
-        console.log(response.data);
-      })
-      .catch((err) => {
-        console.log("users doesn't work");
-      });
-  };
+  useEffect(() => {
+    if (profileRedirect == true)  {
+      props.history.push("/profile")
+      updateProfileRedirect(false)
+    }
+  }, [profileRedirect])
 
-  const fetchUser = () => {
+  const fetchUser = ()=>{
     axios
-      .get(`${config.API_URL}/api/profile`, { withCredentials: true })
-      .then((response) => {
-        updateUser(response.data);
-        console.log(response.data);
-        updateFetchingUser(false);
-      })
-      .catch((err) => {
-        console.log("user not logged in");
-        updateFetchingUser(false);
-      });
-  };
+    .get(`${config.API_URL}/api/profile`, { withCredentials: true })
+    .then((response) => {
+      updateUser(response.data)
+      updateFetchingUser(false)
+      
+    }).catch((err) => {
+      console.log("user not logged in")
+      updateFetchingUser(false)
+    });
+  }
+
+  
+  
   const fetchUsers = () => {
     axios
       .get(`${config.API_URL}/api/users`, { withCredentials: true })
@@ -107,9 +118,10 @@ function App(props) {
 
     axios
       .post(`${config.API_URL}/api/signup`, newUser, { withCredentials: true })
-      .then(() => {
-        //updateUser(response.data)
-        props.history.push("/choice-page");
+      .then((response) => {
+        updateUser(response.data)
+        updateRedirect("signin")
+        
       })
       .catch((errorObj) => {
         updateError(errorObj.response.data.errorMessage);
@@ -127,10 +139,10 @@ function App(props) {
     axios
       .post(`${config.API_URL}/api/signin`, newUser, { withCredentials: true })
       .then((response) => {
-        console.log(response.data);
         updateUser(response.data);
         updateError(null);
-        props.history.push("/profile");
+        updateRedirect("afterSignIn")
+        
       })
       .catch((errorObj) => {
         updateError(errorObj.response.data.errorMessage);
@@ -194,7 +206,8 @@ function App(props) {
       .post(`${config.API_URL}/api/logout`, {}, { withCredentials: true })
       .then(() => {
         updateUser(null);
-        props.history.push("/");
+        updateRedirect("")
+        
       })
       .catch((errorObj) => {
         updateError(errorObj.response.data);
@@ -312,6 +325,8 @@ function App(props) {
       })
       .then((response) => {
         updateProject([response.data, ...projects]);
+        updateFilteredProjects([response.data, ...filteredProjects]);
+        updateProfileRedirect(true)
       })
       .catch(() => {
         console.log("Image upload failed");
@@ -324,8 +339,37 @@ function App(props) {
     let title = e.target.title.value;
     let type = e.target.type.value;
     let description = e.target.description.value;
-    let image = e.target.image.files[0];
 
+
+    if (e.target.image.files.length == 0) {
+      axios.patch(
+        `${config.API_URL}/api/project/${projectId}`, 
+        {
+          title: title,
+          type: type,
+          description: description,
+        },
+         {withCredentials: true,})
+    .then((response) => {
+      
+      let clonedProjects = projects.map((e) => {
+        if (projectId == e._id) {
+          return response.data
+        }
+        else {
+          return e
+        }
+      }) 
+      updateProject(clonedProjects);
+      updateProfileRedirect(true)
+    }) 
+    .catch(() => {
+      console.log("Edit project failed");
+    });
+    }
+    else {
+      let image = e.target.image.files[0];
+    
     let formData = new FormData();
     formData.append("imageUrl", image);
 
@@ -344,13 +388,38 @@ function App(props) {
         );
       })
       .then((response) => {
-        console.log(image);
-        updateProject(response.data);
-      })
+        let clonedProjects = projects.map((e) => {
+          if (projectId == e._id) {
+            return response.data
+          }
+          else {
+            return e
+          }
+        }) 
+        updateProject(clonedProjects);
+        updateProfileRedirect(true)
+      }) 
       .catch(() => {
         console.log("Edit project failed");
       });
+    }
+    
   };
+
+  const handlOnChoose = (userType) => {
+    updateFetchingUser(true)
+
+    axios.patch(`${config.API_URL}/api/type`, {userType}, {withCredentials: true,})
+      .then((response) => {
+        updateFetchingUser(false);
+        updateUser(response.data);
+        updateRedirect("profile")
+        
+      }).catch(() => {
+        console.log("Edit project failed");
+        updateFetchingUser(false)
+      });
+  }
 
   const handleDeleteProject = (projectId) => {
     axios
@@ -359,32 +428,69 @@ function App(props) {
       })
       .then(() => {
         let filteredProject = projects.filter((project) => {
-          return project._id !== projectId;
-        });
+        return project._id !== projectId
+        })
         updateProject(filteredProject);
-        props.history.push("/profile");
-      })
-      .catch((err) => {
-        console.log("Delete failed", err);
+        updateProfileRedirect(true)
+      }).catch((err) => {
+        console.log('Delete failed', err)
       });
   };
 
-  if (fetchingUser) {
-    return <h1>Loading</h1>;
+  const handleSearch = (e) => {
+    // since our onChange event listener is on the input
+    // e.target will give us  the input DOM
+    let input  = e.target.value 
+    console.log(input)
+    let filteredProjects = projects.filter((singleProject) => {
+      // converting to same case 
+      // checking if the input includes in the books title
+      return singleProject.title.toLowerCase().includes(input.toLowerCase())
+    })
+    updateFilteredProjects(filteredProjects)
   }
+
+  const handleFollow = (follow) => {
+    axios.patch(`${config.API_URL}/api/follow`, {follow}, {withCredentials: true,})
+    .then((response) => {
+      console.log(response)
+      updateUser(response.data);
+      
+    }).catch(() => {
+      console.log("Edit project failed");
+
+    });
+  }
+
+  const handleUnfollow = (unfollow) => {
+    console.log(unfollow)
+    axios.patch(`${config.API_URL}/api/unfollow`, {unfollow}, {withCredentials: true,})
+    .then((response) => {
+      console.log(response)
+      updateUser(response.data);
+      
+    }).catch(() => {
+      console.log("Edit project failed");
+
+    });
+  }
+
+
+  if(fetchingUser){
+    return <h1>Loading</h1>
+  }
+
 
   return (
     <div className="App">
       <NavBar onLogout={handleLogout} user={user} />
       <Switch>
-        <Route exact path="/" component={Home} />
-        <Route
-          exact
-          path="/userslist"
-          render={(routeProps) => {
-            return <UserList users={users} user={user} {...routeProps} />;
-          }}
-        />
+        <Route exact path="/" render={(routeProps) => {
+          return <Home user={user} {...routeProps} />
+        }} />
+        <Route exact path='/userslist' render={(routeProps) => {
+              return <UserList users={users} user={user}  {...routeProps}  />
+            }} />
         <Route
           path="/signup"
           render={(routeProps) => {
@@ -413,7 +519,7 @@ function App(props) {
           exact
           path="/profile"
           render={(routeProps) => {
-            return <Profile user={user} projects={projects} {...routeProps} />;
+            return <Profile user={user} projects={projects} allUsers={users} {...routeProps} />;
           }}
         />
         <Route
@@ -457,29 +563,21 @@ function App(props) {
           exact
           path="/trends"
           render={(routeProps) => {
-            return <Trends projects={projects} {...routeProps} />;
+            return <Trends onSearch={handleSearch} projects={filteredProjects} {...routeProps} />;
           }}
         />
         <Route
           exact
           path="/project/:id"
           render={(routeProps) => {
-            return (
-              <ProjectDetails
-                projects={projects}
-                user={user}
-                allUser={allUser}
-                onDelete={handleDeleteProject}
-                {...routeProps}
-              />
-            );
+            return <ProjectDetails projects={projects} user={user} allUser={users} onDelete={handleDeleteProject} {...routeProps} />;
           }}
         />
         <Route
           exact
           path="/project-edit/:id"
           render={(routeProps) => {
-            return <EditProject onEdit={handleEditProject} {...routeProps} />;
+            return <EditProject onEdit={handleEditProject} projects={projects} {...routeProps} />;
           }}
         />
         <Route
@@ -492,14 +590,14 @@ function App(props) {
           exact
           path="/user/:id"
           render={(routeProps) => {
-            return <UserProfile {...routeProps} />;
+            return <UserProfile projects={projects} loggedInUser={user} onFollow={handleFollow} onUnfollow={handleUnfollow} {...routeProps} />;
           }}
         />
         <Route
           exact
           path="/choice-page"
           render={(routeProps) => {
-            return <ChoicePage {...routeProps} />;
+            return <ChoicePage onChoose={handlOnChoose} {...routeProps} />;
           }}
         />
       </Switch>

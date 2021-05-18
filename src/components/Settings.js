@@ -5,7 +5,7 @@ import { Grid, Container } from "@material-ui/core";
 
 const Settings = (props) => {
   const { loggedInUser, onEdit, fetchingUser, onDelete } = props;
-  const [user, updateUser] = useState(loggedInUser);
+  const [user, updateUser]= useState(loggedInUser)
   const handleChangeUser = (event) =>
     updateUser({
       ...user,

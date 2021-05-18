@@ -15,7 +15,7 @@ function AddProject(props) {
         }
     }
 
-    const [disabled, updateDisabled] = useState(true)
+    /*const [disabled, updateDisabled] = useState(true)
 
     
 
@@ -26,7 +26,7 @@ function AddProject(props) {
         else {
             updateDisabled(true)
         }
-    }
+    }*/
 
 
     return (
@@ -48,13 +48,13 @@ function AddProject(props) {
                     <Grid className="infoGrid" item xs={6}>
                         <div className="labelLigne">
                         <label for="title">Title</label>
-                        <input onChange={handleChange} name="title" id="title" type="text" placeholder="Project title" />
+                        <input  name="title" id="title" type="text" placeholder="Project title" />
                         <label for="type">Type</label>
-                        <input onChange={handleChange} name="type" id="type" type="text" placeholder="Enter type" />
+                        <input  name="type" id="type" type="text" placeholder="Enter type" />
                         <label for="description">Description</label>
                         <textarea name="description" id="description" type="text" placeholder="Project description" />
                         <div>
-                        <button disabled={disabled} type="submit" >Add project</button>
+                        <button type="submit">Add project</button>
                         </div>
                         </div>
                     </Grid>

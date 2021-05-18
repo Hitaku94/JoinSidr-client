@@ -55,26 +55,7 @@
     height: 100%
 }
 
-.center .centerBlock .infoGrid button:enabled {
-    padding: 10px 15px;
-    border-radius: 10px;
-    border: 1px solid;
-    color: white;
-    cursor: pointer;
-    background: red;
-   
-}
 
-.center .centerBlock .infoGrid button:disabled {
-    padding: 10px 15px;
-    border-radius: 10px;
-    border: 1px solid;
-    color: rgb(241, 97, 97);
-}
-
-.center .centerBlock .infoGrid button:enabled:hover {
-    background :lightcoral;
-}
 
 .center .centerBlock .infoGrid .labelLigne input {
     margin-top: 5px;

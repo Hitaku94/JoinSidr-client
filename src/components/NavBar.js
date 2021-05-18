@@ -122,6 +122,7 @@ export default function NavBar(props) {
     >
       <MenuItem onClick={handleMenuClose}><Link className="link-profile" to={"/profile"}>Profile</Link></MenuItem>
       <MenuItem onClick={handleMenuClose}><Link className="link-profile" to={"/settings"}>Settings</Link></MenuItem>
+      <MenuItem onClick={handleMenuClose}><Link className="link-profile" to={"/userslist"}>messages</Link></MenuItem>
       <MenuItem onClick={handleMenuClose}><Button onClick={onLogout} variant="contained" color="secondary">Logout</Button></MenuItem>
     </Menu>
   );
@@ -196,15 +197,13 @@ export default function NavBar(props) {
           {
             user ? (
               <>
-              <Typography className={classes.title, "navItem"} variant="h6" noWrap color="inherit">
-              <Link to="/userslist" className="slide-bar" color="inherit">Users</Link>
-              </Typography>
-              
+              <Link to="/userslist" className="slide-bar-icon" color="inherit">
               <IconButton aria-label="show 4 new mails" color="inherit">
               <Badge badgeContent={4} color="secondary">
                 <MailIcon />
               </Badge>
             </IconButton>
+            </Link>
             <IconButton aria-label="show 17 new notifications" color="inherit">
               <Badge badgeContent={17} color="secondary">
                 <NotificationsIcon />
