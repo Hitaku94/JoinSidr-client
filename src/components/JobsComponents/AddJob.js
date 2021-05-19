@@ -1,10 +1,10 @@
 import React from 'react'
 import { useEffect, useState } from "react";
 import { Grid, Container, Divider, TextField } from '@material-ui/core';
-import '../AddProject.css'
-import MultipleSelect from './MultipleSelectLanguage'
+import '../../AddProject.css'
+import MultipleSelect from '../MultipleSelectLanguage'
 
-function AddProject(props) {
+function AddJob(props) {
     const { onAdd } = props
 
     const showPreview = (event) => {
@@ -19,13 +19,10 @@ function AddProject(props) {
     let languages = ["Python", "Java", "JavaScript", "Go", "Ruby", "Dart", "PHP", "CSS", "HTML", "C++", "SQL", "MongoDB", "Angular", "React", "Vue", "Jquery", "TypeScript", "Unity"]
     let random = languages.sort(() => .5 - Math.random()).slice(0,7)
 
-    console.log(random)
-
-
     return (
         <Container className={"center"} style={{ width: "80%" }} fixed >
             <Grid className="centerBlock" container spacing={2}>
-                <h1>Upload your project</h1>
+                <h1>Upload your Job</h1>
                 <form onSubmit={onAdd}>
                     <div className="centerGrid">
                     <Grid className="imgDisplay" item xs={6}>
@@ -42,17 +39,17 @@ function AddProject(props) {
                     <Grid className="infoGrid" item xs={6}>
                         <div className="labelLigne">
                         <label for="title">Title</label>
-                        <input  className="inputAdd" name="title" id="title" type="text" placeholder="Project title" />
+                        <input  className="inputAdd" name="title" id="title" type="text" placeholder="Job title" />
+                        <label for="location">Location</label>
+                        <input  className="inputAdd" name="location" id="location" type="text" placeholder="Job location" />
                         <label for="type">Type</label>
-                        <input  className="inputAdd" name="type" id="type" type="text" placeholder="Type of project" />
-                        <label for="type">Languages</label>
+                        <input  className="inputAdd" name="type" id="type" type="text" placeholder="Type of job" />
+                        <label for="languages">Languages</label>
                         <MultipleSelect className="languages-input" />
                         <label for="description">Description</label>
-                        <textarea name="description" id="description" type="text" placeholder="Project description" />
-                        <TextField name="urlProject" id="standard-basic" label="Url project" />
-                        <TextField  name="urlGit" id="standard-basic" label="Url git" />
+                        <textarea name="description" id="description" type="text" placeholder="Job description" />
                         <div className="urlgit-btn-padding">
-                        <button type="submit">Add project</button>
+                        <button type="submit">Add Job</button>
                         </div>
                         </div>
                     </Grid>
@@ -64,4 +61,4 @@ function AddProject(props) {
     )
 }
 
-export default AddProject
+export default AddJob

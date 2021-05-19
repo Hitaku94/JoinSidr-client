@@ -194,6 +194,9 @@ export default function NavBar(props) {
           <Typography className={classes.title, "navItem"} variant="h6" noWrap color="inherit">
           <Link to="/trends" className="slide-bar" color="inherit">Trending projects </Link>
           </Typography>
+          <Typography className={classes.title, "navItem"} variant="h6" noWrap color="inherit">
+          <Link to="/jobsList" className="slide-bar" color="inherit">Jobs list </Link>
+          </Typography>
           {
             user ? (
               <>

@@ -47,7 +47,7 @@ const useStyles = makeStyles((theme) => ({
 
 function Trends(props) {
     const classes = useStyles();
-    const { projects, onSearch } = props
+    const { projects, onSearch, user } = props
 
     if (!projects) {
         return <p>Loading . . .</p>
@@ -69,11 +69,19 @@ function Trends(props) {
                                 <Link to={`/project/${project._id}`}>
                                     <img className={classes.image} src={project.image} alt={project.image} />
                                 <Divider />
+                                </Link>
                                     <div>
+                                    <Link to={`/project/${project._id}`}>
                                         <h3 className={classes.h3}>{project.title}</h3>
-                                        <p className={classes.h3}>by: {project.user?.username}</p>
-                                    </div>
                                     </Link>
+                                    {
+                                        user._id == project.user._id
+                                        ? <><Link to={`/profile`}><p className={classes.h3}>by: {project.user?.username}</p></Link></>
+                                        : <><Link to={`/user/${project.user._id}`}><p className={classes.h3}>by: {project.user?.username}</p></Link></>
+                                    }
+                                        
+                                    </div>
+                                   
                                 </Paper>
                             </Grid>
                             

@@ -1,7 +1,8 @@
 import React from 'react'
 import { useEffect, useState } from "react";
-import { Grid, Container, Divider } from '@material-ui/core';
+import { Grid, Container, Divider, TextField } from '@material-ui/core';
 import '../AddProject.css'
+import MultipleSelect from './MultipleSelectLanguage'
 
 function EditProject(props) {
 
@@ -66,12 +67,16 @@ function EditProject(props) {
                     <Grid className="infoGrid" item xs={6}>
                         <div className="labelLigne">
                         <label for="title">Title</label>
-                        <input  name="title" id="title" type="text" placeholder="Project title" defaultValue={singleProject.title} />
+                        <input className="inputAdd"  name="title" id="title" type="text" placeholder="Project title" defaultValue={singleProject.title} />
                         <label for="type">Type</label>
-                        <input name="type" id="type" type="text" placeholder="Enter type" defaultValue={singleProject.type} />
+                        <input className="inputAdd" name="type" id="type" type="text" placeholder="Enter type" defaultValue={singleProject.type} />
+                        <label for="type">Languages</label>
+                        <MultipleSelect className="languages-input" />
                         <label for="description">Description</label>
                         <textarea name="description" id="description" type="text" placeholder="Project description" defaultValue={singleProject.description} />
-                        <div>
+                        <TextField name="urlProject" id="standard-basic" label="Url project" defaultValue={singleProject.urlProject}/>
+                        <TextField  name="urlGit" id="standard-basic" label="Url git" defaultValue={singleProject.urlGit}/>
+                        <div className="urlgit-btn-padding">
                         <button type="submit" >Save</button>
                         </div>
                         </div>
