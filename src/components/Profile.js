@@ -3,15 +3,15 @@ import ClippedDrawer from './DrawerLeft'
 
 function Profile(props) {
 
-    const {user, projects, onLogout, allUsers} = props
+    const {user, projects, onLogout, allUsers, jobs} = props
 
-    if (!projects){
+    if (!projects || !jobs){
         return <h1>Loading</h1>
     }
 
     return (
         <>
-            <ClippedDrawer user={user} projects={projects} allUsers={allUsers} onLogout={onLogout} />
+            <ClippedDrawer user={user} projects={projects} jobs={jobs} allUsers={allUsers} onLogout={onLogout} />
         </>
     )
 }

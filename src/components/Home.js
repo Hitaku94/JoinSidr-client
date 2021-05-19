@@ -1,6 +1,7 @@
 import React from 'react';
 import { Grid, Button } from '@material-ui/core';
 import { Redirect } from "react";
+import { Link } from 'react-router-dom'
 
 function Home(props) {
 
@@ -22,6 +23,7 @@ function Home(props) {
                     <Button variant="contained" color="primary">
                         SignUp
                     </Button>
+                    <Link to="/thetesting">test</Link>
                 </Grid>
             </Grid>
         </>

@@ -19,12 +19,18 @@ import EditProject from "./components/EditProject";
 import UserProfile from "./components/UserProfile";
 import ChoicePage from "./components/ChoicePage";
 import AccountForm from "./components/AccountForm"
+import TheProfile from "./components/SingleProfile/TheProfile";
+import JobsList from "./components/JobsComponents/JobsList";
+import JobDetails from "./components/JobsComponents/JobDetails";
+import EditJob from "./components/JobsComponents/EditJob";
+import AddJob from "./components/JobsComponents/AddJob";
 
 function App(props) {
 
   const [user, updateUser] = useState(null);
   const [users, updateUsers] = useState([]);
   const [projects, updateProject] = useState([]);
+  const [jobs, updateJob] = useState([]);
   const [filteredProjects, updateFilteredProjects] = useState([])
   const [error, updateError] = useState(null);
   const [fetchingUser, updateFetchingUser] = useState(true);
@@ -33,7 +39,7 @@ function App(props) {
   const [profileRedirect, updateProfileRedirect] = useState(false)
 
   
-
+  //useEffect (COMPONENT DID MOUNT)
 
   useEffect(() => {
     axios
@@ -48,7 +54,7 @@ function App(props) {
     
       fetchUser();
       fetchUsers();
-      
+      fetchJobs()
     
   },[]);
 
@@ -75,6 +81,8 @@ function App(props) {
     }
   }, [profileRedirect])
 
+  // FETCH THE MODELS FROM DATABASE
+
   const fetchUser = ()=>{
     axios
     .get(`${config.API_URL}/api/profile`, { withCredentials: true })
@@ -88,8 +96,6 @@ function App(props) {
     });
   }
 
-  
-  
   const fetchUsers = () => {
     axios
       .get(`${config.API_URL}/api/users`, { withCredentials: true })
@@ -101,11 +107,26 @@ function App(props) {
         console.log("user not logged in");
       });
   };
+
+  const fetchJobs = () => {
+    axios
+    .get(`${config.API_URL}/api/jobList`, { withCredentials: true })
+    .then((response) => {
+      updateJob(response.data);
+    })
+    .catch((err) => {
+      console.log("Fecthing failed");
+    });
+  }
+
+   ////
   const handleChangeUser = (event) =>
     updateUser({
       ...user,
       [event.currentTarget.name]: event.currentTarget.value,
     });
+
+  //HANDLE AUTH
 
   const handleSignup = (e) => {
     e.preventDefault();
@@ -237,6 +258,7 @@ function App(props) {
         )
         .then((response) => {
           updateUser(response.data);
+          updateProfileRedirect(true)
         })
         .catch((err) => updateError(err.response.data));
     } else {
@@ -262,6 +284,7 @@ function App(props) {
         })
         .then((response) => {
           updateUser(response.data);
+          updateProfileRedirect(true)
         })
         .catch((err) => updateError(err.response.data));
     }
@@ -282,6 +305,7 @@ function App(props) {
         )
         .then((response) => {
           updateUser(response.data);
+          updateProfileRedirect(true)
         })
         .catch((err) => updateError(err.response.data));
   };
@@ -299,12 +323,17 @@ function App(props) {
       });
   };
 
+  // HANDLES FOR PROJECTS
+
   const handleCreateProject = (e) => {
     e.preventDefault();
     let title = e.target.title.value;
     let type = e.target.type.value;
     let description = e.target.description.value;
     let image = e.target.image.files[0];
+    let urlProject = e.target.urlProject.value;
+    let urlGit = e.target.urlGit.value;
+    let languages = e.target.languages.value
 
     let formData = new FormData();
     formData.append("imageUrl", image);
@@ -319,6 +348,9 @@ function App(props) {
             type: type,
             description: description,
             image: response.data.image,
+            urlProject: urlProject,
+            urlGit: urlGit,
+            languages: languages,
           },
           { withCredentials: true }
         );
@@ -339,6 +371,9 @@ function App(props) {
     let title = e.target.title.value;
     let type = e.target.type.value;
     let description = e.target.description.value;
+    let urlProject = e.target.urlProject.value;
+    let urlGit = e.target.urlGit.value;
+    let languages = e.target.languages.value
 
 
     if (e.target.image.files.length == 0) {
@@ -348,6 +383,9 @@ function App(props) {
           title: title,
           type: type,
           description: description,
+          urlProject: urlProject,
+          urlGit: urlGit,
+          languages: languages,
         },
          {withCredentials: true,})
     .then((response) => {
@@ -383,6 +421,9 @@ function App(props) {
             type: type,
             description: description,
             image: response.data.image,
+            urlProject: urlProject,
+            urlGit: urlGit,
+            languages: languages,
           },
           { withCredentials: true }
         );
@@ -437,6 +478,8 @@ function App(props) {
       });
   };
 
+  // HANDLE FOR SEARCH
+
   const handleSearch = (e) => {
     // since our onChange event listener is on the input
     // e.target will give us  the input DOM
@@ -449,6 +492,8 @@ function App(props) {
     })
     updateFilteredProjects(filteredProjects)
   }
+
+  // HANDLES FOR FOLLOWING
 
   const handleFollow = (follow) => {
     axios.patch(`${config.API_URL}/api/follow`, {follow}, {withCredentials: true,})
@@ -474,6 +519,142 @@ function App(props) {
 
     });
   }
+
+  // HANDLES FOR JOBS
+
+  const handleCreateJob = (e) => {
+    e.preventDefault();
+    let title = e.target.title.value;
+    let type = e.target.type.value;
+    let description = e.target.description.value;
+    let image = e.target.image.files[0];
+    let languages = e.target.languages.value
+    let location = e.target.location.value
+
+    let formData = new FormData();
+    formData.append("imageUrl", image);
+
+    axios
+      .post(`${config.API_URL}/api/upload`, formData)
+      .then((response) => {
+        return axios.post(
+          `${config.API_URL}/api/job-create`,
+          {
+            title: title,
+            type: type,
+            description: description,
+            image: response.data.image,
+            languages: languages,
+            location: location,
+          },
+          { withCredentials: true }
+        );
+      })
+      .then((response) => {
+        updateJob([response.data, ...jobs]);
+        updateProfileRedirect(true)
+      })
+      .catch(() => {
+        console.log("Image upload failed");
+      });
+  };
+
+  const handleEditJob = (e, jobId) => {
+    e.preventDefault();
+
+    let title = e.target.title.value;
+    let type = e.target.type.value;
+    let description = e.target.description.value;
+    let languages = e.target.languages.value
+    let location = e.target.location.value
+
+    if (e.target.image.files.length == 0) {
+      axios.patch(
+        `${config.API_URL}/api/job/${jobId}`, 
+        {
+          title: title,
+          type: type,
+          description: description,
+          languages: languages,
+          location: location,
+        },
+         {withCredentials: true,})
+    .then((response) => {
+      
+      let clonedJobs = jobs.map((e) => {
+        if (jobId == e._id) {
+          return response.data
+        }
+        else {
+          return e
+        }
+      }) 
+      updateJob(clonedJobs);
+      updateProfileRedirect(true)
+    }) 
+    .catch(() => {
+      console.log("Edit project failed");
+    });
+    }
+    else {
+      let image = e.target.image.files[0];
+    
+    let formData = new FormData();
+    formData.append("imageUrl", image);
+
+    axios
+      .post(`${config.API_URL}/api/upload`, formData)
+      .then((response) => {
+        return axios.patch(
+          `${config.API_URL}/api/job/${jobId}`,
+          {
+            title: title,
+            type: type,
+            description: description,
+            image: response.data.image,
+            languages: languages,
+            location: location,
+          },
+          { withCredentials: true }
+        );
+      })
+      .then((response) => {
+        let clonedJobs = jobs.map((e) => {
+          if (jobId == e._id) {
+            return response.data
+          }
+          else {
+            return e
+          }
+        }) 
+        updateJob(clonedJobs);
+        updateProfileRedirect(true)
+      }) 
+      .catch(() => {
+        console.log("Edit project failed");
+      });
+    }
+    
+  };
+
+  const handleDeleteJob = (jobId) => {
+    axios
+      .delete(`${config.API_URL}/api/job/${jobId}`, {
+        withCredentials: true,
+      })
+      .then(() => {
+        let filteredJob = jobs.filter((job) => {
+        return job._id !== jobId
+        })
+        updateJob(filteredJob);
+        updateProfileRedirect(true)
+      }).catch((err) => {
+        console.log('Delete failed', err)
+      });
+  };
+
+  // HANDLES FOR LIKES
+
 
 
   if(fetchingUser){
@@ -519,7 +700,7 @@ function App(props) {
           exact
           path="/profile"
           render={(routeProps) => {
-            return <Profile user={user} projects={projects} allUsers={users} {...routeProps} />;
+            return <Profile user={user} projects={projects} jobs={jobs} allUsers={users} onLogout={handleLogout} {...routeProps} />;
           }}
         />
         <Route
@@ -563,7 +744,7 @@ function App(props) {
           exact
           path="/trends"
           render={(routeProps) => {
-            return <Trends onSearch={handleSearch} projects={filteredProjects} {...routeProps} />;
+            return <Trends onSearch={handleSearch} projects={filteredProjects} user={user} {...routeProps} />;
           }}
         />
         <Route
@@ -590,7 +771,7 @@ function App(props) {
           exact
           path="/user/:id"
           render={(routeProps) => {
-            return <UserProfile projects={projects} loggedInUser={user} onFollow={handleFollow} onUnfollow={handleUnfollow} {...routeProps} />;
+            return <TheProfile projects={projects} loggedInUser={user} allUsers={users} onFollow={handleFollow} onUnfollow={handleUnfollow} {...routeProps} />;
           }}
         />
         <Route
@@ -598,6 +779,35 @@ function App(props) {
           path="/choice-page"
           render={(routeProps) => {
             return <ChoicePage onChoose={handlOnChoose} {...routeProps} />;
+          }}
+        />
+        {/*Route for Jobs*/}
+        <Route
+          exact
+          path="/jobsList"
+          render={(routeProps) => {
+            return <JobsList jobs={jobs} {...routeProps} user={user} />;
+          }}
+        />
+        <Route
+          exact
+          path="/job/:id"
+          render={(routeProps) => {
+            return <JobDetails jobs={jobs} user={user} allUser={users} onDelete={handleDeleteJob} {...routeProps} />;
+          }}
+        />
+        <Route
+          exact
+          path="/job-edit/:id"
+          render={(routeProps) => {
+            return <EditJob onEdit={handleEditJob} jobs={jobs} {...routeProps} />;
+          }}
+        />
+        <Route
+          exact
+          path="/job-create"
+          render={(routeProps) => {
+            return <AddJob onAdd={handleCreateJob} {...routeProps} />;
           }}
         />
       </Switch>

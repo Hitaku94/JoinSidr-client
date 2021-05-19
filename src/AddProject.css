@@ -7,6 +7,10 @@
 
 .center .centerGrid {
     display: flex;
+    flex-direction: column;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
 }
 
 .center .centerBlock {
@@ -16,13 +20,10 @@
 }
 
 .center .centerBlock .infoGrid {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+
     width: 100%;
-    height: 100%;
-    max-height: 380px;
+    margin-top: 50px;
+
 
 }
 
@@ -34,7 +35,7 @@
     padding: 20px ;
     background:lightblue;
     border: 2px dashed #555;
-    height: 380px;
+    height: 100%;
 }
 
 .center .centerBlock h1 {
@@ -57,12 +58,13 @@
 
 
 
-.center .centerBlock .infoGrid .labelLigne input {
+.center .centerBlock .infoGrid .labelLigne .inputAdd {
     margin-top: 5px;
     margin-bottom: 25px;
     padding: 10px 15px;
     border-radius: 5px;
     border: 1px solid;
+    width: 50%
 }
 
 .center .centerBlock .infoGrid .labelLigne label {
@@ -71,12 +73,13 @@
 }
 
 .center .centerBlock .infoGrid .labelLigne textarea {
-    margin-bottom: 50px;
+    margin-bottom: 10px;
     margin-top: 5px;
-    width: 400px;
-    height: 50px;
+    width: 70%;
+    height: 100px;
     padding: 15px;
     resize:none;
+    border-radius: 5px;
 }
 
 .center .centerBlock .imgDisplay .inputUpload {
@@ -106,7 +109,9 @@
 .center .centerBlock .imgDisplay img {
     width: 100%;
     display: none;
-    height: 300px;
+    height: 100%;
+    margin-top: 0;
+    border-radius: 0px;
 
 }
 
@@ -114,4 +119,14 @@
     display:flex;
     align-items: center;
     justify-content: center;
+    height: 200px;
+}
+
+.languages-input {
+    margin-bottom: 50px;
+    margin-top: 7px;
+}
+
+.urlgit-btn-padding {
+    margin-top: 40px
 }

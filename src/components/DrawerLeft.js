@@ -5,8 +5,6 @@ import {
     Drawer, CssBaseline, AppBar, Toolbar, List, Typography, Divider, IconButton, ListItem, ListItemIcon, ListItemText, Hidden
 } from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
-import InboxIcon from '@material-ui/icons/MoveToInbox';
-import MailIcon from '@material-ui/icons/Mail';
 import PowerSettingsNewIcon from '@material-ui/icons/PowerSettingsNew';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import SettingsIcon from '@material-ui/icons/Settings';
@@ -69,16 +67,20 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function ResponsiveDrawer(props) {
-    const { window, user, projects, onLogout, allUsers } = props;
+    const { window, user, projects, onLogout, allUsers, jobs } = props;
     const classes = useStyles();
     const theme = useTheme();
     const [mobileOpen, setMobileOpen] = React.useState(false);
 
-    if (!projects || !user) {
+    if (!projects || !user || !jobs) {
         return <p>Loading . . .</p>
     }
 
     let filteredProject = projects.filter((e) => {
+        return e.user._id == user._id
+    })
+
+    let filteredJob = jobs.filter((e) => {
         return e.user._id == user._id
     })
 
@@ -95,30 +97,26 @@ function ResponsiveDrawer(props) {
 
     const drawer = (
         <div>
-            <div className={classes.toolbar} style={{display: "flex", alignContent: "center", justifyContent: "center", alignItems: "center",}}>
-               
+            <div className={classes.toolbar} style={{ display: "flex", alignContent: "center", justifyContent: "center", alignItems: "center", }}>
+
                 <Link className="linkLogo" to="/">
-                <h1 className="logo">JoinSidr</h1>
+                    <h1 className="logo">JoinSidr</h1>
                 </Link>
-                
-                </div>
+
+            </div>
             <Divider />
             <div className="infoProfile">
                 <img className="profilePic" src={user.profilePic} alt={user.username} />
                 <h2>{user.username}</h2>
                 <div className="countryBox">
-                <LocationOnIcon style={{width: 20}}/>
-                <h5 className="country">{user.country}</h5>
-                </div>
-                <div>
-                    <button className="followBtn">Follow</button>
-                    <button className="msgBtn"> <Link to="/userslist">Message</Link></button>
+                    <LocationOnIcon style={{ width: 20 }} />
+                    <h5 className="country">{user.country}</h5>
                 </div>
             </div>
             <List>
                 <ListItem>
                     <ListItemText >Followers</ListItemText>
-                        {followers}
+                    {followers}
                 </ListItem>
                 <ListItem>
                     <ListItemText>Following</ListItemText>
@@ -127,29 +125,29 @@ function ResponsiveDrawer(props) {
             </List>
             <Divider />
             <List>
-            <Link className="linkIcon" to="/userslist">
-                <ListItem>
-                    <MessageIcon className="iconSpace"/>
-                    <ListItemText className="iconSpace">Messages</ListItemText>
-                </ListItem>
+                <Link className="linkIcon" to="/userslist">
+                    <ListItem>
+                        <MessageIcon className="iconSpace" />
+                        <ListItemText className="iconSpace">Messages</ListItemText>
+                    </ListItem>
                 </Link>
                 <Link className="linkIcon" to="/security">
-                <ListItem>
-                    <AccountCircleIcon className="iconSpace"/>
-                    <ListItemText className="iconSpace">Account</ListItemText>
-                </ListItem>
+                    <ListItem>
+                        <AccountCircleIcon className="iconSpace" />
+                        <ListItemText className="iconSpace">Account</ListItemText>
+                    </ListItem>
                 </Link>
                 <Link className="linkIcon" to="/settings">
-                <ListItem>
-                    <SettingsIcon className="iconSpace"/>
-                    <ListItemText className="iconSpace">Settings</ListItemText>
-                </ListItem>
+                    <ListItem>
+                        <SettingsIcon className="iconSpace" />
+                        <ListItemText className="iconSpace">Settings</ListItemText>
+                    </ListItem>
                 </Link>
                 <button onClick={onLogout} className="btnLogOut">
-                <ListItem>
-                    <PowerSettingsNewIcon className="iconSpace"/>
-                    <ListItemText className="iconSpace">Log out</ListItemText>
-                </ListItem>
+                    <ListItem>
+                        <PowerSettingsNewIcon className="iconSpace" />
+                        <ListItemText className="iconSpace">Log out</ListItemText>
+                    </ListItem>
                 </button>
             </List>
         </div>
@@ -178,7 +176,7 @@ function ResponsiveDrawer(props) {
                         Welcome {user.username}
                     </Typography>
                     <Typography className={classes.title, "navItem"} variant="h6" noWrap color="inherit">
-                    <Link to="/trends" className="slide-bar" color="inherit">Trending projects </Link>
+                        <Link to="/trends" className="slide-bar" color="inherit">Trending projects </Link>
                     </Typography>
                 </Toolbar>
             </AppBar>
@@ -215,50 +213,97 @@ function ResponsiveDrawer(props) {
             </nav>
             <main className={classes.content}>
                 <div className={classes.toolbar} />
-                <Grid container spacing={5}>
-                    <Grid className="uploadBox" item xs={12} sm={12} md={6} lg={4}>
-                        <div className="upload">
-                            <h2>Upload your Project</h2>
-                            <div>
-                                <p>Show off your best work, and be part of a growing community</p>
-                                <Link className="uploadLink" to="/project-create">Add project</Link>
-                            </div>
-                        </div>
-                    </Grid>
-                    {
+                {
+                    user.userType == "Workfluencer"
+                        ? <Grid container spacing={5}>
+                            <Grid className="uploadBox" item xs={12} sm={12} md={6} lg={4}>
+                                <div className="upload">
+                                    <h2>Upload your Project</h2>
+                                    <div>
+                                        <p>Show off your best work, and be part of a growing community</p>
+                                        <Link className="uploadLink" to="/project-create">Add project</Link>
+                                    </div>
+                                </div>
+                            </Grid>
+                            {
 
-                        filteredProject.map((project) => {
-                            return (
-                                <>
-                                    <Grid key={project._id} className="box" item xs={12} sm={12} md={6} lg={4}>
+                                filteredProject.map((project) => {
+                                    return (
+                                        <>
+                                            <Grid key={project._id} className="box" item xs={12} sm={12} md={6} lg={4}>
 
 
 
-                                        <div className="imgBox">
+                                                <div className="imgBox">
 
-                                            <img className="imgProject" src={project.image} alt={project.image} />
-
-                                        </div>
-                                        <Link className="link" to={`/project/${project._id}`}>
-                                            <div className="details">
-
-                                                <div className="content">
-                                                   
-                                                    <h2>{project.title}</h2>
+                                                    <img className="imgProject" src={project.image} alt={project.image} />
 
                                                 </div>
+                                                <Link className="link" to={`/project/${project._id}`}>
+                                                    <div className="details">
 
-                                            </div>
-                                        </Link>
+                                                        <div className="content">
 
-                                    </Grid>
-                                </>
+                                                            <h2>{project.title}</h2>
 
-                            )
-                        }
+                                                        </div>
 
-                        )}
-                </Grid>
+                                                    </div>
+                                                </Link>
+
+                                            </Grid>
+                                        </>
+
+                                    )
+                                }
+
+                                )}
+                        </Grid>
+                        : <Grid container spacing={5}>
+                            <Grid className="uploadBox" item xs={12} sm={12} md={6} lg={4}>
+                                <div className="upload">
+                                    <h2>Upload your Job</h2>
+                                    <div>
+                                        <p>Make your job offer be seen by everyone</p>
+                                        <Link className="uploadLink" to="/job-create">Add Job</Link>
+                                    </div>
+                                </div>
+                            </Grid>
+                            {
+
+                                filteredJob.map((job) => {
+                                    return (
+                                        <>
+                                            <Grid key={job._id} className="box" item xs={12} sm={12} md={6} lg={4}>
+
+
+
+                                                <div className="imgBox">
+
+                                                    <img className="imgProject" src={job.image} alt={job.image} />
+
+                                                </div>
+                                                <Link className="link" to={`/job/${job._id}`}>
+                                                    <div className="details">
+
+                                                        <div className="content">
+
+                                                            <h2>{job.title}</h2>
+
+                                                        </div>
+
+                                                    </div>
+                                                </Link>
+
+                                            </Grid>
+                                        </>
+
+                                    )
+                                }
+
+                                )}
+                        </Grid>
+                }
             </main>
         </div>
     );
