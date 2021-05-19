@@ -13,7 +13,7 @@ class LinkedInButton extends Component {
           onFailure={onFailure}
           onSuccess={onSuccess}
           scope={'r_liteprofile r_emailaddress'}
-          redirectUri={`http://localhost:3000/profile`}
+          redirectUri={`http://localhost:3000/linkedin`}
         >
           <img src={linkedin} alt="Log in with Linked In" style={{ maxWidth: '180px' }} />
         </LinkedIn>

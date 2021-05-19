@@ -1,10 +1,12 @@
-import React, { useState } from "react";
+import React, { useState, useMemo } from "react";
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
 import { Grid, Container } from "@material-ui/core";
 
+import CountrySelector from "./externalComponents/CountrySelector";
+
 const AccountForm = (props) => {
-    const { loggedInUser, onEdit, onDelete } = props;
+    const { loggedInUser, onEdit, onDelete, selected } = props;
     const [user, updateUser] = useState(loggedInUser);
     const handleChangeUser = (event) =>
       updateUser({
@@ -30,26 +32,28 @@ const AccountForm = (props) => {
           >
             <div className="centerGrid">
               
-              <Grid className="infoGrid" item xs={6}>
+              <Grid className="infoGrid" item xs={12}>
                 <div className="labelLigne">
+                <label for="username">Username</label>
                   <TextField
                     name="username"
                     type="text"
                     onChange={handleChangeUser}
                     value={user.username}
                   />
+                  <label for="password">Password</label>
                   <TextField
                     name="password"
                     type="password"
                     onChange={handleChangeUser}
                     value={user.password}
                   />
-                  <TextField
-                    name="country"
-                    type="text"
-                    onChange={handleChangeUser}
-                    value={user.country}
-                  />
+                  
+                  
+                  <label for="country">Country</label>
+                  <CountrySelector  value={selected} name="country" onChange={handleChangeUser}/>
+                
+                  
                   </div>
                 <Button className="my-btn" type="submit" variant="contained">
                   Save

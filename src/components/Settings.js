@@ -2,9 +2,10 @@ import React, { useState } from "react";
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
 import { Grid, Container } from "@material-ui/core";
+import SkillsDrop from "./externalComponents/SkillsDropdownList";
 
 const Settings = (props) => {
-  const { loggedInUser, onEdit, fetchingUser, onDelete } = props;
+  const { loggedInUser, onEdit, selected } = props;
   const [user, updateUser]= useState(loggedInUser)
   const handleChangeUser = (event) =>
     updateUser({
@@ -55,18 +56,21 @@ const Settings = (props) => {
             </Grid>
             <Grid className="infoGrid" item xs={6}>
               <div className="labelLigne">
+              <label for="country">Username</label>
                 <TextField
                   name="username"
                   type="text"
                   onChange={handleChangeUser}
                   value={user.username}
                 />
+                <label for="description">Description</label>
                 <TextField
                   name="description"
                   type="text"
                   onChange={handleChangeUser}
                   value={user.description}
                 />
+                <label for="country">Country</label>
                 <TextField
                   name="country"
                   type="text"
@@ -94,28 +98,17 @@ const Settings = (props) => {
                   </select>
                 </div>
                 <div id="skills">
-                  <label for="skills" className="form-label" id="marginText">
-                    My Skills
-                  </label>
-                  <select name="skills" id="skills" className="form-select">
-                    <option value="HTML">HTML</option>
-                    <option value="CSS">CSS</option>
-                    <option value="JavaScript">JavaScript</option>
-                    <option value="React">React</option>
-                    <option value="Angular">Angular</option>
-                    <option value="other">Other</option>
-                  </select>
+                <SkillsDrop value={selected} onChange={handleChangeUser} name="skills"/>
                 </div>
-              </div>
+
+                
+              </div>  
               <Button className="my-btn" type="submit" variant="contained">
                 Save
               </Button>
             </Grid>
           </div>
         </form>
-        <Button className="my-btn" onClick={onDelete} variant="contained">
-          Delete your account
-        </Button>
       </Grid>
     </Container>
   );
