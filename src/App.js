@@ -26,6 +26,8 @@ import JobDetails from "./components/JobsComponents/JobDetails";
 import EditJob from "./components/JobsComponents/EditJob";
 import AddJob from "./components/JobsComponents/AddJob";
 import MiniNavBar from "./components/MiniNavBar";
+import NotFound from "./components/externalComponents/lottie/NotFound"
+import AboutPage from "./components/AboutPage";
 
 function App(props) {
   const [user, updateUser] = useState(null);
@@ -782,6 +784,13 @@ function App(props) {
         />
         <Route
           exact
+          path="/about"
+          render={(routeProps) => {
+            return <AboutPage {...routeProps} />;
+          }}
+        />
+        <Route
+          exact
           path="/userslist"
           render={(routeProps) => {
             return <UserList users={users} user={user} {...routeProps} />;
@@ -943,6 +952,7 @@ function App(props) {
             return <AddJob onAdd={handleCreateJob} {...routeProps} />;
           }}
         />
+        <Route component={NotFound} />
       </Switch>
     </div>
   );

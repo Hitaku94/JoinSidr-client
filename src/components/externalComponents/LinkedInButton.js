@@ -7,7 +7,7 @@ class LinkedInButton extends Component {
   render() {
     const { onSuccess, onFailure } = this.props
     return (
-      <div id="">
+      <div >
         <LinkedIn
           clientId="78ehlghrz59uta"
           onFailure={onFailure}

@@ -18,7 +18,7 @@ function Home(props) {
                 <h1>JoinSidr to become a Workfluencer or find here your next WorkStar!</h1>
             <h2>Showcase your amazing work with our easy to use Online Portfolio Website</h2>
             <p>Our community brings together talents and recruiters! Join us and </p>
-            <button>Get Started!</button>
+            <Link to="/signup" >Get Started!</Link>
             </div>
                 </Grid>
                 <Grid item xs={12}>

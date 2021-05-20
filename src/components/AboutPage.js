@@ -26,14 +26,14 @@ export default function AboutPage() {
                 <div>
                 <h3>Yanis Dimitropoulos</h3>
                 <img src="images/yanis.png" alt="Yanis photo"/>
-                <p>Linkedin:</p><Link to=''/>
-                <p>Github:</p><Link to=''/>
+                <p>Linkedin:</p>
+                <p>Github:</p>
                 </div>
                 <div>
                 <h3>Takayuki Wada</h3>
                 <img src="images/taka.png" alt="Taka photo"/>
-                <p>Linkedin:</p><Link to=''/>
-                <p>Github:</p><Link to=''/>
+                <p>Linkedin:</p>
+                <p>Github:</p>
                 </div>
             </div>
 

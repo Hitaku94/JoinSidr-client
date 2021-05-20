@@ -7,4 +7,11 @@
 .externalButtons{
     display: flex;
     justify-content: space-around;
+    align-items: flex-end;
+}
+
+#button-linkedin{
+    border-radius: 0%;
+    width: 150px;
+
 }

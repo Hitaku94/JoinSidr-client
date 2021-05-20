@@ -10,7 +10,7 @@ function MiniNavBar() {
             <div className="container-downer-navbar">
                 <Link to="/trends" className="navbar-link-slide">Trending Projects</Link>
                 <Link to="/jobsList" className="navbar-link-slide">Jobs List</Link>
-                <Link to="/" className="navbar-link-slide">About</Link>
+                <Link to="/about" className="navbar-link-slide">About</Link>
             </div>
             <Divider />
         </div>
