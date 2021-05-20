@@ -181,7 +181,7 @@ function App(props) {
       image: imageUrl,
       googleId,
     };
-    console.log(data.profileObj);
+    
     axios
       .post(`${config.API_URL}/api/google/info`, newUser, {
         withCredentials: true,
@@ -190,7 +190,7 @@ function App(props) {
         updateUser(response.data.data);
         updateError(null);
         updateShowloading(false);
-        updateRedirect("profile");
+        updateRedirect("afterSignIn");
       });
   };
 
@@ -211,7 +211,7 @@ function App(props) {
         updateUser(response.data.data);
         updateError(null);
         updateShowloading(false);
-        props.history.push("/profile");
+        updateRedirect("afterSignIn");
       });
   };
 
@@ -235,20 +235,19 @@ function App(props) {
   const handleEditSettings = (event) => {
     event.preventDefault();
 
-    let username = event.target.username.value;
     let description = event.target.description.value;
-    let country = event.target.country.value;
     let experience = event.target.experience.value;
-    /*available: event.target.available.value, 
-      workLocation: event.target.worklocation.value, 
-      */
+    let available= event.target.available.value; 
+    let workLocation= event.target.workLocation.value; 
+    let linkedinUrl = event.target.linkedinUrl.value;
+    let githubUrl = event.target.githubUrl.value;
     let skills = event.target.skills.value;
 
     if (event.target.profilePic.files.length == 0) {
       axios
         .patch(
           `${config.API_URL}/api/settings`,
-          { username, description, country, experience, skills },
+          { description, experience,available,workLocation,linkedinUrl,githubUrl, skills },
           {
             withCredentials: true,
           }
@@ -268,11 +267,14 @@ function App(props) {
           return axios.patch(
             `${config.API_URL}/api/settings`,
             {
-              username,
               description,
-              country,
               experience,
               profilePic: response.data.image,
+              available,
+              workLocation,
+              linkedinUrl,
+              githubUrl,
+              skills,
             },
             {
               withCredentials: true,
@@ -703,7 +705,10 @@ function App(props) {
           path="/signin"
           render={(routeProps) => {
             return (
-              <Signin error={error} onSignIn={handleSignIn} {...routeProps} />
+              <Signin error={error} onSignIn={handleSignIn} onGoogleFailure={handleGoogleFailure}
+                onGoogleSuccess={handleGoogleSuccess}
+                onLinkedInSuccess={handleLinkedInSuccess}
+                onLinkedInFailure={handleLinkedInFailure} {...routeProps} />
             );
           }}
         />

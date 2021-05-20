@@ -7,7 +7,7 @@ class LinkedInButton extends Component {
   render() {
     const { onSuccess, onFailure } = this.props
     return (
-      <div>
+      <div id="">
         <LinkedIn
           clientId="78ehlghrz59uta"
           onFailure={onFailure}
@@ -15,7 +15,7 @@ class LinkedInButton extends Component {
           scope={'r_liteprofile r_emailaddress'}
           redirectUri={`http://localhost:3000/linkedin`}
         >
-          <img src={linkedin} alt="Log in with Linked In" style={{ maxWidth: '180px' }} />
+          <img src={linkedin} id="button-linkedin" alt="Log in with Linked In" style={{ maxWidth: '180px' }} />
         </LinkedIn>
       </div>
     );

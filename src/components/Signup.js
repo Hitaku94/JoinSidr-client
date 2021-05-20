@@ -111,8 +111,14 @@ function Signup(props) {
           >
             <span>Sign Up</span>
           </Button>
+          <Grid>
+          <div className='externalButtons'>
           <GoogleButton onSuccess={onGoogleSuccess} onFailure={onGoogleFailure}/>
           <LinkedInButton onSuccess={onLinkedInSuccess} onFailure={onLinkedInFailure} />
+          </div>
+          
+          </Grid>
+          
 
           {
                 error && (<p style={{color:'red'}}>{error}</p>)

@@ -11,6 +11,8 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
+import GoogleButton from './externalComponents/GoogleButton';
+import LinkedInButton from './externalComponents/LinkedInButton'
 import {Link} from  'react-router-dom'
 import '../Signin.css'
 
@@ -49,7 +51,7 @@ const useStyles = makeStyles((theme) => ({
 
 function Signin(props) {
   const classes = useStyles();
-  const { onSignIn, error } = props
+  const { onSignIn, error, onGoogleSuccess, onGoogleFailure, onLinkedInSuccess, onLinkedInFailure } = props
 
   return (
     <Container component="main" maxWidth="xs">
@@ -84,10 +86,6 @@ function Signin(props) {
             id="password"
             autoComplete="current-password"
           />
-          <FormControlLabel
-            control={<Checkbox value="remember" color="primary" />}
-            label="Remember me"
-          />
           <Button
             type="submit"
             fullWidth
@@ -100,18 +98,19 @@ function Signin(props) {
           {
                 error && (<p style={{color:'red'}}>{error}</p>)
             }
-          <Grid container>
-            <Grid item xs>
-              <Link href="#" variant="body2">
-                Forgot password?
-              </Link>
-            </Grid>
-            <Grid item>
+          
+              <div className='externalButtons'>
+              <GoogleButton onSuccess={onGoogleSuccess} onFailure={onGoogleFailure}/>
+          <LinkedInButton onSuccess={onLinkedInSuccess} onFailure={onLinkedInFailure} />
+              </div>
+          
+      
+            
+ 
               <Link className="link-profile" to="/signup" variant="body2">
                 {"Don't have an account? Sign Up"}
               </Link>
-            </Grid>
-          </Grid>
+          
         </form>
       </div>
       <Box mt={8}>

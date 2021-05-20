@@ -2,11 +2,13 @@ import React, { useState } from "react";
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
 import { Grid, Container } from "@material-ui/core";
-import SkillsDrop from "./externalComponents/SkillsDropdownList";
+import SkillsDropdownList from "./externalComponents/SkillsDropdownList";
+import RadioButtonAvailable from "./externalComponents/RadiobuttonAvailable";
+import RadioButtonWork from "./externalComponents/RadiobuttonWork";
 
 const Settings = (props) => {
-  const { loggedInUser, onEdit, selected } = props;
-  const [user, updateUser]= useState(loggedInUser)
+  const { loggedInUser, onEdit } = props;
+  const [user, updateUser] = useState(loggedInUser);
   const handleChangeUser = (event) =>
     updateUser({
       ...user,
@@ -26,7 +28,6 @@ const Settings = (props) => {
     return <h1>Loading</h1>;
   }
 
-  console.log(props);
   return (
     <Container className={"center"} style={{ width: "80%" }} fixed>
       <Grid className="centerBlock" container spacing={2}>
@@ -56,26 +57,14 @@ const Settings = (props) => {
             </Grid>
             <Grid className="infoGrid" item xs={6}>
               <div className="labelLigne">
-              <label for="country">Username</label>
-                <TextField
-                  name="username"
-                  type="text"
-                  onChange={handleChangeUser}
-                  value={user.username}
-                />
+                <RadioButtonWork onChange={handleChangeUser} />
+                <RadioButtonAvailable onChange={handleChangeUser} />
                 <label for="description">Description</label>
                 <TextField
                   name="description"
                   type="text"
                   onChange={handleChangeUser}
                   value={user.description}
-                />
-                <label for="country">Country</label>
-                <TextField
-                  name="country"
-                  type="text"
-                  onChange={handleChangeUser}
-                  value={user.country}
                 />
                 <div id="experience">
                   <label
@@ -98,11 +87,26 @@ const Settings = (props) => {
                   </select>
                 </div>
                 <div id="skills">
-                <SkillsDrop value={selected} onChange={handleChangeUser} name="skills"/>
+                  <label>My Skills</label>
+                  <SkillsDropdownList className="languages-input" />
                 </div>
-
-                
-              </div>  
+                <div id="users-links">
+                <label for="linkedinUrl">Your Linkedin URL</label>
+                <TextField
+                  name="linkedinUrl"
+                  type="text"
+                  onChange={handleChangeUser}
+                  value={user.linkedinUrl}
+                />
+                <label for="githubUrl">Your Github URL</label>
+                <TextField
+                  name="githubUrl"
+                  type="text"
+                  onChange={handleChangeUser}
+                  value={user.githubUrl}
+                />
+                </div>
+              </div>
               <Button className="my-btn" type="submit" variant="contained">
                 Save
               </Button>
