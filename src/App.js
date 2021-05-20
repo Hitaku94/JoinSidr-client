@@ -25,6 +25,7 @@ import JobsList from "./components/JobsComponents/JobsList";
 import JobDetails from "./components/JobsComponents/JobDetails";
 import EditJob from "./components/JobsComponents/EditJob";
 import AddJob from "./components/JobsComponents/AddJob";
+import MiniNavBar from "./components/MiniNavBar";
 
 function App(props) {
   const [user, updateUser] = useState(null);
@@ -37,21 +38,15 @@ function App(props) {
   const [showLoading, updateShowloading] = useState(true);
   const [redirect, updateRedirect] = useState(null)
   const [profileRedirect, updateProfileRedirect] = useState(false)
+  const [follow, updateFollow] = useState(false)
+  const [likes, updateLikes] = useState(false)
 
   
   //useEffect (COMPONENT DID MOUNT)
 
   useEffect(() => {
-    axios
-      .get(`${config.API_URL}/api/trends`, { withCredentials: true })
-      .then((response) => {
-        updateProject(response.data);
-        updateFilteredProjects(response.data);
-      })
-      .catch((err) => {
-        console.log("Fecthing failed");
-      });
     
+      fetchProjects();
       fetchUser();
       fetchUsers();
       fetchJobs()
@@ -81,7 +76,35 @@ function App(props) {
     }
   }, [profileRedirect]);
 
+  useEffect(() => {
+    if (follow == true) {
+      updateFollow(false)
+      fetchUsers()
+    }
+  })
+
+    useEffect(() => {
+      if(likes == true) {
+        updateLikes(false)
+        fetchProjects();
+      }
+    })
+
+
+
   // FETCH THE MODELS FROM DATABASE
+
+  const fetchProjects = () => {
+    axios
+      .get(`${config.API_URL}/api/trends`, { withCredentials: true })
+      .then((response) => {
+        updateProject(response.data);
+        updateFilteredProjects(response.data);
+      })
+      .catch((err) => {
+        console.log("Fecthing failed");
+      });
+  }
 
   const fetchUser = ()=>{
     axios
@@ -224,8 +247,9 @@ function App(props) {
     axios
       .post(`${config.API_URL}/api/logout`, {}, { withCredentials: true })
       .then(() => {
-        updateUser(null);
         updateRedirect("");
+        updateUser(null);
+        
       })
       .catch((errorObj) => {
         updateError(errorObj.response.data);
@@ -503,8 +527,17 @@ function App(props) {
         { withCredentials: true }
       )
       .then((response) => {
-        console.log(response);
+        let allUsersArr = users.map((e) => {
+          if (e._id == follow) {
+            return response.data
+          } else {
+            return e
+          }
+        })
+
+        updateUsers(allUsersArr);
         updateUser(response.data);
+        updateFollow(true)
       })
       .catch(() => {
         console.log("Edit project failed");
@@ -515,8 +548,16 @@ function App(props) {
     console.log(unfollow)
     axios.patch(`${config.API_URL}/api/unfollow`, {unfollow}, {withCredentials: true,})
     .then((response) => {
-      console.log(response)
+      let allUsersArr = users.map((e) => {
+        if (e._id == unfollow) {
+          return response.data
+        } else {
+          return e
+        }
+      })
+      updateUsers(allUsersArr);
       updateUser(response.data);
+      updateFollow(true)
       
     }).catch(() => {
       console.log("Edit project failed");
@@ -659,7 +700,67 @@ function App(props) {
 
   // HANDLES FOR LIKES
 
+  const handleLikes = (projectId) => {
 
+    axios.patch(`${config.API_URL}/api/like/${projectId}`, {like: user._id}, {withCredentials: true,})
+    .then((response) => {
+     let projectsArr = projects.map((e) => {
+        if (e._id == projectId) {
+          return response.data
+        } else {
+          return e
+        }
+      })
+   
+      updateProject(projectsArr);
+      updateLikes(true)
+      let filteredProjectsArr = filteredProjects.map((e) => {
+        if (e._id == projectId) {
+          return response.data
+        } else {
+          return e
+        }
+        
+      })
+  
+      updateFilteredProjects(filteredProjectsArr)
+      updateLikes(true)
+    }).catch(() => {
+      console.log("Edit project failed like");
+      
+    });
+  }
+
+  const handleUnlikes = (projectId) => {
+    axios.patch(`${config.API_URL}/api/unlike/${projectId}`, {like: user._id}, {withCredentials: true,})
+    .then((response) => {
+      let projectsArr = projects.map((e) => {
+        if (e._id == projectId) {
+          return response.data
+        } else {
+          return e
+        }
+      })
+     
+      updateProject(projectsArr);
+      updateLikes(true)
+      let filteredProjectsArr = filteredProjects.map((e) => {
+        if (e._id == projectId) {
+          return response.data
+        } else {
+          return e
+        }
+        
+      })
+      
+      updateFilteredProjects(filteredProjectsArr)
+      updateLikes(true)
+      
+    }).catch(() => {
+      console.log("Edit project failed unlike");
+
+    });
+  }
 
   if (fetchingUser) {
     return <h1>Loading</h1>;
@@ -668,6 +769,7 @@ function App(props) {
   return (
     <div className="App">
       <NavBar onLogout={handleLogout} user={user} />
+      <MiniNavBar />
       <Switch>
         <Route
           exact
@@ -756,7 +858,7 @@ function App(props) {
           exact
           path="/trends"
           render={(routeProps) => {
-            return <Trends onSearch={handleSearch} projects={filteredProjects} user={user} {...routeProps} />;
+            return <Trends onSearch={handleSearch} projects={filteredProjects} user={user} likes={handleLikes} unlikes={handleUnlikes} {...routeProps} />;
           }}
         />
         <Route

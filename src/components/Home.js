@@ -1,7 +1,8 @@
 import React from 'react';
-import { Grid, Button } from '@material-ui/core';
+import { Grid, Button, Divider } from '@material-ui/core';
 import { Redirect } from "react";
 import { Link } from 'react-router-dom'
+import "../Home.css"
 
 function Home(props) {
 
@@ -10,7 +11,6 @@ function Home(props) {
 
     return (
         <>
-
 
             <Grid container direction="column" justify="center" alignItems="stretch">
                 <Grid item xs={12} sm={6}>

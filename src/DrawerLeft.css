@@ -6,6 +6,12 @@
 
 }
 
+.profile-project-box {
+    max-width: 300px;
+    max-height: 300px;
+    padding: 0;
+}
+
 .link {
     text-decoration: none;
 }
@@ -140,6 +146,9 @@ h5 {
     border-radius: 10;
     align-items: 'center';
     margin: 20px;
+    max-width: 300px;
+    max-height: 300px;
+    padding: 0;
 }
 
 .box:hover .imgBox img {
@@ -210,6 +219,10 @@ h5 {
     font-size: 20px;
 }
 
+.profile-app-bar {
+    background-color: #fbf9f3;
+}
+
 .uploadLink {
     margin-top: 25px;
     border: 1px solid;
@@ -221,4 +234,15 @@ h5 {
 
 .uploadLink:hover {
     color: #a6afe0;
+}
+
+.container-projects-jobs {
+    display: flex;
+    flex-wrap: wrap;
+    box-sizing: border-box;
+    justify-content: space-around;
+}
+
+@media (min-width: 600px).MuiToolbar-regular {
+    min-height: 0px;
 }

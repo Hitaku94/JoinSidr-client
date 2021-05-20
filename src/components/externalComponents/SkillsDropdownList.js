@@ -36,7 +36,7 @@ const SkillsDrop = (props) => {
       <MultiSelect
       name= "skills"
         options={options}
-        value={selected}
+        value={selected} 
         onChange={changeHandler}
         labelledBy="Select"
       />
