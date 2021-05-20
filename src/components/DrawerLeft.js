@@ -220,9 +220,9 @@ function ResponsiveDrawer(props) {
             </nav>
             <main className={classes.content}>
                 <ul className="nav">
-                <Link to="/profile"><li>Gallery</li></Link>
-                <Link to="/profile/collections"><li>Collections</li></Link>
-                <Link to="/profile/follow"><li>Follow</li></Link>
+                <Link className="link" to="/profile"><li>Gallery</li></Link>
+                <Link className="link" to="/profile/collections"><li>Collections</li></Link>
+                <Link className="link" to="/profile/follow"><li>Follow</li></Link>
                             </ul>
                 {
                     user.userType == "Workfluencer"

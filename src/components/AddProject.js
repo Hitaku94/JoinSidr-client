@@ -49,12 +49,12 @@ function AddProject(props) {
                         <input  className="inputAdd" name="type" id="type" type="text" placeholder="Type of project" />
                         <label for="type">Languages</label>
                         <MultipleSelect className="languages-input" />
-                        <label for="description">Description</label>
-                        <textarea name="description" id="description" type="text" placeholder="Project description" />
+                        <label  for="description">Description</label>
+                        <textarea style={{outlineColor: "#230C0F"}} name="description" id="description" type="text" placeholder="Project description" />
                         <TextField name="urlProject" id="standard-basic" label="Url project" />
                         <TextField  name="urlGit" id="standard-basic" label="Url git" />
                         <div className="urlgit-btn-padding">
-                        <button type="submit">Add project</button>
+                        <button className="btn-add-project" type="submit">ADD PROJECT</button>
                         </div>
                         </div>
                     </Grid>

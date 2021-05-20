@@ -16,7 +16,7 @@
 }
 
 .body .are-you .are {
-    color: #ed9271;
+    color: #230c0f;
     margin-right: 15px;
 }
 
@@ -39,9 +39,9 @@
     display: block;
     width: 100px;
     height: 100px;
-    background-color: #ed9271;
+    background-color: #230c0f;
     border-radius: 50%;
-    box-shadow: 0 0 0 0 #ed9271;
+    box-shadow: 0 0 0 0 #230c0f;
     animation: pulse 1.3s infinite;
     transition: width 2s, height 2s, background-color 2s, border-radius, transform 2s;
 }
@@ -62,7 +62,7 @@
     left: 0;
     width: 100%;
     height: 50vh;
-    color: #ed9271;
+    color: #230c0f;
     opacity: 0;
     visibility: hidden;
 }
@@ -71,9 +71,9 @@
     position: relative;
     cursor: pointer;
     background-color: #fbf9f3;
-    color: #ed9271;
+    color: #230c0f;
     padding: 10px 20px;
-    border: 2px solid #ed9271;
+    border: 2px solid #230c0f;
     border-radius: 10px;
     font-size: 40px;
     overflow: hidden;
@@ -81,7 +81,7 @@
 }
 
 .body .boxLeft .miniBoxLeft .overlay .overlay-link::before {
-    background: #ed9271;
+    background: #230c0f;
     content: "";
     position: absolute;
     top: 50%;
@@ -113,7 +113,7 @@
 .body .boxLeft .miniBoxLeft .overlay .overlay-link:hover {
     color: #fbf9f3;
     border: 2px solid #fbf9f3;
-    background-color: #ed9271;
+    background-color: #230c0f;
     
 }
 
@@ -124,7 +124,7 @@
 .body .boxRight {
     width: 50%;
     height: 100vh;
-    background-color: #ed9271;
+    background-color: #230c0f;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -166,7 +166,7 @@
 
 .body .boxRight .miniBoxRight .overlay .overlay-link {
     position: relative;
-    background-color: #ed9271;
+    background-color: #230c0f;
     text-decoration: none;
     color: #fbf9f3;
     padding: 10px 20px;
@@ -194,7 +194,7 @@
 }
 
 .body .boxRight .miniBoxRight:hover {
-    background-color: #ed9271;
+    background-color: #230c0f;
     width: 100%;
     height: 50vh;
     transform: rotate(360deg);
@@ -210,8 +210,8 @@
 }
 
 .body .boxRight .miniBoxRight .overlay .overlay-link:hover {
-    color: #ed9271;
-    border: 2px solid #ed9271;
+    color: #230c0f;
+    border: 2px solid #230c0f;
     background-color: #fbf9f3;
 }
 
