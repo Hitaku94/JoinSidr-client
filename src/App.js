@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Switch, Route, withRouter, Redirect } from "react-router-dom";
+import { Switch, Route, withRouter} from "react-router-dom";
 import {
   Home,
   NavBar,
@@ -26,12 +26,14 @@ import EditJob from "./components/JobsComponents/EditJob";
 import AddJob from "./components/JobsComponents/AddJob";
 import NotFound from "./components/externalComponents/lottie/NotFound"
 import AboutPage from "./components/AboutPage";
-import { TramRounded } from "@material-ui/icons";
 import FollowProject from "./components/FollowProject";
 import FollowingList from "./components/FollowingList";
 import './App.css'
 
 function App(props) {
+
+  // UseState
+
   const [user, updateUser] = useState(null);
   const [users, updateUsers] = useState([]);
   const [projects, updateProject] = useState([]);
@@ -130,7 +132,6 @@ function App(props) {
     axios
       .get(`${config.API_URL}/api/users`, { withCredentials: true })
       .then((response) => {
-        console.log(response.data);
         updateUsers(response.data);
       })
       .catch((err) => {
@@ -150,6 +151,7 @@ function App(props) {
   }
 
    ////
+
   const handleChangeUser = (event) =>
     updateUser({
       ...user,
@@ -515,13 +517,10 @@ function App(props) {
   // HANDLE FOR SEARCH
 
   const handleSearch = (e) => {
-    // since our onChange event listener is on the input
-    // e.target will give us  the input DOM
+
     let input = e.target.value;
-    console.log(input);
     let filteredProjects = projects.filter((singleProject) => {
-      // converting to same case
-      // checking if the input includes in the books title
+
       return singleProject.title.toLowerCase().includes(input.toLowerCase());
     });
     updateFilteredProjects(filteredProjects);
@@ -556,7 +555,6 @@ function App(props) {
   };
 
   const handleUnfollow = (unfollow) => {
-    console.log(unfollow)
     axios.patch(`${config.API_URL}/api/unfollow`, {unfollow}, {withCredentials: true,})
     .then((response) => {
       let allUsersArr = users.map((e) => {

@@ -16,7 +16,7 @@ function TheProfile(props) {
 
     useEffect(() => {
         let userId = props.match.params.id
-        console.log(props.match.params)
+        
         axios.get(`${config.API_URL}/api/user/${userId}`, { withCredentials: true })
             .then((response) => {
                 updateUser(response.data)
