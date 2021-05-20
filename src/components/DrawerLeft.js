@@ -225,7 +225,7 @@ function ResponsiveDrawer(props) {
                             </ul>
                 {
                     user.userType == "Workfluencer"
-                        ? <div className=" grille" >
+                        ? <div className= "grille" >
                             <div className="grille-item">
                                 <div className="upload">
                                     <h2>Upload your Project</h2>

@@ -260,7 +260,11 @@ Conversational model
 - POST/auth/signin
 
 * body:
+<<<<<<< HEAD
   - uername
+=======
+  - username
+>>>>>>> 791783d966d26308e1acfd800fb031cc2ef7711d
   - password
 
 - POST/auth/logout
