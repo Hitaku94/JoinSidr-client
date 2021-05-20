@@ -4,6 +4,7 @@ import { Paper, Grid, Divider } from '@material-ui/core';
 import SearchBar from './SearchBar'
 import { Link } from 'react-router-dom'
 import MiniNavBar from "./MiniNavBar";
+import '../Trends.css'
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -57,20 +58,22 @@ function Trends(props) {
             <SearchBar onSearch={onSearch} />
             <div className={classes.root}>
 
-                <Grid container spacing={5}>
+            <div className="grille-trends" >
                     {
 
                         projects.map((project) => {
                             return (
 
-                                <Grid className={classes.grid} item xs={12} sm={6} md={4} lg={3}>
-                                    <Paper className={classes.paper}>
+                                <div key={project._id} className="box-trends">
                                         <Link to={`/project/${project._id}`}>
-                                            <img className={classes.image} src={project.image} alt={project.image} />
+                                            <div className="fond-blanc">
+                                            <img className="box-imgBox-trends" src={project.image} alt={project.image} />
+                                            </div>
                                             <Divider />
                                         </Link>
-                                        <div>
-                                            <Link to={`/project/${project._id}`}>
+                                        <div className="content-trends-box">
+                                        <div className="content-trends">
+                                            <Link className="link" to={`/project/${project._id}`}>
                                                 <h3 className={classes.h3}>{project.title}</h3>
                                             </Link>
                                             {
@@ -86,15 +89,14 @@ function Trends(props) {
                                             }*/}
 
                                         </div>
-
-                                    </Paper>
-                                </Grid>
+                                        </div>
+                                </div>
 
                             )
                         }
 
                         )}
-                </Grid>
+                </div>
 
             </div>
         </div>
