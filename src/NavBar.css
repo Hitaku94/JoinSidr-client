@@ -28,3 +28,8 @@ body {
     text-decoration: none;
     color: #230c0f;
 }
+
+.MuiAppBar-colorPrimary {
+    background-color: rgba(0, 0, 0, 0.12);
+}
+

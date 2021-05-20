@@ -10,6 +10,7 @@ import SearchIcon from '@material-ui/icons/Search';
 import InputBase from '@material-ui/core/InputBase';
 import SearchBar from './SearchBar'
 import { Link } from 'react-router-dom'
+import MiniNavBar from "./MiniNavBar";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -57,6 +58,8 @@ function Trends(props) {
     }
 
     return (
+        <>
+        <MiniNavBar />
         <div style={{ marginTop: 50 }}>
             <SearchBar onSearch={onSearch} />
             <div className={classes.root}>
@@ -83,11 +86,11 @@ function Trends(props) {
                                                     : <><Link to={`/user/${project.user._id}`}><p className={classes.h3}>by: {project.user?.username}</p></Link></>
                                             }
 
-                                            {/*{
+                                            {
                                                 project.like && project.like.includes(user._id)
                                                     ? <button onClick={() => unlikes(project._id)}>unlike</button>
                                                     : <button onClick={() => likes(project._id)}>like</button>
-                                            }*/}
+                                            }
 
                                         </div>
 
@@ -102,6 +105,7 @@ function Trends(props) {
 
             </div>
         </div>
+        </>
     );
 }
 

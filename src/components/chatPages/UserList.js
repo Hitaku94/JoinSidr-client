@@ -3,6 +3,7 @@ import React, { Component } from 'react'
 import config from "../../config"
 import "./UsersList.css"
 import { Link } from 'react-router-dom'
+import MiniNavBar from "../MiniNavBar";
 
 class UserList extends Component {
 
@@ -34,6 +35,8 @@ class UserList extends Component {
             allUsers = users.filter(u => u._id !== user._id)
         }
         return (
+            <>
+        <MiniNavBar />
             <div id="chatlist-main">
                 <div className="chatlist-body">
                     {
@@ -61,6 +64,7 @@ class UserList extends Component {
                 </div>
 
             </div>
+            </>
         )
     }
 }

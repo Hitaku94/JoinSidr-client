@@ -15,6 +15,7 @@ import {Link} from  'react-router-dom'
 import '../Signup.css'
 import GoogleButton from './externalComponents/GoogleButton'
 import LinkedInButton from './externalComponents/LinkedInButton'
+import MiniNavBar from "./MiniNavBar";
 
 function Copyright() {
   return (
@@ -55,6 +56,8 @@ function Signup(props) {
   const {onSubmit, error, onGoogleSuccess, onGoogleFailure, onLinkedInSuccess, onLinkedInFailure} = props
 
   return (
+    <>
+        <MiniNavBar />
     <Container component="main" maxWidth="xs">
       <CssBaseline />
       <div className={classes.paper}>
@@ -136,6 +139,7 @@ function Signup(props) {
         <Copyright />
       </Box>
     </Container>
+    </>
   );
 }
 

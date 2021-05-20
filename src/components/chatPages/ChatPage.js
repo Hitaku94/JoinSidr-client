@@ -3,6 +3,7 @@ import React, { Component } from 'react'
 import config from '../../config'
 import './ChatPage.css'
 import io from "socket.io-client";
+import MiniNavBar from "../MiniNavBar";
 
 let socket = ''
 
@@ -86,6 +87,8 @@ class ChatPage extends Component {
         }
 
         return (
+            <>
+        <MiniNavBar />
             <div>
                 <div className="chatpages-body">
                 <h3>You're in the Chat Page </h3>
@@ -115,6 +118,7 @@ class ChatPage extends Component {
                 </div>
                 </div>
             </div>
+            </>
         )
     }
 }

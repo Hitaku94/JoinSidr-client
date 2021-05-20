@@ -6,6 +6,7 @@ import config from '../../config'
 import { Link } from 'react-router-dom'
 import { Paper, Grid } from '@material-ui/core';
 import LocationOnIcon from '@material-ui/icons/LocationOn';
+import MiniNavBar from "../MiniNavBar";
 
 function TheProfile(props) {
 
@@ -54,6 +55,8 @@ function TheProfile(props) {
 
     return (
         <>
+         
+    <MiniNavBar />
             <div className="upper-container">
 
             </div>

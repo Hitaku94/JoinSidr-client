@@ -118,7 +118,7 @@ h5 {
     right: 0;
     opacity: 0;
     transition: opacity .5s;
-    background: rgba(90,0,10,0.4);
+    background: rgba(0, 0, 0, 0.541);
     color: white;
     border-radius: 10px;
     
@@ -133,9 +133,9 @@ h5 {
     opacity: 1;
 }
 
-.box .imgBox {
-    line-height: 0;
-    overflow: hidden;
+.box-imgBox {
+    width: 300px; 
+    object-fit: cover; 
 }
 
 .box {
@@ -146,8 +146,8 @@ h5 {
     border-radius: 10;
     align-items: 'center';
     margin: 20px;
-    max-width: 300px;
-    max-height: 300px;
+    width: 300px;
+    height: 300px;
     padding: 0;
 }
 
@@ -212,11 +212,14 @@ h5 {
     justify-content: center;
     align-items: center;
     text-align: center;
-    margin: 20px;
 }
 
 .upload {
     font-size: 20px;
+}
+
+.upload-p {
+    margin: 20px auto;
 }
 
 .profile-app-bar {
@@ -243,6 +246,51 @@ h5 {
     justify-content: space-around;
 }
 
-@media (min-width: 600px).MuiToolbar-regular {
-    min-height: 0px;
+@media (min-width: 600px) {
+    .MuiToolbar-regular {
+        min-height: 0px;
+    }
+}
+
+.mininav-profile {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    position: relative;
+    height: 64px;
+    
+}
+
+.Welome-name {
+    position: absolute;
+    left: 0;
+    color:rgba(0, 0, 0, 0.644);
+   
+}
+
+.grille {
+    max-width: 100%;
+    width: 100%;
+    height: auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, 300px);
+    justify-content: space-between;
+    grid-gap: 10px;
+}
+
+.grille-item {
+    width: 300px;
+    height: 300px;
+    border: 1px dotted grey;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    margin: 20px;
+}
+
+.grille-item-picture {
+    width: 300px;
+    height: 300px;
 }

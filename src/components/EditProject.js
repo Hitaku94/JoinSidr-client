@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { Grid, Container, Divider, TextField } from '@material-ui/core';
 import '../AddProject.css'
 import MultipleSelect from './MultipleSelectLanguage'
+import MiniNavBar from "./MiniNavBar";
 
 function EditProject(props) {
 
@@ -20,22 +21,6 @@ function EditProject(props) {
         }
     }
 
-    /*const handleTitleChange = (event) => {
-        let text = event.target.value
-        let cloneProject = JSON.parse(JSON.stringify(project))
-        cloneProject.title = text
-    
-        updateProject(cloneProject)
-      }
-    
-      const handleDescChange = (event) => {
-        let text = event.target.value
-        let cloneProject = JSON.parse(JSON.stringify(project))
-        cloneProject.description = text
-    
-        updateProject(cloneProject)
-      }*/
-
     if (!projects) {
         <h1>Loading</h1>
     }
@@ -49,6 +34,8 @@ function EditProject(props) {
     
 
     return (
+        <>
+        <MiniNavBar />
         <Container className={"center"} style={{ width: "80%" }} fixed >
             <Grid className="centerBlock" container spacing={2}>
                 <h1>Update your Project</h1>
@@ -86,6 +73,7 @@ function EditProject(props) {
                 </form>
             </Grid>
         </Container>
+        </>
     )
 }
 

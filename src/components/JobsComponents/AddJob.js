@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { Grid, Container, Divider, TextField } from '@material-ui/core';
 import '../../AddProject.css'
 import MultipleSelect from '../MultipleSelectLanguage'
+import MiniNavBar from "../MiniNavBar";
 
 function AddJob(props) {
     const { onAdd } = props
@@ -20,6 +21,8 @@ function AddJob(props) {
     let random = languages.sort(() => .5 - Math.random()).slice(0,7)
 
     return (
+        <>
+        <MiniNavBar />
         <Container className={"center"} style={{ width: "80%" }} fixed >
             <Grid className="centerBlock" container spacing={2}>
                 <h1>Upload your Job</h1>
@@ -58,6 +61,7 @@ function AddJob(props) {
                 </form>
             </Grid>
         </Container>
+        </>
     )
 }
 

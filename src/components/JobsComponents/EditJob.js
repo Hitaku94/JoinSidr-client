@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { Grid, Container, Divider, TextField } from '@material-ui/core';
 import '../../AddProject.css'
 import MultipleSelect from '../MultipleSelectLanguage'
+import MiniNavBar from "../MiniNavBar";
 
 function EditJob(props) {
 
@@ -30,6 +31,8 @@ function EditJob(props) {
     let singleJob = filteredJobs[0]
 
     return (
+        <>
+        <MiniNavBar />
         <Container className={"center"} style={{ width: "80%" }} fixed >
             <Grid className="centerBlock" container spacing={2}>
                 <h1>Update your Project</h1>
@@ -67,6 +70,7 @@ function EditJob(props) {
                 </form>
             </Grid>
         </Container>
+        </>
     )
 }
 

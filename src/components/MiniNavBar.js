@@ -6,13 +6,13 @@ import '../MiniNavBar.css'
 function MiniNavBar() {
     return (
         <div>
-            <Divider />
-            <div className="container-downer-navbar">
+            <Divider className="MuiAppBar-colorPrimary"/>
+            <div className="container-downer-navbar container-downer-navbar-profile">
                 <Link to="/trends" className="navbar-link-slide">Trending Projects</Link>
                 <Link to="/jobsList" className="navbar-link-slide">Jobs List</Link>
                 <Link to="/about" className="navbar-link-slide">About</Link>
             </div>
-            <Divider />
+            <Divider className="MuiAppBar-colorPrimary"/>
         </div>
     )
 }
