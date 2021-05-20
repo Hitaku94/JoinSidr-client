@@ -24,15 +24,11 @@ import JobsList from "./components/JobsComponents/JobsList";
 import JobDetails from "./components/JobsComponents/JobDetails";
 import EditJob from "./components/JobsComponents/EditJob";
 import AddJob from "./components/JobsComponents/AddJob";
-<<<<<<< HEAD
-import MiniNavBar from "./components/MiniNavBar";
 import NotFound from "./components/externalComponents/lottie/NotFound"
 import AboutPage from "./components/AboutPage";
-=======
 import { TramRounded } from "@material-ui/icons";
 import FollowProject from "./components/FollowProject";
 import FollowingList from "./components/FollowingList";
->>>>>>> 09a951478f806e1c315008f2d52de071c5ac9c7b
 
 function App(props) {
   const [user, updateUser] = useState(null);
