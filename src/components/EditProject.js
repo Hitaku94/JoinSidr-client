@@ -1,6 +1,6 @@
 import React from 'react'
-import { useEffect, useState } from "react";
-import { Grid, Container, Divider, TextField } from '@material-ui/core';
+import { useState } from "react";
+import { Grid, Container, TextField } from '@material-ui/core';
 import '../AddProject.css'
 import MultipleSelect from './MultipleSelectLanguage'
 import MiniNavBar from "./MiniNavBar";
@@ -8,7 +8,6 @@ import MiniNavBar from "./MiniNavBar";
 function EditProject(props) {
 
     const { onEdit, projects }  = props
-    const [project, updateProject] = useState({})
 
     let projectId = props.match.params.id
 
@@ -30,7 +29,6 @@ function EditProject(props) {
     })
 
     let singleProject = filteredProjects[0]
-    console.log(filteredProjects)
     
 
     return (

@@ -1,13 +1,6 @@
 import React from 'react';
-import { makeStyles, fade } from '@material-ui/core/styles';
-import GridList from '@material-ui/core/GridList';
-import GridListTile from '@material-ui/core/GridListTile';
-import GridListTileBar from '@material-ui/core/GridListTileBar';
-import IconButton from '@material-ui/core/IconButton';
-import InfoIcon from '@material-ui/icons/Info';
+import { makeStyles } from '@material-ui/core/styles';
 import { Paper, Grid, Divider } from '@material-ui/core';
-import SearchIcon from '@material-ui/icons/Search';
-import InputBase from '@material-ui/core/InputBase';
 import SearchBar from './SearchBar'
 import { Link } from 'react-router-dom'
 import MiniNavBar from "./MiniNavBar";

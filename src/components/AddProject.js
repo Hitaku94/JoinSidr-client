@@ -19,9 +19,6 @@ function AddProject(props) {
     let languages = ["Python", "Java", "JavaScript", "Go", "Ruby", "Dart", "PHP", "CSS", "HTML", "C++", "SQL", "MongoDB", "Angular", "React", "Vue", "Jquery", "TypeScript", "Unity"]
     let random = languages.sort(() => .5 - Math.random()).slice(0,7)
 
-    console.log(random)
-
-
     return (
         <>
         <MiniNavBar />

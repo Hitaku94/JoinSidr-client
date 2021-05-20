@@ -11,7 +11,6 @@ import SettingsIcon from '@material-ui/icons/Settings';
 import MessageIcon from '@material-ui/icons/Message';
 import LocationOnIcon from '@material-ui/icons/LocationOn';
 import { Link } from 'react-router-dom'
-import { Paper, Grid } from '@material-ui/core';
 import '../DrawerLeft.css'
 
 const drawerWidth = 240;

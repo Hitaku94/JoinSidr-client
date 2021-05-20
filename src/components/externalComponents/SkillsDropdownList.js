@@ -1,14 +1,10 @@
 
 import React from 'react';
-import clsx from 'clsx';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import Input from '@material-ui/core/Input';
-import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
-import ListItemText from '@material-ui/core/ListItemText';
 import Select from '@material-ui/core/Select';
-import Checkbox from '@material-ui/core/Checkbox';
 import Chip from '@material-ui/core/Chip';
 
 const useStyles = makeStyles((theme) => ({
@@ -42,16 +38,16 @@ const MenuProps = {
 
 const skills = [
     "Python", "Java", "JavaScript", "Go", "Ruby",
-     "Dart", "PHP", "CSS", "HTML", "C++",
-      "SQL", "MongoDB", "Angular", "React",
-       "Vue", "Jquery", "TypeScript", "Unity","NodeJS",".NET","Perl","Usage of Frameworks","GitHub",
-       "GitTalk", "Beanstalk","Perforce","Apache Subversion", "Responsive Design","Testing/Debugging",
+    "Dart", "PHP", "CSS", "HTML", "C++",
+    "SQL", "MongoDB", "Angular", "React",
+    "Vue", "Jquery", "TypeScript", "Unity", "NodeJS", ".NET", "Perl", "Usage of Frameworks", "GitHub",
+    "GitTalk", "Beanstalk", "Perforce", "Apache Subversion", "Responsive Design", "Testing/Debugging",
 ];
 
 function getStyles(skill, selectSkill, theme) {
     return {
         fontWeight:
-        selectSkill.indexOf(skill) === -1
+            selectSkill.indexOf(skill) === -1
                 ? theme.typography.fontWeightRegular
                 : theme.typography.fontWeightMedium,
     };
@@ -79,7 +75,7 @@ export default function SkillsDropdownList() {
     return (
         <div>
             <FormControl className={classes.formControl}>
-              
+
                 <Select
                     name="skills"
                     labelId="demo-mutiple-chip-label"

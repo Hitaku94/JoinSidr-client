@@ -17,7 +17,6 @@ function ProjectDetails(props) {
         let projectId = props.match.params.id
         axios.get(`${config.API_URL}/api/project/${projectId}`, { withCredentials: true })
             .then((response) => {
-                console.log(response.data)
                 updateProject(response.data)
             })
             .catch(() => {
@@ -31,7 +30,6 @@ function ProjectDetails(props) {
     }, [])
 
     useEffect(() => {
-        console.log(project)
 
         if (!project || props.match.params.id != project._id) {
             fetchProject()
@@ -53,8 +51,6 @@ function ProjectDetails(props) {
     let filteredUsers = allUser.filter((e) => {
         return e._id == project.user._id
     })
-
-    let singleUser = filteredUsers[0]
 
     return (
         <>
