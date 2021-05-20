@@ -8,6 +8,7 @@ import { Paper, Grid } from '@material-ui/core';
 function UserProfile(props) {
 
     const [user, updateUser] = useState(null)
+
     const { projects, onFollow, loggedInUser, onUnfollow } = props
 
     useEffect(() => {
@@ -41,12 +42,6 @@ function UserProfile(props) {
             <img src={user.profilePic} alt={user.username} />
             <h1>{user.username}</h1>
             <p>{user.description}</p>
-
-            {
-              loggedInUser.follow.includes(user._id) 
-              ? <button onClick={() => onUnfollow(user._id)}>unfollow</button>
-              : <button onClick={() => onFollow(user._id) }>follow</button>  
-            }
         </div>
         <div>
             <h2>projects</h2>

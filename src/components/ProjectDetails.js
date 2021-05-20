@@ -55,10 +55,6 @@ function ProjectDetails(props) {
 
     let singleUser = filteredUsers[0]
 
-    console.log(singleUser)
-
-    console.log(project.user.profilePic)
-
     return (
         <>
             <Container className={"projectDetailContainer"} style={{ width: "50%" }} fixed >

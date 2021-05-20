@@ -54,6 +54,7 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
+    color: '#230C0F'
   },
   inputRoot: {
     color: 'inherit',
@@ -138,28 +139,27 @@ export default function NavBar(props) {
       open={isMobileMenuOpen}
       onClose={handleMobileMenuClose}
     >
-      <MenuItem>
-        <IconButton aria-label="show 4 new mails" color="inherit">
-          <Badge badgeContent={4} color="secondary">
+      <MenuItem className="menu-item-logo">
+        <IconButton aria-label="show 4 new mails">
+          <Badge badgeContent={4}>
             <MailIcon />
           </Badge>
         </IconButton>
         <p>Messages</p>
       </MenuItem>
-      <MenuItem>
-        <IconButton aria-label="show 11 new notifications" color="inherit">
-          <Badge badgeContent={11} color="secondary">
-            <NotificationsIcon />
+      <MenuItem className="menu-item-logo">
+        <IconButton aria-label="show 11 new notifications">
+          <Badge badgeContent={11}>
+            <NotificationsIcon  className="menu-item-logo"/>
           </Badge>
         </IconButton>
         <p>Notifications</p>
       </MenuItem>
-      <MenuItem onClick={handleProfileMenuOpen}>
+      <MenuItem className="menu-item-logo" onClick={handleProfileMenuOpen}>
         <IconButton
           aria-label="account of current user"
           aria-controls="primary-search-account-menu"
           aria-haspopup="true"
-          color="inherit"
         >
           <AccountCircle />
         </IconButton>
@@ -171,45 +171,26 @@ export default function NavBar(props) {
   return (
     <div className={classes.grow}>
       <AppBar position="static">
-        <Toolbar>
+        <Toolbar className="appbar">
           
           <Typography className={classes.title} variant="h6" noWrap>
-          <Link to="/" className="link" color="inherit">JoinSidr</Link>
+          <Link to="/" className="linkLogo">JoinSidr</Link>
           </Typography>
-          {/*<div className={classes.search}>
-            <div className={classes.searchIcon}>
-              <SearchIcon />
-            </div>
-            <InputBase
-              placeholder="Search…"
-              classes={{
-                root: classes.inputRoot,
-                input: classes.inputInput,
-              }}
-              inputProps={{ 'aria-label': 'search' }}
-            />
-            </div>*/}
           <div className={classes.grow} />
           <div className={classes.sectionDesktop}>
-          <Typography className={classes.title, "navItem"} variant="h6" noWrap color="inherit">
-          <Link to="/trends" className="slide-bar" color="inherit">Trending projects </Link>
-          </Typography>
-          <Typography className={classes.title, "navItem"} variant="h6" noWrap color="inherit">
-          <Link to="/jobsList" className="slide-bar" color="inherit">Jobs list </Link>
-          </Typography>
           {
             user ? (
               <>
-              <Link to="/userslist" className="slide-bar-icon" color="inherit">
-              <IconButton aria-label="show 4 new mails" color="inherit">
-              <Badge badgeContent={4} color="secondary">
-                <MailIcon />
+              <Link to="/userslist">
+              <IconButton aria-label="show 4 new mails">
+              <Badge badgeContent={4} >
+                <MailIcon className="slide-bar-icon"/>
               </Badge>
             </IconButton>
             </Link>
-            <IconButton aria-label="show 17 new notifications" color="inherit">
-              <Badge badgeContent={17} color="secondary">
-                <NotificationsIcon />
+            <IconButton aria-label="show 17 new notifications">
+              <Badge badgeContent={17} >
+                <NotificationsIcon className="slide-bar-icon"/>
               </Badge>
             </IconButton>
             <IconButton
@@ -218,15 +199,13 @@ export default function NavBar(props) {
               aria-controls={menuId}
               aria-haspopup="true"
               onClick={handleProfileMenuOpen}
-              color="inherit"
             >
-              <AccountCircle />
+              <AccountCircle className="slide-bar-icon"/>
             </IconButton>
               </>
             ) 
              : (
               <>
-          
           <Typography className={classes.title, "navItem"} variant="h6" noWrap color="inherit">
           <Link to="/signin" className="slide-bar" color="inherit">Sign in </Link>
           </Typography>
@@ -237,8 +216,6 @@ export default function NavBar(props) {
             )
           }
            
-            
-            
           </div>
           <div className={classes.sectionMobile}>
             <IconButton

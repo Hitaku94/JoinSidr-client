@@ -10,20 +10,21 @@ import LocationOnIcon from '@material-ui/icons/LocationOn';
 function TheProfile(props) {
 
     const [user, updateUser] = useState(null)
+   
     const { projects, onFollow, loggedInUser, onUnfollow, allUsers } = props
 
     useEffect(() => {
         let userId = props.match.params.id
-        console.log(props.match)
+        console.log(props.match.params)
         axios.get(`${config.API_URL}/api/user/${userId}`, { withCredentials: true })
             .then((response) => {
-                console.log(response.data)
                 updateUser(response.data)
             })
             .catch(() => {
                 console.log("Detail fetch failed")
             })
     }, [])
+
 
     if (!user) {
         return <h1>Loading</h1>
@@ -102,7 +103,7 @@ function TheProfile(props) {
                         <div className="right col-lg-8">
                             <div className="follow-div">
                                 {
-                                    loggedInUser.follow.includes(user._id)
+                                    loggedInUser.follow && loggedInUser.follow.includes(user._id)
                                         ? <button className="unfollow" onClick={() => onUnfollow(user._id)}>unfollow</button>
                                         : <button className="follow" onClick={() => onFollow(user._id)}>follow</button>
                                 }

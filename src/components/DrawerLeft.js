@@ -120,7 +120,10 @@ function ResponsiveDrawer(props) {
                 </ListItem>
                 <ListItem>
                     <ListItemText>Following</ListItemText>
-                    {user.follow.length}
+                    {
+                        user.follow ? user.follow.length : 0
+                    }
+                    
                 </ListItem>
             </List>
             <Divider />
@@ -162,7 +165,7 @@ function ResponsiveDrawer(props) {
         <div className={classes.root}>
             <CssBaseline />
             <AppBar position="fixed" className={classes.appBar}>
-                <Toolbar>
+                <Toolbar className="profile-app-bar">
                     <IconButton
                         color="inherit"
                         aria-label="open drawer"
@@ -174,9 +177,6 @@ function ResponsiveDrawer(props) {
                     </IconButton>
                     <Typography variant="h6" noWrap>
                         Welcome {user.username}
-                    </Typography>
-                    <Typography className={classes.title, "navItem"} variant="h6" noWrap color="inherit">
-                        <Link to="/trends" className="slide-bar" color="inherit">Trending projects </Link>
                     </Typography>
                 </Toolbar>
             </AppBar>
@@ -215,7 +215,7 @@ function ResponsiveDrawer(props) {
                 <div className={classes.toolbar} />
                 {
                     user.userType == "Workfluencer"
-                        ? <Grid container spacing={5}>
+                        ? <Grid className="container-projects-jobs"  container spacing={5}>
                             <Grid className="uploadBox" item xs={12} sm={12} md={6} lg={4}>
                                 <div className="upload">
                                     <h2>Upload your Project</h2>
