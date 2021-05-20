@@ -1,0 +1,87 @@
+.grille-trends {
+    max-width: 1300px;
+    height: auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, 250px);
+    justify-content: space-between;
+    grid-gap: 10px;
+    overflow: hidden;
+    margin: 20px;
+}
+
+.box-trends {
+    position: relative;
+    display: "flex";
+    justify-content: 'center';
+    overflow: 'hidden';
+    border-radius: 10;
+    align-items: 'center';
+    width: 270px;
+    height: 200px;
+    margin: 30px auto;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+    overflow: hidden;
+}
+
+.content-trends-box {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.box-imgBox-trends {
+    position: absolute;
+    top:0;
+    left:0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover; 
+    border-radius: none;
+}
+
+.content-trends {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.content-trends-box::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: #fff;
+    transform: scaleX(0);
+    transition: transform 0.5s ease-in-out;
+    transform-origin:right;
+}
+
+.box-trends:hover .content-trends-box::before {
+    transform: scaleX(1);
+    transition: transform 0.5s ease-in-out;
+    transform-origin: left;
+}
+
+.box-trends .content-trends-box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.box-trends .content-trends-box .content-trends {
+    position: relative;
+    padding: 30px;
+    z-index: 1;
+    transition: 0.5s;
+    transform: translateX(-300px);
+}
+
+.box-trends:hover .content-trends-box .content-trends {
+    transform: translateX(0px)
+}
