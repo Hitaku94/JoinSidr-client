@@ -10,6 +10,7 @@ import SearchIcon from '@material-ui/icons/Search';
 import InputBase from '@material-ui/core/InputBase';
 import SearchBar from '../SearchBar'
 import { Link } from 'react-router-dom'
+import MiniNavBar from "../MiniNavBar";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -54,6 +55,8 @@ function JobsList(props) {
     }
 
     return (
+        <>
+        <MiniNavBar />
         <div style={{ marginTop: 50 }}>
             <SearchBar onSearch={onSearch} />
             <div className={classes.root}>
@@ -92,6 +95,7 @@ function JobsList(props) {
 
             </div>
         </div>
+        </>
     );
 }
 

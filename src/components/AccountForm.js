@@ -2,6 +2,7 @@ import React, { useState, useMemo } from "react";
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
 import { Grid, Container } from "@material-ui/core";
+import MiniNavBar from "./MiniNavBar";
 
 import CountrySelector from "./externalComponents/CountrySelector";
 
@@ -20,6 +21,8 @@ const AccountForm = (props) => {
   
     console.log(props);
     return (
+      <>
+      <MiniNavBar />
       <Container className={"center"} style={{ width: "80%" }} fixed>
         <Grid className="centerBlock" container spacing={2}>
           <h1>Hello @{loggedInUser.username}</h1>
@@ -66,6 +69,7 @@ const AccountForm = (props) => {
           </Button>
         </Grid>
       </Container>
+      </>
     );
   };
   export default AccountForm;

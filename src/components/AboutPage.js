@@ -1,9 +1,13 @@
 import React from "react";
+import MiniNavBar from "./MiniNavBar";
+
 
 
 
 export default function AboutPage() {
     return (
+        <>
+        <MiniNavBar />
         <div>
         <h1>About JoinSidr</h1>
             <div id="about-title">
@@ -38,5 +42,6 @@ export default function AboutPage() {
             </div>
 
         </div>
+        </>
     )
 }

@@ -3,7 +3,8 @@ import { Grid, Button, Divider } from '@material-ui/core';
 import { Redirect } from "react";
 import { Link } from 'react-router-dom'
 import "../Home.css"
-
+import MiniNavBar from "./MiniNavBar";
+import NavBar from "./NavBar";
 function Home(props) {
 
     const { user } = props
@@ -11,7 +12,7 @@ function Home(props) {
 
     return (
         <>
-
+            <MiniNavBar />
             <Grid container direction="column" justify="center" alignItems="stretch">
                 <Grid item xs={12} sm={6}>
                 <div id="top-section-home">

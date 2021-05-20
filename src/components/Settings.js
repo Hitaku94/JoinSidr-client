@@ -5,6 +5,7 @@ import { Grid, Container } from "@material-ui/core";
 import SkillsDropdownList from "./externalComponents/SkillsDropdownList";
 import RadioButtonAvailable from "./externalComponents/RadiobuttonAvailable";
 import RadioButtonWork from "./externalComponents/RadiobuttonWork";
+import MiniNavBar from "./MiniNavBar";
 
 const Settings = (props) => {
   const { loggedInUser, onEdit } = props;
@@ -29,6 +30,8 @@ const Settings = (props) => {
   }
 
   return (
+    <>
+    <MiniNavBar />
     <Container className={"center"} style={{ width: "80%" }} fixed>
       <Grid className="centerBlock" container spacing={2}>
         <h1>Hello @{loggedInUser.username}</h1>
@@ -115,6 +118,7 @@ const Settings = (props) => {
         </form>
       </Grid>
     </Container>
+    </>
   );
 };
 export default Settings;

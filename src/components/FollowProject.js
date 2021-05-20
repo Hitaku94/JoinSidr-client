@@ -66,7 +66,7 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-function ResponsiveDrawer(props) {
+function FollowProject(props) {
     const { window, user, projects, onLogout, allUsers, jobs } = props;
     const classes = useStyles();
     const theme = useTheme();
@@ -78,6 +78,10 @@ function ResponsiveDrawer(props) {
 
     let filteredProject = projects.filter((e) => {
         return e.user._id == user._id
+    })
+
+    let filteredFollow = projects.filter((e) => {
+        return user.follow.includes(e.user._id)
     })
 
     let filteredJob = jobs.filter((e) => {
@@ -123,7 +127,7 @@ function ResponsiveDrawer(props) {
                     {
                         user.follow ? user.follow.length : 0
                     }
-                    
+
                 </ListItem>
             </List>
             <Divider />
@@ -176,14 +180,14 @@ function ResponsiveDrawer(props) {
                         <MenuIcon />
                     </IconButton>
                     <div className="mininav-profile">
-                 
-                        <h2 className="Welome-name">Welcome {user.username}</h2>
-           
-                    <Link to="/trends" className="navbar-link-slide">Trending Projects</Link>
-                <Link to="/jobsList" className="navbar-link-slide">Jobs List</Link>
-                <Link to="/" className="navbar-link-slide">About</Link>
-                        
-                       
+
+                        <h2 className="container-downer-navbar-profile">Welcome {user.username}</h2>
+
+                        <Link to="/trends" className="navbar-link-slide">Trending Projects</Link>
+                        <Link to="/jobsList" className="navbar-link-slide">Jobs List</Link>
+                        <Link to="/" className="navbar-link-slide">About</Link>
+
+
                     </div>
                 </Toolbar>
             </AppBar>
@@ -220,29 +224,21 @@ function ResponsiveDrawer(props) {
             </nav>
             <main className={classes.content}>
                 <ul className="nav">
-                <Link to="/profile"><li>Gallery</li></Link>
-                <Link to="/profile/collections"><li>Collections</li></Link>
-                <Link to="/profile/follow"><li>Follow</li></Link>
-                            </ul>
+                    <Link to="/profile"><li>Gallery</li></Link>
+                    <Link to="/profile/collections"><li>Collections</li></Link>
+                    <Link to="/profile/follow"><li>Follow</li></Link>
+                </ul>
                 {
                     user.userType == "Workfluencer"
                         ? <div className=" grille" >
-                            <div className="grille-item">
-                                <div className="upload">
-                                    <h2>Upload your Project</h2>
-                                    <div>
-                                        <p className="upload-p">Show off your best work, and be part of a growing community</p>
-                                        <Link className="uploadLink" to="/project-create">Add project</Link>
-                                    </div>
-                                </div>
-                            </div>
+                            
                             {
 
-                                filteredProject.map((project) => {
+                                filteredFollow.map((project) => {
                                     return (
                                         <>
                                             <div key={project._id} className="box">
-                                                    <img className="box-imgBox" src={project.image} alt={project.image} />
+                                                <img className="box-imgBox" src={project.image} alt={project.image} />
                                                 <Link className="link" to={`/project/${project._id}`}>
                                                     <div className="details">
                                                         <div className="content">
@@ -260,32 +256,24 @@ function ResponsiveDrawer(props) {
                                 )}
                         </div>
                         : <div className=" grille" >
-                        <div className="grille-item">
-                            <div className="upload">
-                                <h2>Upload your Job</h2>
-                                <div>
-                                    <p className="upload-p">Make your job offer be seen by everyone</p>
-                                    <Link className="uploadLink" to="/project-create">Add Job offer</Link>
-                                </div>
-                            </div>
-                        </div>
+                            
                             {
 
-                                filteredJob.map((job) => {
+                                filteredFollow.map((job) => {
                                     return (
                                         <>
-                                        <div key={job._id} className="box">
+                                            <div key={job._id} className="box">
                                                 <img className="box-imgBox" src={job.image} alt={job.image} />
-                                            <Link className="link" to={`/job/${job._id}`}>
-                                                <div className="details">
-                                                    <div className="content">
-                                                        <h2>{job.title}</h2>
+                                                <Link className="link" to={`/job/${job._id}`}>
+                                                    <div className="details">
+                                                        <div className="content">
+                                                            <h2>{job.title}</h2>
+                                                        </div>
                                                     </div>
-                                                </div>
-                                            </Link>
+                                                </Link>
 
-                                        </div>
-                                    </>
+                                            </div>
+                                        </>
 
                                     )
                                 }
@@ -298,7 +286,7 @@ function ResponsiveDrawer(props) {
     );
 }
 
-ResponsiveDrawer.propTypes = {
+FollowProject.propTypes = {
     /**
      * Injected by the documentation to work in an iframe.
      * You won't need it on your project.
@@ -306,4 +294,4 @@ ResponsiveDrawer.propTypes = {
     window: PropTypes.func,
 };
 
-export default ResponsiveDrawer;
+export default FollowProject;

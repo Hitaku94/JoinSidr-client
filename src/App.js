@@ -17,7 +17,6 @@ import config from "./config";
 import Trends from "./components/Trends";
 import ProjectDetails from "./components/ProjectDetails";
 import EditProject from "./components/EditProject";
-import UserProfile from "./components/UserProfile";
 import ChoicePage from "./components/ChoicePage";
 import AccountForm from "./components/AccountForm"
 import TheProfile from "./components/SingleProfile/TheProfile";
@@ -25,7 +24,9 @@ import JobsList from "./components/JobsComponents/JobsList";
 import JobDetails from "./components/JobsComponents/JobDetails";
 import EditJob from "./components/JobsComponents/EditJob";
 import AddJob from "./components/JobsComponents/AddJob";
-import MiniNavBar from "./components/MiniNavBar";
+import { TramRounded } from "@material-ui/icons";
+import FollowProject from "./components/FollowProject";
+import FollowingList from "./components/FollowingList";
 
 function App(props) {
   const [user, updateUser] = useState(null);
@@ -40,6 +41,7 @@ function App(props) {
   const [profileRedirect, updateProfileRedirect] = useState(false)
   const [follow, updateFollow] = useState(false)
   const [likes, updateLikes] = useState(false)
+  const [showNav, updateShowNav] = useState(true)
 
   
   //useEffect (COMPONENT DID MOUNT)
@@ -60,6 +62,7 @@ function App(props) {
       props.history.push("/");
     } else if (redirect === "afterSignIn") {
       if (!user.userType) {
+        updateShowNav(false)
         props.history.push("/choice-page");
       } else {
         props.history.push("/profile");
@@ -73,6 +76,7 @@ function App(props) {
     if (profileRedirect == true) {
       props.history.push("/profile");
       updateProfileRedirect(false);
+      
     }
   }, [profileRedirect]);
 
@@ -469,6 +473,7 @@ function App(props) {
 
   const handlOnChoose = (userType) => {
     updateFetchingUser(true);
+    updateShowNav(true)
 
     axios
       .patch(
@@ -530,7 +535,8 @@ function App(props) {
       )
       .then((response) => {
         let allUsersArr = users.map((e) => {
-          if (e._id == follow) {
+          //TODO: CHANGE THIS LATER
+          if (e._id == follow && response.data) {
             return response.data
           } else {
             return e
@@ -704,7 +710,7 @@ function App(props) {
 
   const handleLikes = (projectId) => {
 
-    axios.patch(`${config.API_URL}/api/like/${projectId}`, {like: user._id}, {withCredentials: true,})
+    axios.patch(`${config.API_URL}/api/like/${projectId}`, {like: user._id}, {withCredentials: true})
     .then((response) => {
      let projectsArr = projects.map((e) => {
         if (e._id == projectId) {
@@ -726,7 +732,6 @@ function App(props) {
       })
   
       updateFilteredProjects(filteredProjectsArr)
-      updateLikes(true)
     }).catch(() => {
       console.log("Edit project failed like");
       
@@ -770,8 +775,12 @@ function App(props) {
 
   return (
     <div className="App">
-      <NavBar onLogout={handleLogout} user={user} />
-      <MiniNavBar />
+      {
+        showNav == true
+        ? <NavBar onLogout={handleLogout} user={user} />
+        : <></>
+}
+      
       <Switch>
         <Route
           exact
@@ -941,6 +950,20 @@ function App(props) {
           path="/job-create"
           render={(routeProps) => {
             return <AddJob onAdd={handleCreateJob} {...routeProps} />;
+          }}
+        />
+         <Route
+          exact
+          path="/profile/collections"
+          render={(routeProps) => {
+            return <FollowProject user={user} projects={projects} jobs={jobs} allUsers={users} onLogout={handleLogout} {...routeProps} />;
+          }}
+        />
+          <Route
+          exact
+          path="/profile/follow"
+          render={(routeProps) => {
+            return <FollowingList user={user} projects={projects} jobs={jobs} allUsers={users} onLogout={handleLogout} {...routeProps} />;
           }}
         />
       </Switch>

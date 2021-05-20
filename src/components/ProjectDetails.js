@@ -5,6 +5,7 @@ import '../ProjectDetails.css'
 import config from "../config";
 import { Grid, Container, Divider } from '@material-ui/core';
 import { Link } from 'react-router-dom'
+import MiniNavBar from "./MiniNavBar";
 
 function ProjectDetails(props) {
 
@@ -57,6 +58,7 @@ function ProjectDetails(props) {
 
     return (
         <>
+        <MiniNavBar />
             <Container className={"projectDetailContainer"} style={{ width: "50%" }} fixed >
                 <Grid className="Thebigger-upBox" container spacing={8}>
                     <Grid className="item" item xs={12}>

@@ -13,6 +13,8 @@ import LocationOnIcon from '@material-ui/icons/LocationOn';
 import { Link } from 'react-router-dom'
 import { Paper, Grid } from '@material-ui/core';
 import '../DrawerLeft.css'
+import axios from 'axios'
+import config from "../config";
 
 const drawerWidth = 240;
 
@@ -66,22 +68,30 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-function ResponsiveDrawer(props) {
+function FollowingList(props) {
     const { window, user, projects, onLogout, allUsers, jobs } = props;
     const classes = useStyles();
     const theme = useTheme();
     const [mobileOpen, setMobileOpen] = React.useState(false);
 
+    const handleChatClick = (chatUserId) => {
+            let data = {
+                participants: [chatUserId, user._id]
+            }
+            axios.post(`${config.API_URL}/api/conversation`, data, { withCredentials: true })
+                .then((response) => {
+                    props.history.push(`/chat/${response.data._id}`)
+                })
+
+        }
+    
+
     if (!projects || !user || !jobs) {
         return <p>Loading . . .</p>
     }
 
-    let filteredProject = projects.filter((e) => {
-        return e.user._id == user._id
-    })
-
-    let filteredJob = jobs.filter((e) => {
-        return e.user._id == user._id
+    let filteredFollowing = allUsers.filter((e) => {
+        return user.follow.includes(e._id)
     })
 
     let followers = 0;
@@ -123,7 +133,7 @@ function ResponsiveDrawer(props) {
                     {
                         user.follow ? user.follow.length : 0
                     }
-                    
+
                 </ListItem>
             </List>
             <Divider />
@@ -176,14 +186,14 @@ function ResponsiveDrawer(props) {
                         <MenuIcon />
                     </IconButton>
                     <div className="mininav-profile">
-                 
-                        <h2 className="Welome-name">Welcome {user.username}</h2>
-           
-                    <Link to="/trends" className="navbar-link-slide">Trending Projects</Link>
-                <Link to="/jobsList" className="navbar-link-slide">Jobs List</Link>
-                <Link to="/" className="navbar-link-slide">About</Link>
-                        
-                       
+
+                        <h2 className="container-downer-navbar-profile">Welcome {user.username}</h2>
+
+                        <Link to="/trends" className="navbar-link-slide">Trending Projects</Link>
+                        <Link to="/jobsList" className="navbar-link-slide">Jobs List</Link>
+                        <Link to="/" className="navbar-link-slide">About</Link>
+
+
                     </div>
                 </Toolbar>
             </AppBar>
@@ -220,85 +230,44 @@ function ResponsiveDrawer(props) {
             </nav>
             <main className={classes.content}>
                 <ul className="nav">
-                <Link to="/profile"><li>Gallery</li></Link>
-                <Link to="/profile/collections"><li>Collections</li></Link>
-                <Link to="/profile/follow"><li>Follow</li></Link>
-                            </ul>
-                {
-                    user.userType == "Workfluencer"
-                        ? <div className=" grille" >
-                            <div className="grille-item">
-                                <div className="upload">
-                                    <h2>Upload your Project</h2>
-                                    <div>
-                                        <p className="upload-p">Show off your best work, and be part of a growing community</p>
-                                        <Link className="uploadLink" to="/project-create">Add project</Link>
+                    <Link to="/profile"><li>Gallery</li></Link>
+                    <Link to="/profile/collections"><li>Collections</li></Link>
+                    <Link to="/profile/follow"><li>Follow</li></Link>
+                </ul>
+                <div className=" grille" >
+                    {
+                        filteredFollowing.map((user) => {
+                            return (
+                                <>
+                                    <div className="msg-box-container">
+                                    
+                                    <div className="msg-box-container-box">
+                                    <Link to={`/user/${user._id}`}>
+                                        <img className="msg-box-container-box-img" src={user.profilePic} />
+                                        </Link>
+                                    </div>
+                                    <div className="msg-box-container-box-container">
+                                        <div className="msg-box-container-box-info">
+                                            <h3 className="msg-box-container-box-info-h3">{user.username}</h3>
+                                            <Link className="msg-box-container-box-info-profile" to={`/user/${user._id}`}>profile</Link>
+                                            <button className="msg-box-container-box-info-chat" onClick={() => { handleChatClick(user._id)}}>Chat</button>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            {
+                                </>
 
-                                filteredProject.map((project) => {
-                                    return (
-                                        <>
-                                            <div key={project._id} className="box">
-                                                    <img className="box-imgBox" src={project.image} alt={project.image} />
-                                                <Link className="link" to={`/project/${project._id}`}>
-                                                    <div className="details">
-                                                        <div className="content">
-                                                            <h2>{project.title}</h2>
-                                                        </div>
-                                                    </div>
-                                                </Link>
+                            )
+                        }
 
-                                            </div>
-                                        </>
+                        )}
+                </div>
 
-                                    )
-                                }
-
-                                )}
-                        </div>
-                        : <div className=" grille" >
-                        <div className="grille-item">
-                            <div className="upload">
-                                <h2>Upload your Job</h2>
-                                <div>
-                                    <p className="upload-p">Make your job offer be seen by everyone</p>
-                                    <Link className="uploadLink" to="/project-create">Add Job offer</Link>
-                                </div>
-                            </div>
-                        </div>
-                            {
-
-                                filteredJob.map((job) => {
-                                    return (
-                                        <>
-                                        <div key={job._id} className="box">
-                                                <img className="box-imgBox" src={job.image} alt={job.image} />
-                                            <Link className="link" to={`/job/${job._id}`}>
-                                                <div className="details">
-                                                    <div className="content">
-                                                        <h2>{job.title}</h2>
-                                                    </div>
-                                                </div>
-                                            </Link>
-
-                                        </div>
-                                    </>
-
-                                    )
-                                }
-
-                                )}
-                        </div>
-                }
             </main>
         </div>
     );
 }
 
-ResponsiveDrawer.propTypes = {
+FollowingList.propTypes = {
     /**
      * Injected by the documentation to work in an iframe.
      * You won't need it on your project.
@@ -306,4 +275,4 @@ ResponsiveDrawer.propTypes = {
     window: PropTypes.func,
 };
 
-export default ResponsiveDrawer;
+export default FollowingList;

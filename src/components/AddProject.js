@@ -1,8 +1,8 @@
 import React from 'react'
-import { useEffect, useState } from "react";
 import { Grid, Container, Divider, TextField } from '@material-ui/core';
 import '../AddProject.css'
 import MultipleSelect from './MultipleSelectLanguage'
+import MiniNavBar from "./MiniNavBar";
 
 function AddProject(props) {
     const { onAdd } = props
@@ -23,6 +23,8 @@ function AddProject(props) {
 
 
     return (
+        <>
+        <MiniNavBar />
         <Container className={"center"} style={{ width: "80%" }} fixed >
             <Grid className="centerBlock" container spacing={2}>
                 <h1>Upload your project</h1>
@@ -61,6 +63,7 @@ function AddProject(props) {
                 </form>
             </Grid>
         </Container>
+        </>
     )
 }
 
