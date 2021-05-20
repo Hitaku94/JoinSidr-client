@@ -187,7 +187,7 @@ function FollowingList(props) {
                     </IconButton>
                     <div className="mininav-profile">
 
-                        <h2 className="container-downer-navbar-profile">Welcome {user.username}</h2>
+                        <h2 className="Welome-name">Welcome {user.username}</h2>
 
                         <Link to="/trends" className="navbar-link-slide">Trending Projects</Link>
                         <Link to="/jobsList" className="navbar-link-slide">Jobs List</Link>
@@ -230,9 +230,9 @@ function FollowingList(props) {
             </nav>
             <main className={classes.content}>
                 <ul className="nav">
-                    <Link to="/profile"><li>Gallery</li></Link>
-                    <Link to="/profile/collections"><li>Collections</li></Link>
-                    <Link to="/profile/follow"><li>Follow</li></Link>
+                    <Link className="link" to="/profile"><li>Gallery</li></Link>
+                    <Link className="link" to="/profile/collections"><li>Collections</li></Link>
+                    <Link className="link" to="/profile/follow"><li>Follow</li></Link>
                 </ul>
                 <div className=" grille" >
                     {

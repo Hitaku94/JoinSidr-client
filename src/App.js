@@ -29,6 +29,7 @@ import AboutPage from "./components/AboutPage";
 import { TramRounded } from "@material-ui/icons";
 import FollowProject from "./components/FollowProject";
 import FollowingList from "./components/FollowingList";
+import './App.css'
 
 function App(props) {
   const [user, updateUser] = useState(null);

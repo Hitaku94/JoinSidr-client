@@ -86,11 +86,11 @@ function Trends(props) {
                                                     : <><Link to={`/user/${project.user._id}`}><p className={classes.h3}>by: {project.user?.username}</p></Link></>
                                             }
 
-                                            {
+                                            {/*{
                                                 project.like && project.like.includes(user._id)
                                                     ? <button onClick={() => unlikes(project._id)}>unlike</button>
                                                     : <button onClick={() => likes(project._id)}>like</button>
-                                            }
+                                            }*/}
 
                                         </div>
 
