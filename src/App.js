@@ -24,7 +24,6 @@ import JobsList from "./components/JobsComponents/JobsList";
 import JobDetails from "./components/JobsComponents/JobDetails";
 import EditJob from "./components/JobsComponents/EditJob";
 import AddJob from "./components/JobsComponents/AddJob";
-
 import NotFound from "./components/externalComponents/lottie/NotFound"
 import AboutPage from "./components/AboutPage";
 import { TramRounded } from "@material-ui/icons";
