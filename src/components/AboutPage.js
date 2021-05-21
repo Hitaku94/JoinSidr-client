@@ -1,7 +1,7 @@
 import React from "react";
 import MiniNavBar from "./MiniNavBar";
 import "./about.css"
-import { Link } from 'react-router-dom'
+import {Grid} from '@material-ui/core'
 
 
 
@@ -10,6 +10,7 @@ export default function AboutPage() {
         <>
         <MiniNavBar />
         <div id="about-body">
+        <Grid>
         <h1 id="aboutTitle">About JoinSidr</h1>
         <div id="about-text">
         <div id="about-title">
@@ -29,9 +30,9 @@ export default function AboutPage() {
                 </p>
             </div>
         </div>
-            
-            
-            <div id="founders">
+        </Grid>
+        <Grid>
+        <div id="founders">
                 <div className="founders">
                 <h3>Yanis Dimitropoulos</h3>
                 <img id="yanis" src="images/yanis.png" alt="Yanis photo"/>
@@ -65,6 +66,10 @@ export default function AboutPage() {
                 
             
             </div>
+            
+        </Grid>
+            
+            
             
 
         </div>

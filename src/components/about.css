@@ -56,5 +56,10 @@
 
 .linksProfile{
     display: flex;
-    justify-content: space-evenly;
+    justify-content: center;
+}
+
+#founders{
+    
+    margin-bottom: 15px;
 }
