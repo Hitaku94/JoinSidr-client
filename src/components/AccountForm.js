@@ -24,7 +24,7 @@ const AccountForm = (props) => {
       <>
       <MiniNavBar />
       <Container className={"center"} style={{ width: "80%" }} fixed>
-        <Grid className="centerBlock" container spacing={2}>
+        <Grid id='security' className="centerBlock" container spacing={2}>
           <h1>Hello @{loggedInUser.username}</h1>
           <h3>Manage your security</h3>
           <form

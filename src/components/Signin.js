@@ -60,9 +60,7 @@ function Signin(props) {
     <Container component="main" maxWidth="xs">
       <CssBaseline />
       <div className={classes.paper}>
-        <Avatar className={classes.avatar}>
-          <LockOutlinedIcon />
-        </Avatar>
+        <img className="logosignin" src="/images/Jlogo.png" alt="JoinSidr logo"/>
         <Typography component="h1" variant="h5">
           Sign in
         </Typography>
@@ -93,7 +91,7 @@ function Signin(props) {
             type="submit"
             fullWidth
             variant="contained"
-            color="primary"
+            id="signinSubmit"
             className={classes.submit}
           >
             Sign In
@@ -106,10 +104,8 @@ function Signin(props) {
               <GoogleButton onSuccess={onGoogleSuccess} onFailure={onGoogleFailure}/>
           <LinkedInButton onSuccess={onLinkedInSuccess} onFailure={onLinkedInFailure} />
               </div>
-          
-      
-            
- 
+              
+              <br></br>
               <Link className="link-profile" to="/signup" variant="body2">
                 {"Don't have an account? Sign Up"}
               </Link>

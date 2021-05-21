@@ -9,13 +9,15 @@ class LinkedInButton extends Component {
     return (
       <div >
         <LinkedIn
+        id="linkedin"
+        style={{display:"flex", padding:0 , border:"none"}}
           clientId="78ehlghrz59uta"
           onFailure={onFailure}
           onSuccess={onSuccess}
           scope={'r_liteprofile r_emailaddress'}
           redirectUri={`http://localhost:3000/linkedin`}
         >
-          <img src={linkedin} id="button-linkedin" alt="Log in with Linked In" style={{ maxWidth: '180px' }} />
+          <img src="images/linkedinbut.png" id="button-linkedin" alt="Log in with Linked In" style={{ maxWidth: '180px' }} />
         </LinkedIn>
       </div>
     );
