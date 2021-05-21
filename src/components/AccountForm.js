@@ -3,8 +3,9 @@ import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
 import { Grid, Container } from "@material-ui/core";
 import MiniNavBar from "./MiniNavBar";
-
 import CountrySelector from "./externalComponents/CountrySelector";
+import '../AddProject.css'
+
 
 const AccountForm = (props) => {
     const { loggedInUser, onEdit, onDelete, selected } = props;
@@ -37,14 +38,14 @@ const AccountForm = (props) => {
               
               <Grid className="infoGrid" item xs={12}>
                 <div className="labelLigne">
-                <label for="username">Username</label>
+                <label className="label-padding-account" for="username">Username</label>
                   <TextField
                     name="username"
                     type="text"
                     onChange={handleChangeUser}
                     value={user.username}
                   />
-                  <label for="password">Password</label>
+                  <label className="label-padding-account" for="password">Password</label>
                   <TextField
                     name="password"
                     type="password"
@@ -53,20 +54,23 @@ const AccountForm = (props) => {
                   />
                   
                   
-                  <label for="country">Country</label>
+                  <label className="label-padding-account" for="country">Country</label>
+                  <div className="country-selector" >
                   <CountrySelector  value={selected} name="country" onChange={handleChangeUser}/>
-                
+                  </div>
                   
                   </div>
-                <Button className="my-btn" type="submit" variant="contained">
-                  Save
-                </Button>
+                  <div className="account-save-btn">
+                        <button className="btn-add-project" type="submit">Save</button>
+                        </div>
               </Grid>
             </div>
           </form>
-          <Button className="my-btn" onClick={onDelete} variant="contained">
+          <div className="urlgit-btn-padding">
+          <button className="btn-delete-account" onClick={onDelete} >
             Delete your account
-          </Button>
+          </button>
+          </div>
         </Grid>
       </Container>
       </>

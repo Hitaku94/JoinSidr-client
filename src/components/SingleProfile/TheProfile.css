@@ -13,7 +13,7 @@
     height: 250px;
     padding: 0 !important;
     width: 90%;
-    background-color: #ed9271;
+    background-color: #5e2129bb;
     margin: 25px auto auto;
     box-shadow: 0 3px 6px rgba(0,0,0,0.10), 0 3px 6px rgba(0,0,0,0.10) ;
   }
@@ -73,7 +73,7 @@
   }
   
   .info {
-    margin-top: -5px;
+    margin-top: 1px;
     margin-bottom: 5px;
     font-family: 'Montserrat', sans-serif;
     font-size: 11pt;
@@ -164,7 +164,7 @@
   .follow {
     
     font-size: 11pt;
-    background-color: #42b1fa;
+    background-color: #788bff;
     color: #fff;
     padding: 12px 50px;
     cursor: pointer;
@@ -200,11 +200,17 @@
     align-items: center;
     width: 50%;
     margin: auto;
+    margin-bottom: 100px;
+  }
+
+  .other-projects {
+    text-align: center;
+    font-size: 20px;
   }
 
   .msg-div {
     text-decoration: none;
-    color: blue;
+    color: #788bff;
     padding: 10px 50px;
     border: 1px solid;
   }
@@ -248,5 +254,27 @@
   }
 
   .skills-row {
-    
+    text-align: center;
+    color: #aaa;
+  }
+
+  .country-and-logo {
+    width: 100%;
+    margin: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+  }
+
+  .available-worklocation {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    width: 50%;
+    padding-bottom: 50px;
+  }
+
+  .available {
+    text-align: center;
   }

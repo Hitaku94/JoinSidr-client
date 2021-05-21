@@ -37,7 +37,9 @@ class UserList extends Component {
         return (
             <>
         <MiniNavBar />
+        <h1 className="title-pages">All users</h1>
             <div id="chatlist-main">
+                
                 <div className="chatlist-body">
                     {
                         allUsers.map((user) => {
@@ -46,7 +48,7 @@ class UserList extends Component {
                                     
                                     <div className="msg-box-container-box">
                                     <Link to={`/user/${user._id}`}>
-                                        <img className="msg-box-container-box-img" src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png" />
+                                        <img className="msg-box-container-box-img" src={user.profilePic} />
                                         </Link>
                                     </div>
                                     

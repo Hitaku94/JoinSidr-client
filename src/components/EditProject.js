@@ -58,11 +58,11 @@ function EditProject(props) {
                         <label for="type">Languages</label>
                         <MultipleSelect className="languages-input" />
                         <label for="description">Description</label>
-                        <textarea name="description" id="description" type="text" placeholder="Project description" defaultValue={singleProject.description} />
+                        <textarea style={{outlineColor: "#230C0F"}} name="description" id="description" type="text" placeholder="Project description" defaultValue={singleProject.description} />
                         <TextField name="urlProject" id="standard-basic" label="Url project" defaultValue={singleProject.urlProject}/>
                         <TextField  name="urlGit" id="standard-basic" label="Url git" defaultValue={singleProject.urlGit}/>
                         <div className="urlgit-btn-padding">
-                        <button type="submit" >Save</button>
+                        <button type="submit" className="btn-add-project">Save</button>
                         </div>
                         </div>
                     </Grid>
