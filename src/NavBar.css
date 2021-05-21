@@ -10,6 +10,7 @@ body {
 
 .appbar {
     background-color: #fbf9f3;
+    position: relative;
 }
 
 .link-profile{
@@ -33,3 +34,26 @@ body {
     background-color: rgba(0, 0, 0, 0.12);
 }
 
+.auth-btn {
+    text-decoration: none;
+    margin: auto 10px;
+    color: #230c0f;
+}
+
+.auth-btn:hover {
+    color: #230c0fa4
+}
+
+.link-profile-btn-logout {
+    background-color: #230c0f;
+}
+
+
+
+.navbar-img-logo-middle {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 70px;
+}

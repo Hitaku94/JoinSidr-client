@@ -7,6 +7,8 @@ import { Link } from 'react-router-dom'
 import { Paper, Grid } from '@material-ui/core';
 import LocationOnIcon from '@material-ui/icons/LocationOn';
 import MiniNavBar from "../MiniNavBar";
+import GitHubIcon from '@material-ui/icons/GitHub';
+import LinkIcon from '@material-ui/icons/Link';
 
 function TheProfile(props) {
 
@@ -68,16 +70,17 @@ function TheProfile(props) {
                                 <img className="photo" src={user.profilePic} />
                             </div>
                             <h4 className="name">{user.username}</h4>
-                            <div>
+                            <div className="country-and-logo">
                             <LocationOnIcon style={{width: 20}}/>
                             <p className="info">{user.country}</p>
                             </div>
                             <p className="info">{user.experience}</p>
                             <p className="info">{user.email}</p>
                             <div className="skills-row">
+                                <h3>skills:</h3>
                                 {
-                                    user.skills.map((e) => {
-                                        return <span>{e}</span>
+                                    user?.skills.map((e) => {
+                                        return <span className="languages-margin">{e}</span>
                                     })
                                 }
                             </div>
@@ -102,24 +105,34 @@ function TheProfile(props) {
                                 <i className="fa fa-pinterest-square" aria-hidden="true"></i>
                                 <i className="fa fa-tumblr-square" aria-hidden="true"></i>
                             </div>
+                            <div className="available-worklocation">
+                                <div className="available">
+                                    <h4>ready to work</h4>
+                            <p>{user.available}</p>
+                            </div>
+                            <div className="available">
+                            <h4>working style</h4>
+                            <p>{user.workLocation}</p>
+                            </div>
+                            </div>
                         </div>
                         <div className="right col-lg-8">
                             <div className="follow-div">
                                 {
-                                    loggedInUser.follow && loggedInUser.follow.includes(user._id)
+                                    loggedInUser?.follow && loggedInUser?.follow.includes(user._id)
                                         ? <button className="unfollow" onClick={() => onUnfollow(user._id)}>unfollow</button>
                                         : <button className="follow" onClick={() => onFollow(user._id)}>follow</button>
                                 }
                                 <Link className="msg-div" to="/userslist">Message</Link>
                             </div>
+                            <div className="url-project-detail">
+                        <a href={user.githubUrl} className="url-project-git"><GitHubIcon /><p className="space-url">GitHub link</p></a>
+                    <div className="url-project-git">
+                    <a href={user.linkedinUrl} className="url-project-git"><LinkIcon /><p className="space-url">Linkedin link</p></a>
+                        </div>
 
-                            <ul className="nav">
-                                <li>Gallery</li>
-                                <li>Collections</li>
-                                <li>Groups</li>
-                                <li>About</li>
-                            </ul>
-
+                    </div>
+                            <h4 className="other-projects">Other projects</h4>
                             <div className="row gallery">
                                 {
 
@@ -136,12 +149,7 @@ function TheProfile(props) {
                                         )
                                     })
                                 }
-                                <div class="col-md-4">
-             <img src="https://images.pexels.com/photos/113338/pexels-photo-113338.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"/>
-          </div>
-          <div class="col-md-4">
-             <img src="https://images.pexels.com/photos/5049/forest-trees-fog-foggy.jpg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"/>
-          </div>
+
                             </div>
                         </div>
                     </div>

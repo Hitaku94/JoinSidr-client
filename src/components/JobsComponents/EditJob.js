@@ -59,9 +59,9 @@ function EditJob(props) {
                         <label for="type">Languages</label>
                         <MultipleSelect className="languages-input" />
                         <label for="description">Description</label>
-                        <textarea name="description" id="description" type="text" placeholder="Project description" defaultValue={singleJob.description} />
+                        <textarea style={{outlineColor: "#230C0F"}} name="description" id="description" type="text" placeholder="Project description" defaultValue={singleJob.description} />
                         <div className="urlgit-btn-padding">
-                        <button type="submit" >Save</button>
+                        <button type="submit" className="btn-add-project">Save</button>
                         </div>
                         </div>
                     </Grid>

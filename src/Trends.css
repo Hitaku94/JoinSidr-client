@@ -2,7 +2,7 @@
     max-width: 1300px;
     height: auto;
     display: grid;
-    grid-template-columns: repeat(auto-fill, 250px);
+    grid-template-columns: repeat(auto-fill, 270px);
     justify-content: space-between;
     grid-gap: 10px;
     overflow: hidden;
@@ -47,16 +47,20 @@
     left: 0;
     width: 100%;
     height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
 }
 
 .content-trends-box::before {
     content: "";
     position: absolute;
     left: 0;
-    top: 0;
+    bottom: 0;
     width: 100%;
     height: 100%;
-    background: #fff;
+    background: #230c0fdc;
     transform: scaleX(0);
     transition: transform 0.5s ease-in-out;
     transform-origin:right;
@@ -80,8 +84,31 @@
     z-index: 1;
     transition: 0.5s;
     transform: translateX(-300px);
+    width: 100%;
+    height: 100%;
 }
 
 .box-trends:hover .content-trends-box .content-trends {
     transform: translateX(0px)
+}
+ 
+.content-trends-h3 {
+    text-align: center;
+    text-decoration: none;
+    color:#fbf9f3;
+}
+
+.content-trends-p {
+    font-style: italic;
+    color: rgb(204, 204, 204);
+    text-decoration: none;
+}
+
+.box-trends:hover .content-trends-box .content-trends .content-trends-p:hover {
+    color: black;
+}
+
+.title-pages {
+    text-align: center;
+    color: rgba(0, 0, 0, 0.699);
 }

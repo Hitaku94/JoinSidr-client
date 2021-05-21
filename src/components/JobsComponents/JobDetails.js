@@ -61,7 +61,7 @@ function JobDetails(props) {
         <MiniNavBar />
             <Container className={"projectDetailContainer"} style={{ width: "50%" }} fixed >
                 <Grid className="Thebigger-upBox" container spacing={8}>
-                    <Grid className="item" item xs={12}>
+                    <Grid className="itemJob" item xs={12}>
                         {
                             user._id == job.user._id
                                 ? <>
@@ -70,7 +70,7 @@ function JobDetails(props) {
                                     </Link>
                                     <div className="infoTitleDetail">
                                         <h2>{job.title}</h2>
-                                        <span><Link className="link" to={`/profile`}>{job.user.username}</Link></span>, <span>{job.date}</span> <span>{job.user.country}</span>
+                                        <span><Link className="linkname" to={`/profile`}>{job.user.username}</Link></span>, <span>{job.date}</span> <span>{job.user.country}</span>
                                     </div>
                                 </>
                                 : <>
@@ -79,7 +79,7 @@ function JobDetails(props) {
                                     </Link>
                                     <div className="infoTitleDetail">
                                         <h2>{job.title}</h2>
-                                        <span><Link className="link" to={`/user/${job.user._id}`}>{job.user.username}</Link></span>, <span>{job.date}</span> <span>{job.user.country}</span>
+                                        <span><Link className="linkname" to={`/user/${job.user._id}`}>{job.user.username}</Link></span>, <span>{job.date}</span> <span>{job.user.country}</span>
                                     </div>
                                 </>
                         }
@@ -88,17 +88,19 @@ function JobDetails(props) {
                         <img className="image" src={job.image} alt={job.title} />
 
                     </Grid>
-                    <div>
+                    <div className="languages-loop">
+                        <p>required skills</p>
                         {
                             job.languages.map((e) => {
-                                return <span>{e}</span>
+                                return <span className="languages-margin">{e}</span>
                             })
                         }
                     </div>
                     <Grid item xs={12}>
-                        <Divider />
+                      
                         <h3>Description</h3>
                         <p>{job.description}</p>
+                        <Divider />
                     </Grid>
 
 

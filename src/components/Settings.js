@@ -42,7 +42,7 @@ const Settings = (props) => {
           noValidate
           autoComplete="off"
         >
-          <div className="centerGrid">
+          <div className="centerGrid-settings">
             <Grid className="imgDisplay" item xs={6}>
               <div className="centerImg">
                 <img id="file-ip-prev" />
@@ -60,14 +60,14 @@ const Settings = (props) => {
             </Grid>
             <Grid className="infoGrid" item xs={6}>
               <div className="labelLigne">
-                <RadioButtonWork onChange={handleChangeUser} />
-                <RadioButtonAvailable onChange={handleChangeUser} />
+
                 <label for="description">Description</label>
                 <TextField
                   name="description"
                   type="text"
                   onChange={handleChangeUser}
                   value={user.description}
+                  className="desc-settings"
                 />
                 <div id="experience">
                   <label
@@ -109,10 +109,17 @@ const Settings = (props) => {
                   value={user.githubUrl}
                 />
                 </div>
-              </div>
-              <Button className="my-btn" type="submit" variant="contained">
+                <div className="radio-btn">
+                <RadioButtonWork onChange={handleChangeUser} />
+                <RadioButtonAvailable onChange={handleChangeUser} />
+                </div>
+                <div className="urlgit-btn-padding">
+              <button className="btn-add-project" type="submit">
                 Save
-              </Button>
+              </button>
+              </div>
+              </div>
+
             </Grid>
           </div>
         </form>

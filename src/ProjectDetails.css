@@ -11,29 +11,37 @@
 
 .btnBoxDetail {
     display: flex;
-    justify-content:space-evenly;
+    justify-content:center;
     align-items: center;
     text-align: center;
     width: 100%;
-    margin-top: 50px;
+    
+    margin: 50px auto;
 }
 .btnBoxDetail .editLink {
-    border: 1px solid;
     padding: 5px 26px;
-    border-radius: 20px;
+    border-radius: 5px;
     text-decoration: none;
+    border: 1px solid #788bff;
+    margin: 50px;
+    background: #788bff;
+    color:#fbf9f3
 }
 
 .btnBoxDetail .editLink:hover {
-    color: #9da8f1
+    color: #788bff;
+    background-color: #788aff9a;
+    border: 1px solid #fbf9f3
 }
 
 .btnBoxDetail .deleteBtn {
     padding: 8px 20px;
-    border-radius: 20px;
+    border-radius: 5px;
     border: 1px solid;
-    color: red;
+    color: #fbf9f3;
+    background-color: rgba(255, 0, 0, 0.719);
     cursor: pointer;
+    margin: 50px;
 }
 
 .btnBoxDetail .deleteBtn:hover {
@@ -46,16 +54,38 @@
     align-items: center;
     align-content: center;
     width: 100%;
+    box-shadow: 0 0 2px rgba(0, 0, 0, 0.5);
+    background-color: #230c0fdc;
+    border-radius: 5px;
 }
 
-.item .link {
+.itemJob {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    align-content: center;
+    width: 100%;
+    box-shadow: 0 0 2px rgba(0, 0, 0, 0.5);
+    background-color: #6A7062;
+    border-radius: 5px;
+}
+
+.item .linkname {
     text-decoration: none;
-    color:black;
+    color: #fbf9f3;
     padding: 0;
 }
 
+.itemJob .linkname {
+    text-decoration: none;
+    color: #fbf9f3;
+    padding: 0;
+}
+
+
 .infoTitleDetail {
     margin-left: 20px;
+    color: #fbf9f3;
 
 }
 h2 {
@@ -74,14 +104,16 @@ h2 {
     border-radius: 0;
     margin: auto;
     height: 100%;
+   
 }
 
 .imageBox-item {
     display: flex;
     width: 100%;
     height: 350px;
-    padding: 0;
+    padding: 0px;
     margin-top: 10px;
+    
 }
 
 .moreProject {
@@ -93,7 +125,21 @@ h2 {
 .item .profilePic {
     width: 75px;
     border-radius: 50%;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+    padding: 4px;
+    background-color: white;
+    
 }
+
+.itemJob .profilePic {
+    width: 75px;
+    border-radius: 50%;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+    padding: 4px;
+    background-color: white;
+    
+}
+
 
 .spanLine {
     border: 1px solid #e7e7e9;
@@ -110,21 +156,63 @@ h2 {
     width: 50%;
     height: 50%;
     margin-top: 50px;
+    box-shadow: 0 0 10px rgb(0, 0, 0, 0.5);
 }
 
-.containerBottom:hover span {
-    color:  #3f51b5;
-    border-color: #3f51b5;
+.containerBottom:hover .padding-less .lineBox .spanLine {
+    color:  #788bff;
+    border-color: #788bff;
 }
 
 .profileLink {
     margin-top: 2px;
     padding: 0.1px 50px;
-    border: 1px solid;
     border-radius: 20px;
+    visibility: hidden;
+    text-decoration: none;
+    color: #788bff;
 }
 
-.profileLink:hover {
-    background-color: #9da8f1;
+
+.containerBottom:hover .padding-less .lineBox .profileLink {
+    visibility:visible;
 }
 
+.desc-project-detail {
+    margin-bottom: 25px;
+}
+
+.languages-loop {
+    width: 100%;
+    text-align: center;
+    height: 30px;
+}
+
+.url-project-detail {
+    display: flex;
+    justify-content: space-evenly;
+    text-align : center;
+    width: 100%;
+    margin-top: 50px;
+}
+
+.url-project-git {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    color: #788bff
+}
+
+.space-url {
+    margin-left: 10px;
+}
+
+.languages-margin {
+    padding: 0 15px;
+}
+
+.languages-margin:hover {
+   font-size: 23px;
+   font-size-adjust: 10px;
+}
