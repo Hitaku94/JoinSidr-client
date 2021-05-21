@@ -13,6 +13,7 @@ const useStyles = makeStyles((theme) => ({
       backgroundColor: fade(theme.palette.common.white, 0.15),
       '&:hover': {
         backgroundColor: fade(theme.palette.common.white, 0.25),
+      border: "0.5px solid"
       },
       marginRight: theme.spacing(2),
       marginLeft: 0,
@@ -54,7 +55,7 @@ function SearchBar(props) {
     return (
         <Grid className={"searchBox"} container spacing={3}>
         <Grid  item xs={10}>
-        <div className={classes.search}>
+        <div style={{border: "0.5px solid"}}className={classes.search}>
             <div className={classes.searchIcon}>
               <SearchIcon />
             </div>

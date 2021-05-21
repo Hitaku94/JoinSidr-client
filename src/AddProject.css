@@ -151,3 +151,88 @@
     background-color: #fbf9f3;
     color: #788bff;
 }
+
+.radio-btn {
+    display: flex;
+    justify-content:space-evenly;
+    width: 100%;
+    margin-bottom: 30px;
+}
+
+#users-links {
+    flex-direction: column;
+    display: flex;
+    margin: 30px 0;
+}
+
+#skills {
+ margin-top: 30px;
+}
+
+.form-select {
+    margin-left: 20px;
+    height: 25px;
+    border-color:#230C0F;
+}
+
+#experience {
+    margin-top: 10px;
+}
+
+.account-change-form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+} 
+
+.form-center {
+    display: flex;
+    justify-content: center;
+}
+
+.label-padding-account {
+    margin: 10px auto;
+}
+
+.country-selector {
+    width: 100%;
+    display: flex;
+    text-align:center;
+    align-items:center;
+    justify-content:center;
+}
+
+.account-save-btn {
+    display: flex;
+    text-align: center;
+    width: 100%;
+    justify-content: center;
+}
+
+.btn-delete-account{
+    padding: 10px 30px;
+    border-radius: 10px;
+    border: 0.5px solid rgba(255, 0, 0, 0.781);
+    background-color: rgba(255, 0, 0, 0.781);
+    color: #fbf9f3;
+    cursor: pointer;
+}
+
+.btn-delete-account:hover {
+    border: 0.5px solid #fbf9f3;
+    background-color: rgba(255, 0, 0, 0.39);
+    color: #fbf9f3;
+}
+
+.centerGrid-settings {
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+    padding: 50px;
+    background-color: rgba(255, 255, 255, 0.562);
+    width: 50%;
+}

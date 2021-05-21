@@ -125,7 +125,7 @@ export default function NavBar(props) {
       <MenuItem onClick={handleMenuClose}><Link className="link-profile" to={"/profile"}>Profile</Link></MenuItem>
       <MenuItem onClick={handleMenuClose}><Link className="link-profile" to={"/settings"}>Settings</Link></MenuItem>
       <MenuItem onClick={handleMenuClose}><Link className="link-profile" to={"/userslist"}>messages</Link></MenuItem>
-      <MenuItem onClick={handleMenuClose}><Button onClick={onLogout} variant="contained" color="secondary">Logout</Button></MenuItem>
+      <MenuItem onClick={handleMenuClose}><Button onClick={onLogout} className="link-profile-btn-logout">Logout</Button></MenuItem>
     </Menu>
   );
 
@@ -142,19 +142,8 @@ export default function NavBar(props) {
     >
       <MenuItem className="menu-item-logo">
         <IconButton aria-label="show 4 new mails">
-          <Badge badgeContent={4}>
-            <MailIcon />
-          </Badge>
         </IconButton>
         <p>Messages</p>
-      </MenuItem>
-      <MenuItem className="menu-item-logo">
-        <IconButton aria-label="show 11 new notifications">
-          <Badge badgeContent={11}>
-            <NotificationsIcon  className="menu-item-logo"/>
-          </Badge>
-        </IconButton>
-        <p>Notifications</p>
       </MenuItem>
       <MenuItem className="menu-item-logo" onClick={handleProfileMenuOpen}>
         <IconButton
@@ -178,22 +167,18 @@ export default function NavBar(props) {
           <Link to="/" className="linkLogo">JoinSidr</Link>
           </Typography>
           <div className={classes.grow} />
+          <div className="navbar-img-logo">
+            <img className="navbar-img-logo-middle" src="/images/J-removebg-preview.png" />
+          </div>
           <div className={classes.sectionDesktop}>
           {
             user ? (
               <>
               <Link to="/userslist">
               <IconButton aria-label="show 4 new mails">
-              <Badge badgeContent={4} >
                 <MailIcon className="slide-bar-icon"/>
-              </Badge>
             </IconButton>
             </Link>
-            <IconButton aria-label="show 17 new notifications">
-              <Badge badgeContent={17} >
-                <NotificationsIcon className="slide-bar-icon"/>
-              </Badge>
-            </IconButton>
             <IconButton
               edge="end"
               aria-label="account of current user"
@@ -208,10 +193,10 @@ export default function NavBar(props) {
              : (
               <>
           <Typography className={classes.title, "navItem"} variant="h6" noWrap color="inherit">
-          <Link to="/signin" className="slide-bar" color="inherit">Sign in </Link>
+          <Link to="/signin" className="auth-btn" color="inherit">Sign in </Link>
           </Typography>
           <Typography className={classes.title, "navItem"} variant="h6" noWrap color="inherit">
-          <Link to="/signup" className="slide-bar" color="inherit">Sign up </Link>
+          <Link to="/signup" className="auth-btn" color="inherit">Sign up </Link>
           </Typography>
           </>
             )

@@ -58,40 +58,42 @@ function JobsList(props) {
         <>
         <MiniNavBar />
         <div style={{ marginTop: 50 }}>
+            <h1 className="title-pages">All jobs</h1>
             <SearchBar onSearch={onSearch} />
             <div className={classes.root}>
 
-                <Grid container spacing={5}>
+                <div className="grille-trends">
                     {
 
                         jobs.map((job) => {
                             return (
 
-                                <Grid className={classes.grid} item xs={12} sm={6} md={4} lg={3}>
-                                    <Paper className={classes.paper}>
-                                        <Link to={`/job/${job._id}`}>
-                                            <img className={classes.image} src={job.image} alt={job.image} />
+                                <div key={job._id} className="box-trends">
+                                        
+                                            <div className="fond-blanc">
+                                            <img className="box-imgBox-trends" src={job.image} alt={job.image} />
+                                            </div>
                                             <Divider />
-                                        </Link>
-                                        <div>
-                                            <Link to={`/job/${job._id}`}>
-                                                <h3 className={classes.h3}>{job.title}</h3>
-                                            </Link>
+                                        <Link to={`/job/${job._id}`}>
+                                        <div className="content-trends-box">
+                                        <div className="content-trends">
+                                                <h3 className="content-trends-h3">{job.title}</h3>
                                             {
-                                                user._id == job.user._id
-                                                    ? <><Link to={`/profile`}><p className={classes.h3}>by: {job.user?.username}</p></Link></>
-                                                    : <><Link to={`/user/${job.user._id}`}><p className={classes.h3}>by: {job.user?.username}</p></Link></>
+                                                user?._id == job.user._id
+                                                    ? <><Link className="content-trends-p" to={`/profile`}><p>{job.user?.username}</p></Link></>
+                                                    : <><Link className="content-trends-p" to={`/user/${job.user._id}`}><p>{job.user?.username}</p></Link></>
                                             }
-                                        </div>
 
-                                    </Paper>
-                                </Grid>
+                                        </div>
+                                        </div>
+                                        </Link>
+                                </div>
 
                             )
                         }
 
                         )}
-                </Grid>
+                </div>
 
             </div>
         </div>

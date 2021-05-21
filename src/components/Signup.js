@@ -61,9 +61,7 @@ function Signup(props) {
     <Container component="main" maxWidth="xs">
       <CssBaseline />
       <div className={classes.paper}>
-        <Avatar className={classes.avatar}>
-          <LockOutlinedIcon />
-        </Avatar>
+      <img className="logosignpages" src="/images/Jlogo.png" alt="JoinSidr logo"/>
         <Typography component="h1" variant="h5">
           Sign up
         </Typography>
@@ -109,7 +107,7 @@ function Signup(props) {
             type="submit"
             fullWidth
             variant="contained"
-            color="primary"
+            id="signupSubmit"
             className={classes.submit}
           >
             <span>Sign Up</span>
@@ -126,6 +124,7 @@ function Signup(props) {
           {
                 error && (<p style={{color:'red'}}>{error}</p>)
             }
+            <br></br>
           <Grid container justify="flex-end">
             <Grid item>
               <Link className="link-profile" to="/signin" variant="body2">

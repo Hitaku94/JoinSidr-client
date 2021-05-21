@@ -1,11 +1,13 @@
 import React from 'react';
 import axios from 'axios';
 import { useEffect, useState } from "react";
-import '../ProjectDetails.css'
 import config from "../config";
 import { Grid, Container, Divider } from '@material-ui/core';
 import { Link } from 'react-router-dom'
 import MiniNavBar from "./MiniNavBar";
+import '../ProjectDetails.css'
+import GitHubIcon from '@material-ui/icons/GitHub';
+import LinkIcon from '@material-ui/icons/Link';
 
 function ProjectDetails(props) {
 
@@ -66,7 +68,7 @@ function ProjectDetails(props) {
                                 </Link>
                                     <div className="infoTitleDetail">
                                         <h2>{project.title}</h2>
-                                        <span><Link className="link" to={`/profile`}>{project.user.username}</Link></span>, <span>{project.date}</span> <span>{project.user.country}</span>
+                                        <span><Link className="linkname" to={`/profile`}>{project.user.username}</Link></span>, <span>{project.date}</span> <span>{project.user.country}</span>
                                     </div>
                                 </>
                                 : <>
@@ -75,31 +77,35 @@ function ProjectDetails(props) {
                                 </Link>
                                     <div className="infoTitleDetail">
                                         <h2>{project.title}</h2>
-                                        <span><Link className="link" to={`/user/${project.user._id}`}>{project.user.username}</Link></span>, <span>{project.date}</span> <span>{project.user.country}</span>
+                                        <span><Link className="linkname" to={`/user/${project.user._id}`}>{project.user.username}</Link></span>, <span>{project.date}</span> <span>{project.user.country}</span>
                                     </div>
                                 </>
                         }
                     </Grid>
-                    <Grid className="imageBox-item" item xs={12}>
+                    <Grid item className="imageBox-item"  xs={12}>
                         <img className="image" src={project.image} alt={project.title} />
-
                     </Grid>
-                    <div>
+
+                    <div className="languages-loop">
                         {
                             project.languages.map((e) => {
-                                return <span>{e}</span>
+                                return <span className="languages-margin">{e}</span>
                             })
                         }
                     </div>
-                    <div>
-                        <p>{project.urlProject}</p>
-                        <p>{project.urlGit}</p>
-                    </div>
-                    <Grid item xs={12}>
-                        <Divider />
+                    <Grid style={{paddingTop: 0}}  item xs={12}>
                         <h3>Description</h3>
                         <p>{project.description}</p>
+                        <Divider className="desc-project-detail"/>
                     </Grid>
+                    <div className="url-project-detail">
+                        <a href={project.urlGit} className="url-project-git"><GitHubIcon /><p className="space-url">GitHub link</p></a>
+                    <div className="url-project-git">
+                    <a href={project.urlProject} className="url-project-git"><LinkIcon /><p className="space-url">Deploy Link</p></a>
+                        </div>
+                        
+                    </div>
+                   
 
 
 
@@ -114,7 +120,7 @@ function ProjectDetails(props) {
                     : <div></div>
             }
 
-            <Container className={"containerBottom"} style={{ width: "80%" }} fixed >
+            <Container className="containerBottom" style={{ width: "80%" }} fixed >
                 <Grid container spacing={8}>
                     <Grid className="padding-less" item xs={12}>
                         <div className="lineBox">
