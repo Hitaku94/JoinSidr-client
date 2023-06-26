@@ -195,7 +195,7 @@ function App(props) {
   };
 
   // 3rd party auth
-  const handleGoogleSuccess = (data) => {
+  /*const handleGoogleSuccess = (data) => {
     updateShowloading(true);
 
     const { givenName, familyName, email, imageUrl, googleId } =
@@ -222,7 +222,7 @@ function App(props) {
 
   const handleGoogleFailure = (error) => {
     console.log(error);
-  };
+  };*/
 
   const handleLinkedInSuccess = (data) => {
     updateShowloading(true);
@@ -813,8 +813,8 @@ function App(props) {
               <Signup
                 error={error}
                 onSubmit={handleSignup}
-                onGoogleFailure={handleGoogleFailure}
-                onGoogleSuccess={handleGoogleSuccess}
+                //onGoogleFailure={handleGoogleFailure}
+                //onGoogleSuccess={handleGoogleSuccess}
                 onLinkedInSuccess={handleLinkedInSuccess}
                 onLinkedInFailure={handleLinkedInFailure}
                 {...routeProps}
@@ -829,8 +829,8 @@ function App(props) {
               <Signin
                 error={error}
                 onSignIn={handleSignIn}
-                onGoogleFailure={handleGoogleFailure}
-                onGoogleSuccess={handleGoogleSuccess}
+                //onGoogleFailure={handleGoogleFailure}
+                //onGoogleSuccess={handleGoogleSuccess}
                 onLinkedInSuccess={handleLinkedInSuccess}
                 onLinkedInFailure={handleLinkedInFailure}
                 {...routeProps}
