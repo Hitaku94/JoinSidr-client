@@ -100,6 +100,7 @@ function App(props) {
     axios
       .get(`${config.API_URL}/api/trends`, { withCredentials: true })
       .then((response) => {
+        console.log(response, "this is the response from the fetchProjects");
         updateProject(response.data);
         updateFilteredProjects(response.data);
       })
