@@ -1,6 +1,6 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import { Paper, Grid, Divider } from "@material-ui/core";
+import { Divider } from "@material-ui/core";
 import SearchBar from "./SearchBar";
 import { Link } from "react-router-dom";
 import MiniNavBar from "./MiniNavBar";
@@ -39,6 +39,8 @@ const useStyles = makeStyles((theme) => ({
 function Trends(props) {
   const classes = useStyles();
   const { projects, onSearch, user, likes, unlikes } = props;
+
+  console.log(projects, "those are the projects");
 
   if (!projects) {
     return <p>Loading . . .</p>;
@@ -85,8 +87,6 @@ function Trends(props) {
                             </Link>
                           </>
                         )}
-
-                        
                       </div>
                     </div>
                   </Link>
