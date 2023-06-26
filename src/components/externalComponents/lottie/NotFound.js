@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+/*import React, { Component } from 'react'
 import LottieControl from './LottieControl'
 import data from '../../../animations/404.json'
 
@@ -13,4 +13,4 @@ class NotFound extends Component {
   }
 }
 
-export default NotFound
+export default NotFound*/
