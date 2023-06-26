@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Switch, Route, withRouter} from "react-router-dom";
+import { Switch, Route, withRouter } from "react-router-dom";
 import {
   Home,
   NavBar,
@@ -18,47 +18,43 @@ import Trends from "./components/Trends";
 import ProjectDetails from "./components/ProjectDetails";
 import EditProject from "./components/EditProject";
 import ChoicePage from "./components/ChoicePage";
-import AccountForm from "./components/AccountForm"
+import AccountForm from "./components/AccountForm";
 import TheProfile from "./components/SingleProfile/TheProfile";
 import JobsList from "./components/JobsComponents/JobsList";
 import JobDetails from "./components/JobsComponents/JobDetails";
 import EditJob from "./components/JobsComponents/EditJob";
 import AddJob from "./components/JobsComponents/AddJob";
-import NotFound from "./components/externalComponents/lottie/NotFound"
+import NotFound from "./components/externalComponents/lottie/NotFound";
 import AboutPage from "./components/AboutPage";
 import FollowProject from "./components/FollowProject";
 import FollowingList from "./components/FollowingList";
-import './App.css'
+import "./App.css";
 
 function App(props) {
-
   // UseState
 
   const [user, updateUser] = useState(null);
   const [users, updateUsers] = useState([]);
   const [projects, updateProject] = useState([]);
   const [jobs, updateJob] = useState([]);
-  const [filteredProjects, updateFilteredProjects] = useState([])
+  const [filteredProjects, updateFilteredProjects] = useState([]);
   const [error, updateError] = useState(null);
   const [fetchingUser, updateFetchingUser] = useState(true);
   const [showLoading, updateShowloading] = useState(true);
-  const [redirect, updateRedirect] = useState(null)
-  const [profileRedirect, updateProfileRedirect] = useState(false)
-  const [follow, updateFollow] = useState(false)
-  const [likes, updateLikes] = useState(false)
-  const [showNav, updateShowNav] = useState(true)
+  const [redirect, updateRedirect] = useState(null);
+  const [profileRedirect, updateProfileRedirect] = useState(false);
+  const [follow, updateFollow] = useState(false);
+  const [likes, updateLikes] = useState(false);
+  const [showNav, updateShowNav] = useState(true);
 
-  
   //useEffect (COMPONENT DID MOUNT)
 
   useEffect(() => {
-    
-      fetchProjects();
-      fetchUser();
-      fetchUsers();
-      fetchJobs()
-    
-  },[]);
+    fetchProjects();
+    fetchUser();
+    fetchUsers();
+    fetchJobs();
+  }, []);
 
   useEffect(() => {
     if (redirect === "signin") {
@@ -67,7 +63,7 @@ function App(props) {
       props.history.push("/");
     } else if (redirect === "afterSignIn") {
       if (!user.userType) {
-        updateShowNav(false)
+        updateShowNav(false);
         props.history.push("/choice-page");
       } else {
         props.history.push("/profile");
@@ -81,25 +77,22 @@ function App(props) {
     if (profileRedirect == true) {
       props.history.push("/profile");
       updateProfileRedirect(false);
-      
     }
   }, [profileRedirect]);
 
   useEffect(() => {
     if (follow == true) {
-      updateFollow(false)
-      fetchUsers()
+      updateFollow(false);
+      fetchUsers();
     }
-  })
+  });
 
-    useEffect(() => {
-      if(likes == true) {
-        updateLikes(false)
-        fetchProjects();
-      }
-    })
-
-
+  useEffect(() => {
+    if (likes == true) {
+      updateLikes(false);
+      fetchProjects();
+    }
+  });
 
   // FETCH THE MODELS FROM DATABASE
 
@@ -113,9 +106,9 @@ function App(props) {
       .catch((err) => {
         console.log("Fecthing failed");
       });
-  }
+  };
 
-  const fetchUser = ()=>{
+  const fetchUser = () => {
     axios
       .get(`${config.API_URL}/api/profile`, { withCredentials: true })
       .then((response) => {
@@ -141,16 +134,16 @@ function App(props) {
 
   const fetchJobs = () => {
     axios
-    .get(`${config.API_URL}/api/jobList`, { withCredentials: true })
-    .then((response) => {
-      updateJob(response.data);
-    })
-    .catch((err) => {
-      console.log("Fecthing failed");
-    });
-  }
+      .get(`${config.API_URL}/api/jobList`, { withCredentials: true })
+      .then((response) => {
+        updateJob(response.data);
+      })
+      .catch((err) => {
+        console.log("Fecthing failed");
+      });
+  };
 
-   ////
+  ////
 
   const handleChangeUser = (event) =>
     updateUser({
@@ -213,7 +206,7 @@ function App(props) {
       image: imageUrl,
       googleId,
     };
-    
+
     axios
       .post(`${config.API_URL}/api/google/info`, newUser, {
         withCredentials: true,
@@ -258,7 +251,6 @@ function App(props) {
       .then(() => {
         updateRedirect("");
         updateUser(null);
-        
       })
       .catch((errorObj) => {
         updateError(errorObj.response.data);
@@ -270,8 +262,8 @@ function App(props) {
 
     let description = event.target.description.value;
     let experience = event.target.experience.value;
-    let available= event.target.available.value; 
-    let workLocation= event.target.workLocation.value; 
+    let available = event.target.available.value;
+    let workLocation = event.target.workLocation.value;
     let linkedinUrl = event.target.linkedinUrl.value;
     let githubUrl = event.target.githubUrl.value;
     let skills = event.target.skills.value;
@@ -280,14 +272,22 @@ function App(props) {
       axios
         .patch(
           `${config.API_URL}/api/settings`,
-          { description, experience,available,workLocation,linkedinUrl,githubUrl, skills },
+          {
+            description,
+            experience,
+            available,
+            workLocation,
+            linkedinUrl,
+            githubUrl,
+            skills,
+          },
           {
             withCredentials: true,
           }
         )
         .then((response) => {
           updateUser(response.data);
-          updateProfileRedirect(true)
+          updateProfileRedirect(true);
         })
         .catch((err) => updateError(err.response.data));
     } else {
@@ -316,7 +316,7 @@ function App(props) {
         })
         .then((response) => {
           updateUser(response.data);
-          updateProfileRedirect(true)
+          updateProfileRedirect(true);
         })
         .catch((err) => updateError(err.response.data));
     }
@@ -328,18 +328,18 @@ function App(props) {
     let password = event.target.password.value;
     let country = event.target.country.value;
     axios
-        .patch(
-          `${config.API_URL}/api/security`,
-          { username, password, country},
-          {
-            withCredentials: true,
-          }
-        )
-        .then((response) => {
-          updateUser(response.data);
-          updateProfileRedirect(true)
-        })
-        .catch((err) => updateError(err.response.data));
+      .patch(
+        `${config.API_URL}/api/security`,
+        { username, password, country },
+        {
+          withCredentials: true,
+        }
+      )
+      .then((response) => {
+        updateUser(response.data);
+        updateProfileRedirect(true);
+      })
+      .catch((err) => updateError(err.response.data));
   };
 
   const handleDeleteUser = (event) => {
@@ -365,7 +365,7 @@ function App(props) {
     let image = e.target.image.files[0];
     let urlProject = e.target.urlProject.value;
     let urlGit = e.target.urlGit.value;
-    let languages = e.target.languages.value
+    let languages = e.target.languages.value;
 
     let formData = new FormData();
     formData.append("imageUrl", image);
@@ -405,60 +405,22 @@ function App(props) {
     let description = e.target.description.value;
     let urlProject = e.target.urlProject.value;
     let urlGit = e.target.urlGit.value;
-    let languages = e.target.languages.value
+    let languages = e.target.languages.value;
 
     if (e.target.image.files.length == 0) {
-      axios.patch(
-        `${config.API_URL}/api/project/${projectId}`, 
-        {
-          title: title,
-          type: type,
-          description: description,
-          urlProject: urlProject,
-          urlGit: urlGit,
-          languages: languages,
-        },
-         {withCredentials: true,})
-    .then((response) => {
-      
-      let clonedProjects = projects.map((e) => {
-        if (projectId == e._id) {
-          return response.data
-        }
-        else {
-          return e
-        }
-      }) 
-      updateProject(clonedProjects);
-      updateProfileRedirect(true)
-    }) 
-    .catch(() => {
-      console.log("Edit project failed");
-    });
-    }
-    else {
-      let image = e.target.image.files[0];
-    
-    let formData = new FormData();
-    formData.append("imageUrl", image);
-
-    axios
-      .post(`${config.API_URL}/api/upload`, formData)
-      .then((response) => {
-        return axios.patch(
+      axios
+        .patch(
           `${config.API_URL}/api/project/${projectId}`,
           {
             title: title,
             type: type,
             description: description,
-            image: response.data.image,
             urlProject: urlProject,
             urlGit: urlGit,
             languages: languages,
           },
           { withCredentials: true }
         )
-      })
         .then((response) => {
           let clonedProjects = projects.map((e) => {
             if (projectId == e._id) {
@@ -473,12 +435,49 @@ function App(props) {
         .catch(() => {
           console.log("Edit project failed");
         });
-      }
+    } else {
+      let image = e.target.image.files[0];
+
+      let formData = new FormData();
+      formData.append("imageUrl", image);
+
+      axios
+        .post(`${config.API_URL}/api/upload`, formData)
+        .then((response) => {
+          return axios.patch(
+            `${config.API_URL}/api/project/${projectId}`,
+            {
+              title: title,
+              type: type,
+              description: description,
+              image: response.data.image,
+              urlProject: urlProject,
+              urlGit: urlGit,
+              languages: languages,
+            },
+            { withCredentials: true }
+          );
+        })
+        .then((response) => {
+          let clonedProjects = projects.map((e) => {
+            if (projectId == e._id) {
+              return response.data;
+            } else {
+              return e;
+            }
+          });
+          updateProject(clonedProjects);
+          updateProfileRedirect(true);
+        })
+        .catch(() => {
+          console.log("Edit project failed");
+        });
     }
+  };
 
   const handlOnChoose = (userType) => {
     updateFetchingUser(true);
-    updateShowNav(true)
+    updateShowNav(true);
 
     axios
       .patch(
@@ -517,10 +516,8 @@ function App(props) {
   // HANDLE FOR SEARCH
 
   const handleSearch = (e) => {
-
     let input = e.target.value;
     let filteredProjects = projects.filter((singleProject) => {
-
       return singleProject.title.toLowerCase().includes(input.toLowerCase());
     });
     updateFilteredProjects(filteredProjects);
@@ -539,15 +536,15 @@ function App(props) {
         let allUsersArr = users.map((e) => {
           //TODO: CHANGE THIS LATER
           if (e._id == follow && response.data) {
-            return response.data
+            return response.data;
           } else {
-            return e
+            return e;
           }
-        })
+        });
 
         updateUsers(allUsersArr);
         updateUser(response.data);
-        updateFollow(true)
+        updateFollow(true);
       })
       .catch(() => {
         console.log("Edit project failed");
@@ -555,24 +552,28 @@ function App(props) {
   };
 
   const handleUnfollow = (unfollow) => {
-    axios.patch(`${config.API_URL}/api/unfollow`, {unfollow}, {withCredentials: true,})
-    .then((response) => {
-      let allUsersArr = users.map((e) => {
-        if (e._id == unfollow) {
-          return response.data
-        } else {
-          return e
-        }
+    axios
+      .patch(
+        `${config.API_URL}/api/unfollow`,
+        { unfollow },
+        { withCredentials: true }
+      )
+      .then((response) => {
+        let allUsersArr = users.map((e) => {
+          if (e._id == unfollow) {
+            return response.data;
+          } else {
+            return e;
+          }
+        });
+        updateUsers(allUsersArr);
+        updateUser(response.data);
+        updateFollow(true);
       })
-      updateUsers(allUsersArr);
-      updateUser(response.data);
-      updateFollow(true)
-      
-    }).catch(() => {
-      console.log("Edit project failed");
-
-    });
-  }
+      .catch(() => {
+        console.log("Edit project failed");
+      });
+  };
 
   // HANDLES FOR JOBS
 
@@ -582,8 +583,8 @@ function App(props) {
     let type = e.target.type.value;
     let description = e.target.description.value;
     let image = e.target.image.files[0];
-    let languages = e.target.languages.value
-    let location = e.target.location.value
+    let languages = e.target.languages.value;
+    let location = e.target.location.value;
 
     let formData = new FormData();
     formData.append("imageUrl", image);
@@ -606,7 +607,7 @@ function App(props) {
       })
       .then((response) => {
         updateJob([response.data, ...jobs]);
-        updateProfileRedirect(true)
+        updateProfileRedirect(true);
       })
       .catch(() => {
         console.log("Image upload failed");
@@ -619,76 +620,73 @@ function App(props) {
     let title = e.target.title.value;
     let type = e.target.type.value;
     let description = e.target.description.value;
-    let languages = e.target.languages.value
-    let location = e.target.location.value
+    let languages = e.target.languages.value;
+    let location = e.target.location.value;
 
     if (e.target.image.files.length == 0) {
-      axios.patch(
-        `${config.API_URL}/api/job/${jobId}`, 
-        {
-          title: title,
-          type: type,
-          description: description,
-          languages: languages,
-          location: location,
-        },
-         {withCredentials: true,})
-    .then((response) => {
-      
-      let clonedJobs = jobs.map((e) => {
-        if (jobId == e._id) {
-          return response.data
-        }
-        else {
-          return e
-        }
-      }) 
-      updateJob(clonedJobs);
-      updateProfileRedirect(true)
-    }) 
-    .catch(() => {
-      console.log("Edit project failed");
-    });
-    }
-    else {
-      let image = e.target.image.files[0];
-    
-    let formData = new FormData();
-    formData.append("imageUrl", image);
-
-    axios
-      .post(`${config.API_URL}/api/upload`, formData)
-      .then((response) => {
-        return axios.patch(
+      axios
+        .patch(
           `${config.API_URL}/api/job/${jobId}`,
           {
             title: title,
             type: type,
             description: description,
-            image: response.data.image,
             languages: languages,
             location: location,
           },
           { withCredentials: true }
-        );
-      })
-      .then((response) => {
-        let clonedJobs = jobs.map((e) => {
-          if (jobId == e._id) {
-            return response.data
-          }
-          else {
-            return e
-          }
-        }) 
-        updateJob(clonedJobs);
-        updateProfileRedirect(true)
-      }) 
-      .catch(() => {
-        console.log("Edit project failed");
-      });
+        )
+        .then((response) => {
+          let clonedJobs = jobs.map((e) => {
+            if (jobId == e._id) {
+              return response.data;
+            } else {
+              return e;
+            }
+          });
+          updateJob(clonedJobs);
+          updateProfileRedirect(true);
+        })
+        .catch(() => {
+          console.log("Edit project failed");
+        });
+    } else {
+      let image = e.target.image.files[0];
+
+      let formData = new FormData();
+      formData.append("imageUrl", image);
+
+      axios
+        .post(`${config.API_URL}/api/upload`, formData)
+        .then((response) => {
+          return axios.patch(
+            `${config.API_URL}/api/job/${jobId}`,
+            {
+              title: title,
+              type: type,
+              description: description,
+              image: response.data.image,
+              languages: languages,
+              location: location,
+            },
+            { withCredentials: true }
+          );
+        })
+        .then((response) => {
+          let clonedJobs = jobs.map((e) => {
+            if (jobId == e._id) {
+              return response.data;
+            } else {
+              return e;
+            }
+          });
+          updateJob(clonedJobs);
+          updateProfileRedirect(true);
+        })
+        .catch(() => {
+          console.log("Edit project failed");
+        });
     }
-    
   };
 
   const handleDeleteJob = (jobId) => {
@@ -698,77 +696,84 @@ function App(props) {
       })
       .then(() => {
         let filteredJob = jobs.filter((job) => {
-        return job._id !== jobId
-        })
+          return job._id !== jobId;
+        });
         updateJob(filteredJob);
-        updateProfileRedirect(true)
-      }).catch((err) => {
-        console.log('Delete failed', err)
+        updateProfileRedirect(true);
+      })
+      .catch((err) => {
+        console.log("Delete failed", err);
       });
   };
 
   // HANDLES FOR LIKES
 
   const handleLikes = (projectId) => {
+    axios
+      .patch(
+        `${config.API_URL}/api/like/${projectId}`,
+        { like: user._id },
+        { withCredentials: true }
+      )
+      .then((response) => {
+        let projectsArr = projects.map((e) => {
+          if (e._id == projectId) {
+            return response.data;
+          } else {
+            return e;
+          }
+        });
 
-    axios.patch(`${config.API_URL}/api/like/${projectId}`, {like: user._id}, {withCredentials: true})
-    .then((response) => {
-     let projectsArr = projects.map((e) => {
-        if (e._id == projectId) {
-          return response.data
-        } else {
-          return e
-        }
+        updateProject(projectsArr);
+        updateLikes(true);
+        let filteredProjectsArr = filteredProjects.map((e) => {
+          if (e._id == projectId) {
+            return response.data;
+          } else {
+            return e;
+          }
+        });
+
+        updateFilteredProjects(filteredProjectsArr);
       })
-   
-      updateProject(projectsArr);
-      updateLikes(true)
-      let filteredProjectsArr = filteredProjects.map((e) => {
-        if (e._id == projectId) {
-          return response.data
-        } else {
-          return e
-        }
-        
-      })
-  
-      updateFilteredProjects(filteredProjectsArr)
-    }).catch(() => {
-      console.log("Edit project failed like");
-      
-    });
-  }
+      .catch(() => {
+        console.log("Edit project failed like");
+      });
+  };
 
   const handleUnlikes = (projectId) => {
-    axios.patch(`${config.API_URL}/api/unlike/${projectId}`, {like: user._id}, {withCredentials: true,})
-    .then((response) => {
-      let projectsArr = projects.map((e) => {
-        if (e._id == projectId) {
-          return response.data
-        } else {
-          return e
-        }
-      })
-     
-      updateProject(projectsArr);
-      updateLikes(true)
-      let filteredProjectsArr = filteredProjects.map((e) => {
-        if (e._id == projectId) {
-          return response.data
-        } else {
-          return e
-        }
-        
-      })
-      
-      updateFilteredProjects(filteredProjectsArr)
-      updateLikes(true)
-      
-    }).catch(() => {
-      console.log("Edit project failed unlike");
+    axios
+      .patch(
+        `${config.API_URL}/api/unlike/${projectId}`,
+        { like: user._id },
+        { withCredentials: true }
+      )
+      .then((response) => {
+        let projectsArr = projects.map((e) => {
+          if (e._id == projectId) {
+            return response.data;
+          } else {
+            return e;
+          }
+        });
 
-    });
-  }
+        updateProject(projectsArr);
+        updateLikes(true);
+        let filteredProjectsArr = filteredProjects.map((e) => {
+          if (e._id == projectId) {
+            return response.data;
+          } else {
+            return e;
+          }
+        });
+
+        updateFilteredProjects(filteredProjectsArr);
+        updateLikes(true);
+      })
+      .catch(() => {
+        console.log("Edit project failed unlike");
+      });
+  };
 
   if (fetchingUser) {
     return <h1>Loading</h1>;
@@ -776,12 +781,8 @@ function App(props) {
 
   return (
     <div className="App">
-      {
-        showNav == true
-        ? <NavBar onLogout={handleLogout} user={user} />
-        : <></>
-}
-      
+      {showNav == true ? <NavBar onLogout={handleLogout} user={user} /> : <></>}
+
       <Switch>
         <Route
           exact
@@ -824,10 +825,15 @@ function App(props) {
           path="/signin"
           render={(routeProps) => {
             return (
-              <Signin error={error} onSignIn={handleSignIn} onGoogleFailure={handleGoogleFailure}
+              <Signin
+                error={error}
+                onSignIn={handleSignIn}
+                onGoogleFailure={handleGoogleFailure}
                 onGoogleSuccess={handleGoogleSuccess}
                 onLinkedInSuccess={handleLinkedInSuccess}
-                onLinkedInFailure={handleLinkedInFailure} {...routeProps} />
+                onLinkedInFailure={handleLinkedInFailure}
+                {...routeProps}
+              />
             );
           }}
         />
@@ -835,7 +841,16 @@ function App(props) {
           exact
           path="/profile"
           render={(routeProps) => {
-            return <Profile user={user} projects={projects} jobs={jobs} allUsers={users} onLogout={handleLogout} {...routeProps} />;
+            return (
+              <Profile
+                user={user}
+                projects={projects}
+                jobs={jobs}
+                allUsers={users}
+                onLogout={handleLogout}
+                {...routeProps}
+              />
+            );
           }}
         />
         <Route
@@ -880,7 +895,16 @@ function App(props) {
           exact
           path="/trends"
           render={(routeProps) => {
-            return <Trends onSearch={handleSearch} projects={filteredProjects} user={user} likes={handleLikes} unlikes={handleUnlikes} {...routeProps} />;
+            return (
+              <Trends
+                onSearch={handleSearch}
+                projects={filteredProjects}
+                user={user}
+                likes={handleLikes}
+                unlikes={handleUnlikes}
+                {...routeProps}
+              />
+            );
           }}
         />
         <Route
@@ -921,7 +945,16 @@ function App(props) {
           exact
           path="/user/:id"
           render={(routeProps) => {
-            return <TheProfile projects={projects} loggedInUser={user} allUsers={users} onFollow={handleFollow} onUnfollow={handleUnfollow} {...routeProps} />;
+            return (
+              <TheProfile
+                projects={projects}
+                loggedInUser={user}
+                allUsers={users}
+                onFollow={handleFollow}
+                onUnfollow={handleUnfollow}
+                {...routeProps}
+              />
+            );
           }}
         />
         <Route
@@ -943,14 +976,24 @@ function App(props) {
           exact
           path="/job/:id"
           render={(routeProps) => {
-            return <JobDetails jobs={jobs} user={user} allUser={users} onDelete={handleDeleteJob} {...routeProps} />;
+            return (
+              <JobDetails
+                jobs={jobs}
+                user={user}
+                allUser={users}
+                onDelete={handleDeleteJob}
+                {...routeProps}
+              />
+            );
           }}
         />
         <Route
           exact
           path="/job-edit/:id"
           render={(routeProps) => {
-            return <EditJob onEdit={handleEditJob} jobs={jobs} {...routeProps} />;
+            return (
+              <EditJob onEdit={handleEditJob} jobs={jobs} {...routeProps} />
+            );
           }}
         />
         <Route
@@ -960,19 +1003,37 @@ function App(props) {
             return <AddJob onAdd={handleCreateJob} {...routeProps} />;
           }}
         />
-        
-         <Route
+
+        <Route
           exact
           path="/profile/collections"
           render={(routeProps) => {
-            return <FollowProject user={user} projects={projects} jobs={jobs} allUsers={users} onLogout={handleLogout} {...routeProps} />;
+            return (
+              <FollowProject
+                user={user}
+                projects={projects}
+                jobs={jobs}
+                allUsers={users}
+                onLogout={handleLogout}
+                {...routeProps}
+              />
+            );
           }}
         />
-          <Route
+        <Route
           exact
           path="/profile/follow"
           render={(routeProps) => {
-            return <FollowingList user={user} projects={projects} jobs={jobs} allUsers={users} onLogout={handleLogout} {...routeProps} />;
+            return (
+              <FollowingList
+                user={user}
+                projects={projects}
+                jobs={jobs}
+                allUsers={users}
+                onLogout={handleLogout}
+                {...routeProps}
+              />
+            );
           }}
         />
         <Route component={NotFound} />
